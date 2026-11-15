@@ -98,12 +98,14 @@
             '<div class="ms-auto btn-group btn-group-sm"><button class="btn btn-outline-secondary" data-act="up-page" data-i="' + i + '">↑</button><button class="btn btn-outline-secondary" data-act="down-page" data-i="' + i + '">↓</button><button class="btn btn-outline-danger" data-act="del-page" data-i="' + i + '"><i class="fas fa-trash"></i></button></div></div>' +
             '<textarea class="form-control mono ta-page" rows="14" data-o="pages" data-i="' + i + '" data-k="html">' + esc(p.html || '') + '</textarea></div>';
         }).join('') + '<button class="btn btn-sm btn-outline-primary" data-act="add-page"><i class="fas fa-plus"></i> Add page</button>' +
-        '<details class="mt-3 small"><summary class="fw-bold">Template syntax</summary><pre class="mono bg-light p-2 mt-2">{{field}}                    value (escaped)\n{{#if field}}…{{else}}…{{/if}}   conditions: field | !field | field==x | field!=x | a&amp;&amp;b\n{{#each rows}}{{col}} {{@n}}{{/each}}   repeat for a "rows" field\n{option A|option B}           wording variation (spintax)\nBootstrap classes work: text-center, mt-4, table, text-justify …</pre></details>';
+        '<div id="spin-report" class="mt-3"></div>' +
+        '<details class="mt-3 small"><summary class="fw-bold">Template syntax</summary><pre class="mono bg-light p-2 mt-2">{{field}}                    value (escaped)\n{{#if field}}…{{else}}…{{/if}}   conditions: field | !field | field==x | field!=x | a&amp;&amp;b\n{{#each rows}}{{col}} {{@n}}{{/each}}   repeat for a "rows" field\n{option A|option B}           wording variation (spintax) - options MUST mean exactly the same\nBootstrap classes work: text-center, mt-4, table, text-justify …</pre></details>';
     } else if (tab === 'json') {
       h = '<textarea class="form-control mono" rows="28" id="json">' + esc(JSON.stringify(def, null, 2)) + '</textarea><div class="mt-2"><button class="btn btn-sm btn-primary" data-act="apply-json">Apply JSON</button></div>';
     }
     panes.innerHTML = h;
     var ta = $$('.ta-page', panes); if (ta.length) lastTA = ta[0];
+    spinReport();
     preview();
   }
 
@@ -143,6 +145,30 @@
       (f.type === 'rows' ? '<div class="col-md-8"><label class="small">Columns – one per line, <code>name|Label</code></label><textarea class="form-control form-control-sm mono" rows="3" ' + d + ' data-k="columns" data-list="columns">' + esc(cols) + '</textarea></div><div class="col-md-4"><label class="small">Initial rows</label><input type="number" min="0" class="form-control form-control-sm" ' + d + ' data-k="minRows" data-num="1" value="' + esc(f.minRows == null ? 1 : f.minRows) + '"></div>' : '') +
       '</div></div></div>';
   }
+
+  /* spintax must only swap synonyms - flag options whose meaning may differ */
+  function spinReport() {
+    var box = $('#spin-report');
+    if (!box) return;
+    var issues = [];
+    def.pages.forEach(function (p, i) {
+      E.spinAudit(p.html || '').forEach(function (x) { x.page = i + 1; issues.push(x); });
+    });
+    if (!issues.length) {
+      box.innerHTML = '<div class="alert alert-success py-2 small mb-0"><i class="fas fa-check-circle"></i> Spin check: every {a|b} group looks like a pure synonym set.</div>';
+      return;
+    }
+    box.innerHTML = '<div class="alert alert-warning py-2 small mb-0"><strong><i class="fas fa-exclamation-triangle"></i> Spin check - options must have the SAME meaning:</strong><ul class="mb-0 mt-1">' +
+      issues.map(function (x) {
+        return '<li class="' + (x.level === 'error' ? 'text-danger' : '') + '">Page ' + x.page + ': ' + esc(x.msg) + ' - <code>{' + esc(x.group) + '}</code></li>';
+      }).join('') + '</ul></div>';
+  }
+  panes.addEventListener('input', function (e) {
+    if (e.target.classList.contains('ta-page')) {
+      clearTimeout(spinReport._t);
+      spinReport._t = setTimeout(spinReport, 400);
+    }
+  });
 
   /* ---------- editing ---------- */
   function targetFor(el) {

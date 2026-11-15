@@ -1,0 +1,212 @@
+{
+ "id": "lost_document_affidavit",
+ "version": 1,
+ "title": "হারানো কাগজপত্রের হলফনামা",
+ "title_en": "Lost Document Affidavit",
+ "category": "হলফনামা / Affidavit",
+ "icon": "fa-search-minus",
+ "description": "পাসপোর্ট, সনদ, চেক বই, ড্রাইভিং লাইসেন্স ইত্যাদি হারানোর এফিডেভিট (ডুপ্লিকেট কপি সংগ্রহের জন্য)।",
+ "page": {
+  "size": "legal",
+  "marginTop": "4.5in",
+  "margin": "1in",
+  "fontSize": 15,
+  "lineHeight": 1.5,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "groups": [
+  {
+   "id": "g_court",
+   "title": "কোর্ট ও তারিখ",
+   "icon": "fa-gavel"
+  },
+  {
+   "id": "g_self",
+   "title": "হলফকারীর তথ্য (যিনি এফিডেভিট করছেন)",
+   "icon": "fa-user"
+  },
+  {
+   "id": "g_doc",
+   "title": "হারানো কাগজের বিবরণ",
+   "icon": "fa-file-alt"
+  },
+  {
+   "id": "g_gd",
+   "title": "জিডি (সাধারণ ডায়েরি)",
+   "icon": "fa-shield-alt"
+  }
+ ],
+ "fields": [
+  {
+   "name": "court",
+   "label": "মোকাম / জজ কোর্টের নাম",
+   "type": "text",
+   "col": 8,
+   "group": "g_court",
+   "required": true,
+   "default": "নওগাঁ"
+  },
+  {
+   "name": "exec_date",
+   "label": "সম্পাদনের তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_court",
+   "required": true
+  },
+  {
+   "name": "name",
+   "label": "নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "father",
+   "label": "পিতার নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "mother",
+   "label": "মাতার নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "address",
+   "label": "ঠিকানা (গ্রাম, ডাক, উপজেলা, জেলা)",
+   "type": "text",
+   "col": 6,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "nid",
+   "label": "এনআইডি / জন্ম নিবন্ধন নং",
+   "type": "text",
+   "col": 3,
+   "group": "g_self",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "religion",
+   "label": "ধর্ম",
+   "type": "text",
+   "col": 3,
+   "group": "g_self",
+   "required": true,
+   "default": "ইসলাম"
+  },
+  {
+   "name": "doc_type",
+   "label": "কাগজের ধরন",
+   "type": "select",
+   "col": 6,
+   "group": "g_doc",
+   "options": [
+    "পাসপোর্ট",
+    "জাতীয় পরিচয়পত্র",
+    "এস.এস.সি সনদপত্র",
+    "এইচ.এস.সি সনদপত্র",
+    "ডিগ্রী/অনার্স সনদপত্র",
+    "ব্যাংকের চেক বই",
+    "ব্যাংকের পাস বই",
+    "ড্রাইভিং লাইসেন্স",
+    "গাড়ীর রেজিস্ট্রেশন কাগজ (ব্লু-বুক)",
+    "জমির দলিল / খতিয়ান",
+    "জন্ম নিবন্ধন সনদ",
+    "ট্রেড লাইসেন্স",
+    "অন্যান্য"
+   ],
+   "default": "পাসপোর্ট"
+  },
+  {
+   "name": "doc_other",
+   "label": "অন্য কিছু হলে এখানে লিখুন",
+   "type": "text",
+   "col": 6,
+   "group": "g_doc",
+   "help": "লিখলে উপরের তালিকার বদলে এটি ব্যবহৃত হবে"
+  },
+  {
+   "name": "doc_no",
+   "label": "কাগজের নম্বর (জানা থাকলে)",
+   "type": "text",
+   "col": 4,
+   "group": "g_doc"
+  },
+  {
+   "name": "issuer",
+   "label": "প্রদানকারী কর্তৃপক্ষ (জানা থাকলে)",
+   "type": "text",
+   "col": 4,
+   "group": "g_doc",
+   "placeholder": "যেমন: রাজশাহী শিক্ষা বোর্ড"
+  },
+  {
+   "name": "lost_date",
+   "label": "হারানোর তারিখ (আনুমানিক)",
+   "type": "date",
+   "col": 4,
+   "group": "g_doc",
+   "required": true
+  },
+  {
+   "name": "lost_place",
+   "label": "হারানোর স্থান",
+   "type": "text",
+   "col": 6,
+   "group": "g_doc",
+   "required": true,
+   "placeholder": "যেমন: নওগাঁ বাস স্ট্যান্ড এলাকা"
+  },
+  {
+   "name": "purpose",
+   "label": "উদ্দেশ্য",
+   "type": "text",
+   "col": 6,
+   "group": "g_doc",
+   "required": true,
+   "default": "প্রতিলিপি (ডুপ্লিকেট) কপি সংগ্রহের জন্য"
+  },
+  {
+   "name": "gd_no",
+   "label": "জিডি নং (থাকলে)",
+   "type": "text",
+   "col": 4,
+   "group": "g_gd",
+   "bn": true
+  },
+  {
+   "name": "gd_date",
+   "label": "জিডির তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_gd",
+   "show_if": "gd_no"
+  },
+  {
+   "name": "gd_thana",
+   "label": "থানা",
+   "type": "text",
+   "col": 4,
+   "group": "g_gd",
+   "show_if": "gd_no",
+   "default": "নওগাঁ সদর"
+  }
+ ],
+ "pages": [
+  {
+   "html": "<div class=\"text-center mb-4\"><h4><strong>মোকাম নোটারী পাবলিকের কার্যালয়, {{court}}।</strong></h4><h3><strong>হলফনামা (এফিডেভিট)</strong></h3><strong>বিষয়ঃ {{#if doc_other}}{{doc_other}}{{else}}{{doc_type}}{{/if}} হারানো সংক্রান্ত ঘোষণাপত্র।</strong></div>\n<div class=\"text-justify mt-4\">\n<p><strong>আমি হলফকারী:</strong><br>{{name}}, পিতা- {{father}}, মাতা- {{mother}}, সাং- {{address}}, ধর্ম- {{religion}}, জাতীয়তা- বাংলাদেশী, জাতীয় পরিচয় পত্র / জন্ম নিবন্ধন নং- {{nid}}।</p>\n<p>আমি হলফকারী {পরম করুণাময় সৃষ্টিকর্তার নামে|সর্বশক্তিমান সৃষ্টিকর্তার নামে} শপথপূর্বক {সজ্ঞানে, সুস্থ মস্তিষ্কে|সুস্থ শরীরে ও সজ্ঞানে}, স্বেচ্ছায় ও অন্যের বিনা প্ররোচনায় অত্র হলফনামা বা এফিডেভিট এর বয়ান আরম্ভ করিতেছি যে-</p>\n<p><strong>১।</strong> আমি বাংলাদেশের একজন {স্থায়ী|প্রকৃত ও স্থায়ী} নাগরিক এবং {আইন মান্যকারী ব্যক্তি|আইনের প্রতি শ্রদ্ধাশীল ব্যক্তি}।</p>\n<p><strong>২।</strong> আমি <strong>{{#if doc_other}}{{doc_other}}{{else}}{{doc_type}}{{/if}}</strong>{{#if doc_no}} (নং- {{doc_no}}){{/if}}{{#if issuer}}, প্রদানকারী কর্তৃপক্ষ- {{issuer}}{{/if}} এর প্রকৃত মালিক ও ধারক।</p>\n<p><strong>৩।</strong> উক্ত কাগজ গত {{lost_date}} ইং তারিখে <strong>{{lost_place}}</strong> এ {অসাবধানতাবশত|অনিচ্ছাকৃতভাবে} হারাইয়া গিয়াছে। বহু খোঁজাখুঁজি করিয়াও তাহা {পাওয়া যায় নাই|উদ্ধার করা সম্ভব হয় নাই}।</p>\n{{#if gd_no}}<p><strong>৪।</strong> এ বিষয়ে আমি {{gd_thana}} থানায় সাধারণ ডায়েরি (জিডি) নং- <strong>{{gd_no}}</strong>, তারিখ- {{gd_date}} ইং {করিয়াছি|দায়ের করিয়াছি}।</p>{{/if}}\n<p><strong>৫।</strong> আমি উক্ত কাগজের {{purpose}} আবেদন করিতেছি।</p>\n<p><strong>৬।</strong> ভবিষ্যতে হারানো মূল কাগজ পাওয়া গেলে আমি তাহা সংশ্লিষ্ট কর্তৃপক্ষের নিকট {জমা দিব|প্রত্যর্পণ করিব} এবং কোনক্রমেই অপব্যবহার করিব না।</p>\n</div>\n<div class=\"avoid-break\"><div class=\"text-justify\"><p>অত্র এফিডেভিট বা হলফনামায় বর্ণিত যাবতীয় তথ্য ও বিবরণ আমার জ্ঞান, বিশ্বাস ও অবগতি মতে সম্পূর্ণ {সত্য ও নির্ভুল|সঠিক}। আমি স্বেচ্ছায়, সজ্ঞানে, সুস্থ শরীরে এবং অন্যের বিনা প্ররোচনায় অত্র হলফনামার মর্ম পড়িয়া ও বুঝিয়া অদ্য নোটারী পাবলিক এর কার্যালয়ে উপস্থিত থাকিয়া নিজ নাম স্বাক্ষর করিলাম।</p>\n<p><strong>সম্পাদনের তারিখ:</strong> {{exec_date}} ইং।</p>\n</div>\n<table class=\"table table-borderless table-sm sign3\"><tr>\n<td width=\"40%\"><strong>সনাক্তকারীর ঘোষণা:</strong> অত্র হলফকারী আমার পূর্ব পরিচিত। তিনি আমার সামনে স্বাক্ষর করিয়াছেন; আমি তাহাকে সনাক্ত করিলাম।<br><br>__________________<br><strong>সনাক্তকারীর স্বাক্ষর</strong><br>এ্যাডভোকেট, জজ কোর্ট।</td>\n<td width=\"30%\" class=\"text-center align-bottom\">__________________<br><strong>হলফকারীর স্বাক্ষর</strong></td>\n<td width=\"30%\" class=\"text-center align-bottom\">__________________<br><strong>নোটারী পাবলিকের<br>সীল ও স্বাক্ষর</strong></td>\n</tr></table></div>"
+  }
+ ],
+ "css": ".doc-page .avoid-break{break-inside:avoid;page-break-inside:avoid}.doc-page .sign3{margin-top:14px;font-size:.92em;line-height:1.35}.doc-page .sign3 td{vertical-align:top}"
+}

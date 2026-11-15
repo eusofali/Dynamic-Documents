@@ -3,7 +3,7 @@
 A dynamic, **Bangla-first document builder** for shared hosting (cPanel, no root needed).
 Pick a document, fill in only the fields it needs, watch the document update **live**, then print or save as PDF.
 
-* 9 ready documents: marriage affidavit, name/age correction affidavit, vehicle sale affidavit, land bainanama, loan (হাওলাত/কর্জ) agreement, shop rent agreement, job application, and two CV formats (modern 2-column / classic bio-data) plus the **standard one-page CV with photo upload** (English or বাংলা, 6 colour themes, NID / birth-certificate / passport number, fresher "working qualification" paragraph)
+* 16 ready documents: marriage, name-correction, **name-change, lost-document, date-of-birth, citizenship/residence, parent consent (NOC), one-and-the-same-person and a free-text general declaration** affidavits, vehicle sale affidavit, land bainanama, loan (হাওলাত/কর্জ) agreement, shop rent agreement, job application, and three CV formats (modern 2-column, classic bio-data, and the standard one-page CV with photo upload – English or বাংলা, 6 colour themes)
 * **Amounts in words are automatic** (`৩,০০,০০০` → "তিন লক্ষ"), dates and Bangla digits formatted for you, balances auto-calculated
 * Wording variations (spintax) with a **Re-word** button
 * **Admin document builder** – create/edit documents (fields, sections, templates) in the browser with live preview; no code needed
@@ -78,6 +78,8 @@ Template syntax inside `pages[].html`:
 ```
 
 A page can carry `"if": "layout==3"` so it is only printed in some variants. `computed` entries build joined lists (see the correction affidavit).
+
+**Spintax rule:** every option inside `{a|b}` must mean exactly the same - only the wording may differ (never a different fact, number, condition, party, time or yes/no). The builder shows a live *Spin check*, and `node tools/spin-audit.js` audits all documents (it also runs in CI). It flags empty or duplicate options, differing numbers, a negative option next to a positive one, and key legal terms (death, loan, bank, cheque, lawsuit, cash, instalment ...) present in only some options. `--list` prints every group for a human read-through.
 
 User input is inserted **after** spintax is resolved, so typed text can never be altered by the spinner.
 

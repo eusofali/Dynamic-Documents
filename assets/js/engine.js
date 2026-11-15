@@ -130,6 +130,34 @@
     return text.replace(/\u0001(\d+)\u0002/g, function (m, i) { return saved[+i]; });
   }
 
+  /* ---------- spintax audit: options of one group must be pure synonyms ---------- */
+  var SPIN_TERMS = ['মৃত্যু', 'ঋণ', 'আল্লাহ', 'ঈশ্বর', 'কিস্তি', 'বাজেয়াপ্ত', 'নগদ', 'ব্যাংক', 'মামলা', 'চেক', 'বিবাহ', 'তালাক', 'death', 'loan', 'bank', 'not '];
+  function spinAudit(text) {
+    var out = [], saved = [];
+    text = String(text).replace(/\{\{[^{}]*\}\}/g, function (m) { saved.push(m); return '§' + (saved.length - 1) + '§'; });
+    var re = /\{([^{}]*\|[^{}]*)\}/g, m;
+    while ((m = re.exec(text))) {
+      var opts = m[1].split('|').map(function (x) { return x.trim(); });
+      var label = opts.join(' | ');
+      function add(level, msg) { out.push({ level: level, msg: msg, group: label }); }
+      if (opts.some(function (x) { return x === ''; })) add('error', 'empty option');
+      if (new Set(opts).size !== opts.length) add('error', 'duplicate options');
+      var digs = opts.map(function (x) { return (x.match(/[0-9০-৯]+/g) || []).join(','); });
+      if (new Set(digs).size > 1) add('error', 'options contain different numbers');
+      var NEG = { 'নাই': 1, 'নহে': 1, 'নহেন': 1, 'নয়': 1, 'না': 1, 'নি': 1, 'no': 1, 'not': 1 };
+      var negs = opts.map(function (x) { return x.toLowerCase().split(/[\s,।.()\/;:-]+/).some(function (w) { return NEG[w] === 1; }); });
+      if (new Set(negs).size > 1) add('error', 'one option is negative, another is not (meaning differs)');
+      SPIN_TERMS.forEach(function (t) {
+        var has = opts.map(function (x) { return x.toLowerCase().indexOf(t) > -1; });
+        if (has.some(Boolean) && !has.every(Boolean)) add('error', 'key term "' + t.trim() + '" appears in only some options (meaning differs)');
+      });
+      var lens = opts.map(function (x) { return x.length; });
+      if (Math.min.apply(null, lens) >= 5 && Math.max.apply(null, lens) > 3.2 * Math.min.apply(null, lens)) add('warn', 'options differ a lot in length – check they say the same thing');
+      if (opts.length < 2) add('error', 'only one option');
+    }
+    return out;
+  }
+
   /* ---------- template parser ---------- */
   var parseCache = {};
   function parse(src) {
@@ -365,7 +393,7 @@
 
   var api = {
     render: render, defaults: defaults, computeCalc: computeCalc, visibleMap: visibleMap, sampleData: sampleData,
-    words: words, toBn: toBn, toEn: toEn, parseNum: parseNum, fmtAmount: fmtAmount, fmtDate: fmtDate, cond: cond, spin: spin, esc: esc,
+    spinAudit: spinAudit, words: words, toBn: toBn, toEn: toEn, parseNum: parseNum, fmtAmount: fmtAmount, fmtDate: fmtDate, cond: cond, spin: spin, esc: esc,
     pageCss: pageCss, pageVars: pageVars, isEmpty: isEmpty
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;

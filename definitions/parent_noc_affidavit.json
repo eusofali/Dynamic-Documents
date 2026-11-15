@@ -1,0 +1,200 @@
+{
+ "id": "parent_noc_affidavit",
+ "version": 1,
+ "title": "অভিভাবকের অনাপত্তি / সম্মতিপত্র",
+ "title_en": "Parent Consent / NOC",
+ "category": "হলফনামা / Affidavit",
+ "icon": "fa-user-friends",
+ "description": "সন্তানের বিদেশ গমন, ভর্তি বা চাকরির জন্য পিতা/মাতা/অভিভাবকের অনাপত্তির এফিডেভিট।",
+ "page": {
+  "size": "legal",
+  "marginTop": "4.5in",
+  "margin": "1in",
+  "fontSize": 15,
+  "lineHeight": 1.5,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "groups": [
+  {
+   "id": "g_court",
+   "title": "কোর্ট ও তারিখ",
+   "icon": "fa-gavel"
+  },
+  {
+   "id": "g_self",
+   "title": "পিতা / মাতা / অভিভাবকের তথ্য (হলফকারী)",
+   "icon": "fa-user"
+  },
+  {
+   "id": "g_child",
+   "title": "সন্তান / যার জন্য অনাপত্তি দেওয়া হচ্ছে",
+   "icon": "fa-child"
+  },
+  {
+   "id": "g_noc",
+   "title": "অনাপত্তির বিষয়",
+   "icon": "fa-plane-departure"
+  }
+ ],
+ "fields": [
+  {
+   "name": "court",
+   "label": "মোকাম / জজ কোর্টের নাম",
+   "type": "text",
+   "col": 8,
+   "group": "g_court",
+   "required": true,
+   "default": "নওগাঁ"
+  },
+  {
+   "name": "exec_date",
+   "label": "সম্পাদনের তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_court",
+   "required": true
+  },
+  {
+   "name": "name",
+   "label": "নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "father",
+   "label": "পিতার নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "mother",
+   "label": "মাতার নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "address",
+   "label": "ঠিকানা (গ্রাম, ডাক, উপজেলা, জেলা)",
+   "type": "text",
+   "col": 6,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "nid",
+   "label": "এনআইডি / জন্ম নিবন্ধন নং",
+   "type": "text",
+   "col": 3,
+   "group": "g_self",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "religion",
+   "label": "ধর্ম",
+   "type": "text",
+   "col": 3,
+   "group": "g_self",
+   "required": true,
+   "default": "ইসলাম"
+  },
+  {
+   "name": "relation",
+   "label": "হলফকারীর সম্পর্ক",
+   "type": "select",
+   "col": 4,
+   "group": "g_child",
+   "options": [
+    "পিতা",
+    "মাতা",
+    "অভিভাবক"
+   ],
+   "default": "পিতা"
+  },
+  {
+   "name": "child_name",
+   "label": "সন্তানের নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_child",
+   "required": true
+  },
+  {
+   "name": "child_father",
+   "label": "সন্তানের পিতার নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_child",
+   "required": true
+  },
+  {
+   "name": "child_dob",
+   "label": "জন্ম তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_child",
+   "required": true
+  },
+  {
+   "name": "child_id",
+   "label": "পাসপোর্ট / এনআইডি / জন্ম নিবন্ধন নং (থাকলে)",
+   "type": "text",
+   "col": 8,
+   "group": "g_child"
+  },
+  {
+   "name": "purpose",
+   "label": "অনাপত্তির উদ্দেশ্য",
+   "type": "select",
+   "col": 6,
+   "group": "g_noc",
+   "options": [
+    "উচ্চশিক্ষার্থে বিদেশ গমনের জন্য",
+    "চাকুরীর উদ্দেশ্যে বিদেশ গমনের জন্য",
+    "ভ্রমণের উদ্দেশ্যে বিদেশ গমনের জন্য",
+    "দেশের অভ্যন্তরে শিক্ষা প্রতিষ্ঠানে ভর্তির জন্য",
+    "দেশের অভ্যন্তরে চাকুরী গ্রহণের জন্য",
+    "বিবাহ সম্পাদনের জন্য"
+   ],
+   "default": "উচ্চশিক্ষার্থে বিদেশ গমনের জন্য"
+  },
+  {
+   "name": "destination",
+   "label": "দেশ / প্রতিষ্ঠানের নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_noc",
+   "required": true,
+   "placeholder": "যেমন: মালয়েশিয়া / ঢাকা বিশ্ববিদ্যালয়"
+  },
+  {
+   "name": "duration",
+   "label": "মেয়াদ (থাকলে)",
+   "type": "text",
+   "col": 6,
+   "group": "g_noc",
+   "placeholder": "যেমন: ০৪ (চার) বছর"
+  },
+  {
+   "name": "bear_cost",
+   "label": "সন্তানের যাবতীয় ব্যয়ভার বহন করিব – এই লাইনটি যুক্ত করুন",
+   "type": "checkbox",
+   "col": 6,
+   "group": "g_noc",
+   "default": true
+  }
+ ],
+ "pages": [
+  {
+   "html": "<div class=\"text-center mb-4\"><h4><strong>মোকাম নোটারী পাবলিকের কার্যালয়, {{court}}।</strong></h4><h3><strong>হলফনামা (এফিডেভিট)</strong></h3><strong>বিষয়ঃ অনাপত্তি ও সম্মতি ঘোষণাপত্র।</strong></div>\n<div class=\"text-justify mt-4\">\n<p><strong>আমি হলফকারী:</strong><br>{{name}}, পিতা- {{father}}, মাতা- {{mother}}, সাং- {{address}}, ধর্ম- {{religion}}, জাতীয়তা- বাংলাদেশী, জাতীয় পরিচয় পত্র / জন্ম নিবন্ধন নং- {{nid}}।</p>\n<p>আমি হলফকারী {পরম করুণাময় সৃষ্টিকর্তার নামে|সর্বশক্তিমান সৃষ্টিকর্তার নামে} শপথপূর্বক {সজ্ঞানে, সুস্থ মস্তিষ্কে|সুস্থ শরীরে ও সজ্ঞানে}, স্বেচ্ছায় ও অন্যের বিনা প্ররোচনায় অত্র হলফনামা বা এফিডেভিট এর বয়ান আরম্ভ করিতেছি যে-</p>\n<p><strong>১।</strong> আমি <strong>{{child_name}}</strong>, পিতা- {{child_father}}, জন্ম তারিখ- {{child_dob}} ইং{{#if child_id}}, নং- {{child_id}}{{/if}} এর <strong>{{relation}}</strong>।</p>\n<p><strong>২।</strong> আমার উক্ত সন্তান <strong>{{purpose}}</strong> {{destination}}{{#if duration}} এ {{duration}} মেয়াদে{{/if}} {যাইতে ইচ্ছুক|গমনে আগ্রহী}।</p>\n<p><strong>৩।</strong> উক্ত বিষয়ে আমার {কোন প্রকার আপত্তি নাই|কোন আপত্তি বা বিরোধিতা নাই} এবং আমি {স্বেচ্ছায় ও সজ্ঞানে|সম্পূর্ণ সম্মতি সহকারে} অনাপত্তি ও সম্মতি {প্রদান করিতেছি|জ্ঞাপন করিতেছি}।</p>\n{{#if bear_cost}}<p><strong>৪।</strong> উক্ত সময়ে আমার সন্তানের যাবতীয় {ভরণপোষণ ও ব্যয়ভার|ভরণপোষণ ও যাবতীয় খরচ} আমি {বহন করিব|বহন করিয়া যাইব}।</p>{{/if}}\n<p><strong>৫।</strong> অত্র অনাপত্তিপত্র আমার সন্তানের উপরোক্ত উদ্দেশ্যে {{destination}} এর সংশ্লিষ্ট কর্তৃপক্ষের নিকট {দাখিল|উপস্থাপন} করিবার জন্য প্রদান করা হইল।</p>\n</div>\n<div class=\"avoid-break\"><div class=\"text-justify\"><p>অত্র এফিডেভিট বা হলফনামায় বর্ণিত যাবতীয় তথ্য ও বিবরণ আমার জ্ঞান, বিশ্বাস ও অবগতি মতে সম্পূর্ণ {সত্য ও নির্ভুল|সঠিক}। আমি স্বেচ্ছায়, সজ্ঞানে, সুস্থ শরীরে এবং অন্যের বিনা প্ররোচনায় অত্র হলফনামার মর্ম পড়িয়া ও বুঝিয়া অদ্য নোটারী পাবলিক এর কার্যালয়ে উপস্থিত থাকিয়া নিজ নাম স্বাক্ষর করিলাম।</p>\n<p><strong>সম্পাদনের তারিখ:</strong> {{exec_date}} ইং।</p>\n</div>\n<table class=\"table table-borderless table-sm sign3\"><tr>\n<td width=\"40%\"><strong>সনাক্তকারীর ঘোষণা:</strong> অত্র হলফকারী আমার পূর্ব পরিচিত। তিনি আমার সামনে স্বাক্ষর করিয়াছেন; আমি তাহাকে সনাক্ত করিলাম।<br><br>__________________<br><strong>সনাক্তকারীর স্বাক্ষর</strong><br>এ্যাডভোকেট, জজ কোর্ট।</td>\n<td width=\"30%\" class=\"text-center align-bottom\">__________________<br><strong>হলফকারীর স্বাক্ষর</strong></td>\n<td width=\"30%\" class=\"text-center align-bottom\">__________________<br><strong>নোটারী পাবলিকের<br>সীল ও স্বাক্ষর</strong></td>\n</tr></table></div>"
+  }
+ ],
+ "css": ".doc-page .avoid-break{break-inside:avoid;page-break-inside:avoid}.doc-page .sign3{margin-top:14px;font-size:.92em;line-height:1.35}.doc-page .sign3 td{vertical-align:top}"
+}

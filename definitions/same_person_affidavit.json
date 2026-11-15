@@ -1,0 +1,129 @@
+{
+ "id": "same_person_affidavit",
+ "version": 1,
+ "title": "একই ব্যক্তি সনাক্তকরণের হলফনামা",
+ "title_en": "One-and-the-Same Person Affidavit",
+ "category": "হলফনামা / Affidavit",
+ "icon": "fa-people-arrows",
+ "description": "বিভিন্ন কাগজে ভিন্ন ভিন্ন নাম/বানান থাকলে সব একই ব্যক্তি – তা ঘোষণা।",
+ "page": {
+  "size": "legal",
+  "marginTop": "4.5in",
+  "margin": "1in",
+  "fontSize": 15,
+  "lineHeight": 1.5,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "groups": [
+  {
+   "id": "g_court",
+   "title": "কোর্ট ও তারিখ",
+   "icon": "fa-gavel"
+  },
+  {
+   "id": "g_self",
+   "title": "হলফকারীর তথ্য (যিনি এফিডেভিট করছেন)",
+   "icon": "fa-user"
+  },
+  {
+   "id": "g_names",
+   "title": "বিভিন্ন কাগজে লিপিবদ্ধ নাম",
+   "icon": "fa-list"
+  }
+ ],
+ "fields": [
+  {
+   "name": "court",
+   "label": "মোকাম / জজ কোর্টের নাম",
+   "type": "text",
+   "col": 8,
+   "group": "g_court",
+   "required": true,
+   "default": "নওগাঁ"
+  },
+  {
+   "name": "exec_date",
+   "label": "সম্পাদনের তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_court",
+   "required": true
+  },
+  {
+   "name": "name",
+   "label": "নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "father",
+   "label": "পিতার নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "mother",
+   "label": "মাতার নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "address",
+   "label": "ঠিকানা (গ্রাম, ডাক, উপজেলা, জেলা)",
+   "type": "text",
+   "col": 6,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "nid",
+   "label": "এনআইডি / জন্ম নিবন্ধন নং",
+   "type": "text",
+   "col": 3,
+   "group": "g_self",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "religion",
+   "label": "ধর্ম",
+   "type": "text",
+   "col": 3,
+   "group": "g_self",
+   "required": true,
+   "default": "ইসলাম"
+  },
+  {
+   "name": "names",
+   "label": "কাগজে লিপিবদ্ধ নামসমূহ",
+   "type": "rows",
+   "col": 12,
+   "group": "g_names",
+   "minRows": 2,
+   "columns": [
+    {
+     "name": "nm",
+     "label": "লিপিবদ্ধ নাম / বানান"
+    },
+    {
+     "name": "dc",
+     "label": "যে কাগজে আছে"
+    }
+   ],
+   "help": "যেখানে যেখানে ভিন্ন নাম বা বানান আছে সবগুলো যোগ করুন।"
+  }
+ ],
+ "pages": [
+  {
+   "html": "<div class=\"text-center mb-4\"><h4><strong>মোকাম নোটারী পাবলিকের কার্যালয়, {{court}}।</strong></h4><h3><strong>হলফনামা (এফিডেভিট)</strong></h3><strong>বিষয়ঃ একই ব্যক্তি সংক্রান্ত ঘোষণাপত্র।</strong></div>\n<div class=\"text-justify mt-4\">\n<p><strong>আমি হলফকারী:</strong><br>{{name}}, পিতা- {{father}}, মাতা- {{mother}}, সাং- {{address}}, ধর্ম- {{religion}}, জাতীয়তা- বাংলাদেশী, জাতীয় পরিচয় পত্র / জন্ম নিবন্ধন নং- {{nid}}।</p>\n<p>আমি হলফকারী {পরম করুণাময় সৃষ্টিকর্তার নামে|সর্বশক্তিমান সৃষ্টিকর্তার নামে} শপথপূর্বক {সজ্ঞানে, সুস্থ মস্তিষ্কে|সুস্থ শরীরে ও সজ্ঞানে}, স্বেচ্ছায় ও অন্যের বিনা প্ররোচনায় অত্র হলফনামা বা এফিডেভিট এর বয়ান আরম্ভ করিতেছি যে-</p>\n<p><strong>১।</strong> আমি বাংলাদেশের একজন {স্থায়ী|প্রকৃত ও স্থায়ী} নাগরিক এবং {আইন মান্যকারী ব্যক্তি|আইনের প্রতি শ্রদ্ধাশীল ব্যক্তি}।</p>\n<p><strong>২।</strong> আমার বিভিন্ন কাগজপত্রে আমার নাম নিম্নরূপে {লিপিবদ্ধ|উল্লেখ} আছে:</p>\n<table class=\"table table-bordered table-sm text-center w-100\" style=\"border-color:#000\"><thead><tr><th style=\"width:12%\">ক্রমিক</th><th>লিপিবদ্ধ নাম / বানান</th><th>যে কাগজে আছে</th></tr></thead><tbody>\n{{#each names}}<tr><td>{{@n}}</td><td>{{nm}}</td><td>{{dc}}</td></tr>{{/each}}\n</tbody></table>\n<p><strong>৩।</strong> উপরোক্ত সকল নাম ও বানান <strong>একই ব্যক্তি</strong>, অর্থাৎ <strong>আমাকেই</strong> {বুঝায়|নির্দেশ করে}। আমার পিতা-মাতা ও জন্ম তারিখ সকল ক্ষেত্রে অভিন্ন।</p>\n<p><strong>৪।</strong> উক্ত কাগজসমূহের যেকোনটির ভিত্তিতে প্রাপ্ত সুবিধা বা অধিকার আমারই {বলিয়া গণ্য হইবে|বলিয়া বিবেচিত হইবে}। ভিন্ন নামের কারণে আমি ভিন্ন কোন ব্যক্তি নহি।</p>\n</div>\n<div class=\"avoid-break\"><div class=\"text-justify\"><p>অত্র এফিডেভিট বা হলফনামায় বর্ণিত যাবতীয় তথ্য ও বিবরণ আমার জ্ঞান, বিশ্বাস ও অবগতি মতে সম্পূর্ণ {সত্য ও নির্ভুল|সঠিক}। আমি স্বেচ্ছায়, সজ্ঞানে, সুস্থ শরীরে এবং অন্যের বিনা প্ররোচনায় অত্র হলফনামার মর্ম পড়িয়া ও বুঝিয়া অদ্য নোটারী পাবলিক এর কার্যালয়ে উপস্থিত থাকিয়া নিজ নাম স্বাক্ষর করিলাম।</p>\n<p><strong>সম্পাদনের তারিখ:</strong> {{exec_date}} ইং।</p>\n</div>\n<table class=\"table table-borderless table-sm sign3\"><tr>\n<td width=\"40%\"><strong>সনাক্তকারীর ঘোষণা:</strong> অত্র হলফকারী আমার পূর্ব পরিচিত। তিনি আমার সামনে স্বাক্ষর করিয়াছেন; আমি তাহাকে সনাক্ত করিলাম।<br><br>__________________<br><strong>সনাক্তকারীর স্বাক্ষর</strong><br>এ্যাডভোকেট, জজ কোর্ট।</td>\n<td width=\"30%\" class=\"text-center align-bottom\">__________________<br><strong>হলফকারীর স্বাক্ষর</strong></td>\n<td width=\"30%\" class=\"text-center align-bottom\">__________________<br><strong>নোটারী পাবলিকের<br>সীল ও স্বাক্ষর</strong></td>\n</tr></table></div>"
+  }
+ ],
+ "css": ".doc-page .avoid-break{break-inside:avoid;page-break-inside:avoid}.doc-page .sign3{margin-top:14px;font-size:.92em;line-height:1.35}.doc-page .sign3 td{vertical-align:top}"
+}

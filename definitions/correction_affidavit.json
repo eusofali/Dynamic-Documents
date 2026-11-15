@@ -1,0 +1,287 @@
+{
+ "title": "নাম/বয়স সংশোধনের হলফনামা",
+ "title_en": "Correction Affidavit",
+ "category": "হলফনামা / Affidavit",
+ "icon": "fa-edit",
+ "description": "নিজের নাম, পিতা-মাতার নাম বা জন্ম তারিখ সংশোধনের এফিডেভিট। যেকোনো সংমিশ্রণ বাছাই করা যায়।",
+ "page": {
+  "size": "legal",
+  "marginTop": "4.5in",
+  "margin": "1in",
+  "fontSize": 16,
+  "lineHeight": 1.5,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "groups": [
+  {
+   "id": "g_court",
+   "title": "সংশোধন ও কোর্টের তথ্য",
+   "icon": "fa-gavel"
+  },
+  {
+   "id": "g_self",
+   "title": "হলফকারীর তথ্য (যিনি এফিডেভিট করছেন)",
+   "icon": "fa-user"
+  },
+  {
+   "id": "g_wrong",
+   "title": "ভুল ও সঠিক তথ্যের বিবরণ",
+   "icon": "fa-exclamation-triangle"
+  }
+ ],
+ "fields": [
+  {
+   "name": "court",
+   "label": "মোকাম / জজ কোর্টের নাম",
+   "type": "text",
+   "col": 12,
+   "group": "g_court",
+   "required": true,
+   "default": "নওগাঁ"
+  },
+  {
+   "name": "chk_name",
+   "label": "নিজের নাম",
+   "type": "checkbox",
+   "col": 3,
+   "group": "g_court",
+   "default": true,
+   "help": "কী কী সংশোধন করতে চান? (একাধিক নির্বাচন করা যাবে)"
+  },
+  {
+   "name": "chk_father",
+   "label": "পিতার নাম",
+   "type": "checkbox",
+   "col": 3,
+   "group": "g_court"
+  },
+  {
+   "name": "chk_mother",
+   "label": "মাতার নাম",
+   "type": "checkbox",
+   "col": 3,
+   "group": "g_court"
+  },
+  {
+   "name": "chk_dob",
+   "label": "জন্ম তারিখ/বয়স",
+   "type": "checkbox",
+   "col": 3,
+   "group": "g_court"
+  },
+  {
+   "name": "name",
+   "label": "বর্তমান নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "father",
+   "label": "পিতার নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "mother",
+   "label": "মাতার নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "address",
+   "label": "ঠিকানা (গ্রাম, ডাক, উপজেলা, জেলা)",
+   "type": "text",
+   "col": 6,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "nid",
+   "label": "এনআইডি (NID)",
+   "type": "text",
+   "col": 3,
+   "group": "g_self",
+   "required": true
+  },
+  {
+   "name": "religion",
+   "label": "ধর্ম",
+   "type": "text",
+   "col": 3,
+   "group": "g_self",
+   "required": true,
+   "default": "ইসলাম"
+  },
+  {
+   "name": "wrong_name",
+   "label": "নিজের নাম – ভুল",
+   "type": "text",
+   "col": 6,
+   "group": "g_wrong",
+   "required": true,
+   "show_if": "chk_name"
+  },
+  {
+   "name": "correct_name",
+   "label": "নিজের নাম – সঠিক",
+   "type": "text",
+   "col": 6,
+   "group": "g_wrong",
+   "required": true,
+   "show_if": "chk_name"
+  },
+  {
+   "name": "wrong_father",
+   "label": "পিতার নাম – ভুল",
+   "type": "text",
+   "col": 6,
+   "group": "g_wrong",
+   "required": true,
+   "show_if": "chk_father"
+  },
+  {
+   "name": "correct_father",
+   "label": "পিতার নাম – সঠিক",
+   "type": "text",
+   "col": 6,
+   "group": "g_wrong",
+   "required": true,
+   "show_if": "chk_father"
+  },
+  {
+   "name": "wrong_mother",
+   "label": "মাতার নাম – ভুল",
+   "type": "text",
+   "col": 6,
+   "group": "g_wrong",
+   "required": true,
+   "show_if": "chk_mother"
+  },
+  {
+   "name": "correct_mother",
+   "label": "মাতার নাম – সঠিক",
+   "type": "text",
+   "col": 6,
+   "group": "g_wrong",
+   "required": true,
+   "show_if": "chk_mother"
+  },
+  {
+   "name": "wrong_dob",
+   "label": "জন্ম তারিখ – ভুল",
+   "type": "text",
+   "col": 6,
+   "group": "g_wrong",
+   "required": true,
+   "show_if": "chk_dob"
+  },
+  {
+   "name": "correct_dob",
+   "label": "জন্ম তারিখ – সঠিক",
+   "type": "text",
+   "col": 6,
+   "group": "g_wrong",
+   "required": true,
+   "show_if": "chk_dob"
+  },
+  {
+   "name": "documents",
+   "label": "কোন কাগজপত্রে ভুলটি হয়েছে? (একাধিক হলে কমা দিয়ে লিখুন)",
+   "type": "text",
+   "col": 8,
+   "group": "g_wrong",
+   "required": true,
+   "placeholder": "যেমন: এস.এস.সি সনদপত্র ও জাতীয় পরিচয়পত্রে"
+  },
+  {
+   "name": "exec_date",
+   "label": "সম্পাদনের তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_wrong",
+   "required": true
+  }
+ ],
+ "computed": [
+  {
+   "name": "title_str",
+   "sep": " ও ",
+   "items": [
+    {
+     "if": "chk_name",
+     "text": "নাম"
+    },
+    {
+     "if": "chk_father",
+     "text": "পিতার নাম"
+    },
+    {
+     "if": "chk_mother",
+     "text": "মাতার নাম"
+    },
+    {
+     "if": "chk_dob",
+     "text": "জন্ম তারিখ"
+    }
+   ]
+  },
+  {
+   "name": "correct_str",
+   "sep": " এবং ",
+   "items": [
+    {
+     "if": "chk_name",
+     "text": "আমার নাম <strong>“{{correct_name}}”</strong>"
+    },
+    {
+     "if": "chk_father",
+     "text": "আমার পিতার নাম <strong>“{{correct_father}}”</strong>"
+    },
+    {
+     "if": "chk_mother",
+     "text": "আমার মাতার নাম <strong>“{{correct_mother}}”</strong>"
+    },
+    {
+     "if": "chk_dob",
+     "text": "আমার জন্ম তারিখ <strong>“{{correct_dob}}”</strong>"
+    }
+   ]
+  },
+  {
+   "name": "wrong_str",
+   "sep": " এবং ",
+   "items": [
+    {
+     "if": "chk_name",
+     "text": "আমার নাম <strong>“{{wrong_name}}”</strong>"
+    },
+    {
+     "if": "chk_father",
+     "text": "আমার পিতার নাম <strong>“{{wrong_father}}”</strong>"
+    },
+    {
+     "if": "chk_mother",
+     "text": "আমার মাতার নাম <strong>“{{wrong_mother}}”</strong>"
+    },
+    {
+     "if": "chk_dob",
+     "text": "আমার জন্ম তারিখ <strong>“{{wrong_dob}}”</strong>"
+    }
+   ]
+  }
+ ],
+ "pages": [
+  {
+   "html": "<div class=\"text-center mb-4\"><h4><strong>মোকাম নোটারী পাবলিকের কার্যালয়, {{court}}।</strong></h4><h3><strong>হলফনামা (এফিডেভিট)</strong></h3><strong>বিষয়ঃ {{title_str}} সংশোধনের ঘোষণাপত্র।</strong></div>\n<div class=\"text-justify mt-4\">\n<p><strong>আমি হলফকারী:</strong><br>{{name}}, পিতা- {{father}}, মাতা- {{mother}}, সাং- {{address}}, ধর্ম- {{religion}}, জাতীয়তা- বাংলাদেশী, জাতীয় পরিচয় পত্র নং- {{nid}}।</p>\n<p>আমি হলফকারী {পরম করুণাময় সৃষ্টিকর্তার নামে|সর্বশক্তিমান আল্লাহর নামে} শপথপূর্বক {সজ্ঞানে, সুস্থ মস্তিষ্কে|সুস্থ শরীরে ও সজ্ঞানে}, স্বেচ্ছায় ও অন্যের বিনা প্ররোচনায় অত্র হলফনামা বা এফিডেভিট এর বয়ান আরম্ভ করিতেছি যে-</p>\n<p><strong>১।</strong> আমি বাংলাদেশের একজন {স্থায়ী|প্রকৃত ও স্থায়ী} নাগরিক এবং {আইন মান্যকারী ব্যক্তি|শান্তিপ্রিয় স্বভাবের মানুষ}।</p>\n<p><strong>২।</strong> {প্রকৃতপক্ষে|মূলত} {{correct_str}} সঠিক ও নির্ভুল। কিন্তু {অসাবধানতাবশত|ভুলবশত|করণিক ভুলবশত} আমার <strong>{{documents}}</strong> এ {{wrong_str}} বলিয়া {লিপিবদ্ধ হইয়াছে|ছাপানো হইয়াছে|রেকর্ড ভুক্ত হইয়াছে}।</p>\n<p><strong>৩।</strong> আমি অত্র হলফনামার মাধ্যমে {ঘোষণা করিতেছি|অঙ্গীকার করিতেছি} যে, আমার বর্ণিত দলিলাদিতে {{wrong_str}} এর স্থলে সঠিক {{correct_str}} {গণ্য হইবে|পঠিত হইবে}। আমার এই সঠিক তথ্য অদ্য হইতে সকল সরকারি, আধা-সরকারি ও বেসরকারি দলিলাদিতে {ব্যবহার করা হইবে|প্রযোজ্য হইবে}।</p>\n<p><strong>৪।</strong> অত্র এফিডেভিট বা হলফনামায় বর্ণিত যাবতীয় তথ্য ও বিবরণ আমার জ্ঞান, বিশ্বাস ও অবগতি মতে সম্পূর্ণ {সত্য ও নির্ভুল|সঠিক}। আমি স্বেচ্ছায়, সজ্ঞানে, সুস্থ শরীরে এবং অন্যের বিনা প্ররোচনায় অত্র হলফনামার মর্ম পড়িয়া ও বুঝিয়া অদ্য নোটারী পাবলিক এর কার্যালয়ে উপস্থিত থাকিয়া নিজ নাম স্বাক্ষর করিলাম।</p>\n<p><strong>সম্পাদনের তারিখ:</strong> {{exec_date}} ইং।</p>\n</div>\n<div class=\"mt-5 pt-5\"><table class=\"table table-borderless\"><tr>\n<td width=\"50%\"><strong>সনাক্তকারীর ঘোষণা:</strong><br>অত্র হলফকারী আমার পূর্ব পরিচিত। তিনি আমার সামনে সজ্ঞানে অত্র হলফনামায় নিজ নাম স্বাক্ষর করিয়াছেন এবং আমি তাহাকে সনাক্ত করিলাম।<br><br><br><br>_______________________<br><strong>সনাক্তকারীর স্বাক্ষর</strong><br>এ্যাডভোকেট, জজ কোর্ট।</td>\n<td width=\"50%\" class=\"text-center align-bottom\">_______________________<br><strong>হলফকারীর স্বাক্ষর</strong></td>\n</tr></table></div>\n<div class=\"text-center mt-5 pt-4\">_______________________<br><strong>নোটারী পাবলিকের সীল ও স্বাক্ষর</strong></div>"
+  }
+ ],
+ "id": "correction_affidavit",
+ "version": 1
+}

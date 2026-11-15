@@ -1,0 +1,258 @@
+{
+ "title": "দোকান ঘর ভাড়ার চুক্তিপত্র",
+ "title_en": "Shop Rent Agreement",
+ "category": "চুক্তিপত্র / Agreements",
+ "icon": "fa-store",
+ "description": "দোকান ঘর ভাড়ার স্ট্যান্ডার্ড চুক্তিপত্র (৯ শর্ত, ৩ পেজ)।",
+ "page": {
+  "size": "legal",
+  "marginTop": "4.5in",
+  "margin": "1in",
+  "fontSize": 16,
+  "lineHeight": 1.5,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "groups": [
+  {
+   "id": "g_p1",
+   "title": "১ম পক্ষ (মালিকের তথ্য)",
+   "icon": "fa-user-shield"
+  },
+  {
+   "id": "g_p2",
+   "title": "২য় পক্ষ (ভাড়াটিয়ার তথ্য)",
+   "icon": "fa-user-tie"
+  },
+  {
+   "id": "g_terms",
+   "title": "চুক্তির শর্তাবলী",
+   "icon": "fa-handshake"
+  },
+  {
+   "id": "g_prop",
+   "title": "দোকানের তফশীল ও অন্যান্য",
+   "icon": "fa-map-marker-alt"
+  }
+ ],
+ "fields": [
+  {
+   "name": "p1_name",
+   "label": "নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_p1",
+   "required": true
+  },
+  {
+   "name": "p1_father",
+   "label": "পিতা/স্বামীর নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_p1",
+   "required": true
+  },
+  {
+   "name": "p1_nid",
+   "label": "এনআইডি (NID)",
+   "type": "text",
+   "col": 4,
+   "group": "g_p1",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "p1_address",
+   "label": "ঠিকানা (গ্রাম, ডাক, উপজেলা, জেলা)",
+   "type": "text",
+   "col": 6,
+   "group": "g_p1",
+   "required": true
+  },
+  {
+   "name": "p1_profession",
+   "label": "পেশা",
+   "type": "text",
+   "col": 3,
+   "group": "g_p1",
+   "required": true,
+   "default": "ব্যবসা"
+  },
+  {
+   "name": "p1_religion",
+   "label": "ধর্ম",
+   "type": "text",
+   "col": 3,
+   "group": "g_p1",
+   "required": true,
+   "default": "ইসলাম"
+  },
+  {
+   "name": "p2_name",
+   "label": "নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_p2",
+   "required": true
+  },
+  {
+   "name": "p2_father",
+   "label": "পিতা/স্বামীর নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_p2",
+   "required": true
+  },
+  {
+   "name": "p2_nid",
+   "label": "এনআইডি (NID)",
+   "type": "text",
+   "col": 4,
+   "group": "g_p2",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "p2_address",
+   "label": "ঠিকানা (গ্রাম, ডাক, উপজেলা, জেলা)",
+   "type": "text",
+   "col": 6,
+   "group": "g_p2",
+   "required": true
+  },
+  {
+   "name": "p2_profession",
+   "label": "পেশা",
+   "type": "text",
+   "col": 3,
+   "group": "g_p2",
+   "required": true,
+   "default": "ব্যবসা"
+  },
+  {
+   "name": "p2_religion",
+   "label": "ধর্ম",
+   "type": "text",
+   "col": 3,
+   "group": "g_p2",
+   "required": true,
+   "default": "ইসলাম"
+  },
+  {
+   "name": "start_date",
+   "label": "শুরুর তারিখ",
+   "type": "date",
+   "col": 3,
+   "group": "g_terms",
+   "required": true,
+   "help": "তারিখের পাশে আপনি চাইলে মেয়াদ নিজে লিখতে পারেন"
+  },
+  {
+   "name": "end_date",
+   "label": "শেষের তারিখ",
+   "type": "date",
+   "col": 3,
+   "group": "g_terms",
+   "required": true
+  },
+  {
+   "name": "duration",
+   "label": "মেয়াদকাল",
+   "type": "text",
+   "col": 3,
+   "group": "g_terms",
+   "required": true,
+   "placeholder": "৪ (চার) বৎসর"
+  },
+  {
+   "name": "rent_date",
+   "label": "ভাড়া দেওয়ার তারিখ",
+   "type": "text",
+   "col": 3,
+   "group": "g_terms",
+   "required": true,
+   "placeholder": "৭ তারিখ"
+  },
+  {
+   "name": "deposit",
+   "label": "জামানত",
+   "type": "amount",
+   "col": 6,
+   "group": "g_terms",
+   "required": true
+  },
+  {
+   "name": "rent",
+   "label": "মাসিক ভাড়া",
+   "type": "amount",
+   "col": 6,
+   "group": "g_terms",
+   "required": true
+  },
+  {
+   "name": "zilla",
+   "label": "জেলা ও উপজেলা",
+   "type": "text",
+   "col": 4,
+   "group": "g_prop",
+   "required": true,
+   "default": "নওগাঁ সদর, নওগাঁ"
+  },
+  {
+   "name": "mouza",
+   "label": "মৌজা",
+   "type": "text",
+   "col": 4,
+   "group": "g_prop",
+   "required": true
+  },
+  {
+   "name": "khatian",
+   "label": "হাল খতিয়ান",
+   "type": "text",
+   "col": 2,
+   "group": "g_prop",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "dag_no",
+   "label": "দাগ নং",
+   "type": "text",
+   "col": 2,
+   "group": "g_prop",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "location",
+   "label": "অবস্থান/চৌহদ্দি",
+   "type": "text",
+   "col": 8,
+   "group": "g_prop",
+   "required": true,
+   "placeholder": "যেমন: ঢাকা বাস স্ট্যান্ড, ৩নং দোকান ঘর"
+  },
+  {
+   "name": "exec_date",
+   "label": "সম্পাদনের তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_prop",
+   "required": true
+  }
+ ],
+ "pages": [
+  {
+   "html": "<div class=\"text-center mb-4\"><h3><strong>দোকান ঘর ভাড়ার চুক্তিপত্র</strong></h3></div>\n<div class=\"text-justify\"><p><strong>১ম পক্ষ (মালিক)ঃ</strong> <br>{{p1_name}}, পিতা/স্বামী- {{p1_father}}, সাং- {{p1_address}}। জাতীয় পরিচয়পত্র নং- {{p1_nid}}। পেশা- {{p1_profession}}, ধর্ম- {{p1_religion}}।</p><p><strong>২য় পক্ষ (ভাড়াটিয়া)ঃ</strong> <br>{{p2_name}}, পিতা/স্বামী- {{p2_father}}, সাং- {{p2_address}}। জাতীয় পরিচয়পত্র নং- {{p2_nid}}। পেশা- {{p2_profession}}, ধর্ম- {{p2_religion}}।</p>\n<p>{কষ্য দোকান ঘর ভাড়ার চুক্তিপত্র মিদং কার্যাজ্ঞাগে|পরম করুণাময়ের নামে দোকান ভাড়ার চুক্তিপত্র আরম্ভ করিতেছি,} আমরা উভয় পক্ষ নিম্ন শর্ত সমুহ মোতাবেক অত্র চুক্তিপত্র {লিখিয়া এবং সম্পাদন করিয়া|পড়িয়া ও বুঝিয়া} এই মর্মে {স্বীকার ও অঙ্গীকার|শপথ ও অঙ্গীকার} করিতেছি যে, কোন পক্ষ কোন শর্তের {বরখেলাপ করিতে পারিব না|অমান্য করিতে পারিব না} বা কোন প্রকার শর্ত ভঙ্গের কার্যাদি করিতে পারিব না, করিলেও অত্র চুক্তি পত্রের বলে তাহা {না মঞ্জুর|বাতিল} হইবে। {এতদ্বার্থে|অতএব} স্বজ্ঞানে অন্যের বিনা তোষামদে নিম্ন স্বাক্ষীগণের সামনে উভয় পক্ষ সহি সম্পাদন করিলাম।</p>\n<p><strong>শর্তাবলীঃ</strong></p>\n<p><strong>০১।</strong> নিম্ন তফশীল বর্ণিত দোকান ঘর আপনি দ্বিতীয় পক্ষ ভাড়া চাহিলে আমি প্রথম পক্ষ ভাড়া দিতে {সম্মত হইয়া|রাজি হইয়া} উভয় পক্ষের {সম্মতিক্রমেই|আলোচনাসাপেক্ষে} জামানত স্বরূপ {{deposit}}/- ({{deposit_words}}) টাকা নির্ধারিত হয়, যা ২য় পক্ষের নিকট হইতে গ্রহণ করিলাম এবং আমাদের উভয় পক্ষের সম্মতিক্রমেই মাসিক ভাড়া {{rent}}/- ({{rent_words}}) টাকা নির্ধারিত হইল।</p>\n<p><strong>০২।</strong> দোকান ঘরের মাসিক ভাড়া {{rent}}/- টাকা যাহা ২য় পক্ষ (ভাড়াটিয়া) প্রতি মাসের {{rent_date}} এর মধ্যে ১ম পক্ষকে {নগদ প্রদান করিয়া|পরিশোধ করিয়া} ১ম পক্ষের নিকট হইতে {রসিদ|ভাড়ার রশিদ} গ্রহণ করিবেন।</p>\n</div><div class=\"text-end mt-4\"><strong>চলমান পাতা নং-০২...</strong></div>"
+  },
+  {
+   "html": "<div class=\"text-center mb-4\"><strong>পাতা নং-০২</strong></div>\n<div class=\"text-justify\">\n<p><strong>০৩।</strong> অদ্য {{start_date}} ইং সাল হইতে {{end_date}} ইং তারিখ পর্যন্ত মোট {{duration}} বলবৎ মেয়াদ {রহিল|থাকিবে}। উক্ত মেয়াদে এই চুক্তিনামায় আমরা উভয় পক্ষ সম্পাদন করিলাম। তবে প্রকাশ থাকে যে, মেয়াদ অন্তে {ঘরখানা|দোকান ঘরটি} ১ম পক্ষকে ২য় পক্ষ {স্বেচ্ছায়|বিনা ওজরে} হস্তান্তর করিতে বাধ্য থাকিবেন।</p>\n<p><strong>০৪।</strong> দোকান ঘরের বিদ্যুৎ বিল ২য় পক্ষ (ভাড়াটিয়া) নিজ {তহবিল|দায়িত্বে} হইতে মাসিক হারে নিয়মিত পরিশোধ করিবেন।</p>\n<p><strong>০৫।</strong> দোকান ঘরে কোন {বিস্ফোরক জাতীয় দ্রব্যাদি|ঝুঁকিপূর্ণ পদার্থ} ও অবৈধ কোন প্রকার ব্যবসা ২য় পক্ষ করিতে পারিবেন না।</p>\n<p><strong>০৬।</strong> ২য় পক্ষ কোন ক্রমেই অন্য কাহারও নিকট দোকান ঘরের {পজিশন|দখল} হস্তান্তর বা সাব-লেট (ভাড়া) দিতে পারিবেন না।</p>\n<p><strong>০৭।</strong> যদি ২য় পক্ষ কোন কারণে {ব্যবসাদী না করেন|ব্যবসা পরিচালনা না করেন} বা অক্ষম হন তাহলে ১ম পক্ষকে ২য় পক্ষ কমপক্ষে ০৩ (তিন) মাস পূর্বে {লিখিত ভাবে|নোটিশের মাধ্যমে} অবগত করাইবেন। তিন মাসের মধ্যে আলোচনা সাপেক্ষে জামানতের টাকা ফেরৎ লওয়ার ব্যবস্থা করিবেন এবং ১ম পক্ষ দিতে বাধ্য থাকিবেন। তদ্রুপ ১ম পক্ষের নিজ প্রয়োজনে উক্ত ঘরের প্রয়োজন হইলে ২য় পক্ষকে তিন মাস পূর্বে {লিখিত ভাবে|নোটিশের মাধ্যমে} অবগত করাইলে এবং আলোচনা সাপেক্ষে জামানতের টাকা ফেরত লইয়া ১ম পক্ষের বরাবরে ঘর খানা ছাড়িয়া দিতে বাধ্য থাকিবেন।</p>\n<p><strong>০৮।</strong> দোকান ঘরের ভাড়া পরপর ০৩ (তিন) মাস বকেয়া হলে {বিনা নোটিশে|পূর্ব ঘোষণা ব্যতিরেকেই} ১ম পক্ষ ২য় পক্ষকে (ভাড়াটিয়া) উচ্ছেদ করিতে পারিবেন এবং বকেয়া ভাড়ার টাকা জামানতের টাকা হইতে {কর্তন করা হইবে|কেটে নেওয়া হইবে}।</p>\n</div><div class=\"text-end mt-5\"><strong>চলমান পাতা নং-০৩...</strong></div>"
+  },
+  {
+   "html": "<div class=\"text-center mb-4\"><strong>পাতা নং-০৩</strong></div>\n<div class=\"text-justify\">\n<p><strong>০৯।</strong> দোকান ঘরের ছোটখাটো টুকিটাকি সংস্কার প্রয়োজন হলে ২য় পক্ষ নিজ খরচে তাহা করিবেন। তবে বড় ধরণের কাঠামোগত সংস্কারের প্রয়োজন হলে উভয় পক্ষ (মালিক ও ভাড়াটিয়া) {পারস্পরিক আলোচনার মাধ্যমে|সম্মতিক্রমে} সংস্কারের প্রয়োজনীয়তা সম্পর্কে সিদ্ধান্ত নিবেন এবং উক্ত সংস্কারের ব্যয়ভার কে বহন করিবে (১ম পক্ষ, ২য় পক্ষ নাকি উভয় পক্ষ যৌথভাবে) তাহা আলোচনার ভিত্তিতে {নির্ধারিত হইবে|স্থির করা হইবে}।</p>\n<div class=\"mt-4 mb-4\"><strong>তফশীল সম্পত্তি বা দোকান ঘরের পরিচয়ঃ</strong><br>জেলা ও উপজেলা - {{zilla}}, মৌজা- {{mouza}}, হাল খতিয়ান- {{khatian}}, দাগ নং- {{dag_no}}।<br>{{location}}।</div>\n<p>অত্র চুক্তিপত্র নামায় আমরা উভয় পক্ষ পড়িয়া, ইহার মর্ম বুঝিয়া {স্বজ্ঞানে, সুস্থ্য মস্তিষ্কে|সুস্থ শরীরে ও সজ্ঞানে} ও অন্যের বিনা প্ররোচনায় ও তোষামদে স্বাক্ষর সম্পাদন করিলাম।</p>\n<p><strong>সম্পাদনের তারিখ:</strong> {{exec_date}} ইং।</p>\n</div>\n<div class=\"mt-5 pt-4\"><table class=\"table table-borderless table-sm\"><tr><td width=\"50%\">\n<strong>স্বাক্ষীগণের স্বাক্ষরঃ</strong><br><br>\n১। _______________________<br><br>\n২। _______________________<br><br>\n৩। _______________________\n</td>\n<td width=\"50%\" class=\"text-end align-top\"><br><br>_______________________<br><strong>১ম পক্ষের (মালিকের) স্বাক্ষর</strong><br><br><br>_______________________<br><strong>২য় পক্ষের (ভাড়াটিয়ার) স্বাক্ষর</strong></td>\n</tr></table></div>"
+  }
+ ],
+ "id": "shop_rent_agreement",
+ "version": 1
+}

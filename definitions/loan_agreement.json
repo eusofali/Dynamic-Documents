@@ -1,0 +1,235 @@
+{
+ "title": "হাওলাত / কর্জ টাকার চুক্তিপত্র",
+ "title_en": "Loan Agreement",
+ "category": "চুক্তিপত্র / Agreements",
+ "icon": "fa-money-check-alt",
+ "description": "নগদ টাকা ধার/কর্জ নেওয়ার অঙ্গীকারনামা। ঐচ্ছিক সিকিউরিটি চেক ও জামীনদার।",
+ "page": {
+  "size": "legal",
+  "marginTop": "4.5in",
+  "margin": "1in",
+  "fontSize": 16,
+  "lineHeight": 1.5,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "groups": [
+  {
+   "id": "g_p1",
+   "title": "১ম পক্ষ (দাতা / যিনি টাকা দিবেন)",
+   "icon": "fa-hand-holding-usd"
+  },
+  {
+   "id": "g_p2",
+   "title": "২য় পক্ষ (গ্রহিতা / যিনি টাকা নিবেন)",
+   "icon": "fa-user-tag"
+  },
+  {
+   "id": "g_tx",
+   "title": "লেনদেনের শর্তাবলী ও জামানত",
+   "icon": "fa-file-invoice-dollar"
+  },
+  {
+   "id": "g_sec",
+   "title": "সিকিউরিটি চেক / ব্যাংক বিস্তারিত (যদি থাকে)",
+   "icon": "fa-shield-alt"
+  }
+ ],
+ "fields": [
+  {
+   "name": "p1_name",
+   "label": "নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_p1",
+   "required": true
+  },
+  {
+   "name": "p1_father",
+   "label": "পিতা/স্বামীর নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_p1",
+   "required": true
+  },
+  {
+   "name": "p1_mother",
+   "label": "মাতার নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_p1",
+   "required": true
+  },
+  {
+   "name": "p1_address",
+   "label": "ঠিকানা (গ্রাম, ডাক, উপজেলা, জেলা)",
+   "type": "text",
+   "col": 6,
+   "group": "g_p1",
+   "required": true
+  },
+  {
+   "name": "p1_nid",
+   "label": "এনআইডি (NID)",
+   "type": "text",
+   "col": 2,
+   "group": "g_p1",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "p1_religion",
+   "label": "ধর্ম",
+   "type": "text",
+   "col": 2,
+   "group": "g_p1",
+   "required": true,
+   "default": "ইসলাম"
+  },
+  {
+   "name": "p1_profession",
+   "label": "পেশা",
+   "type": "text",
+   "col": 2,
+   "group": "g_p1",
+   "required": true,
+   "default": "ব্যবসা"
+  },
+  {
+   "name": "p2_name",
+   "label": "নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_p2",
+   "required": true
+  },
+  {
+   "name": "p2_father",
+   "label": "পিতা/স্বামীর নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_p2",
+   "required": true
+  },
+  {
+   "name": "p2_mother",
+   "label": "মাতার নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_p2",
+   "required": true
+  },
+  {
+   "name": "p2_address",
+   "label": "ঠিকানা (গ্রাম, ডাক, উপজেলা, জেলা)",
+   "type": "text",
+   "col": 6,
+   "group": "g_p2",
+   "required": true
+  },
+  {
+   "name": "p2_nid",
+   "label": "এনআইডি (NID)",
+   "type": "text",
+   "col": 2,
+   "group": "g_p2",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "p2_religion",
+   "label": "ধর্ম",
+   "type": "text",
+   "col": 2,
+   "group": "g_p2",
+   "required": true,
+   "default": "ইসলাম"
+  },
+  {
+   "name": "p2_profession",
+   "label": "পেশা",
+   "type": "text",
+   "col": 2,
+   "group": "g_p2",
+   "required": true,
+   "default": "ব্যবসা"
+  },
+  {
+   "name": "loan_reason",
+   "label": "টাকা নেওয়ার কারণ",
+   "type": "text",
+   "col": 12,
+   "group": "g_tx",
+   "required": true,
+   "default": "ব্যবসায়িক ও ব্যক্তিগত প্রয়োজনে"
+  },
+  {
+   "name": "start_date",
+   "label": "প্রদানের তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_tx",
+   "required": true
+  },
+  {
+   "name": "end_date",
+   "label": "ফেরত দেওয়ার শেষ তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_tx",
+   "required": true
+  },
+  {
+   "name": "amount",
+   "label": "টাকার পরিমাণ",
+   "type": "amount",
+   "col": 4,
+   "group": "g_tx",
+   "required": true
+  },
+  {
+   "name": "bank_name",
+   "label": "ব্যাংকের নাম ও শাখা",
+   "type": "text",
+   "col": 4,
+   "group": "g_sec",
+   "placeholder": "যেমন: ইসলামী ব্যাংক, নওগাঁ শাখা"
+  },
+  {
+   "name": "acc_no",
+   "label": "অ্যাকাউন্ট নং",
+   "type": "text",
+   "col": 4,
+   "group": "g_sec",
+   "bn": true
+  },
+  {
+   "name": "cheque_no",
+   "label": "চেক নং",
+   "type": "text",
+   "col": 4,
+   "group": "g_sec"
+  },
+  {
+   "name": "has_guarantor",
+   "label": "জামীনদারের (Guarantor) স্বাক্ষরের ঘর যুক্ত করুন",
+   "type": "checkbox",
+   "col": 12,
+   "group": "g_sec",
+   "default": true
+  }
+ ],
+ "pages": [
+  {
+   "html": "<div class=\"text-center mb-4\"><h3><strong>হাওলাত / টাকা কর্জ নেওয়ার অঙ্গীকারনামা</strong></h3></div>\n<div class=\"text-justify\"><p><strong>১ম পক্ষ (দাতা)ঃ</strong> <br>নাম- {{p1_name}}, পিতা/স্বামী- {{p1_father}}, মাতা- {{p1_mother}}, ঠিকানাঃ {{p1_address}}। জাতীয়তা- বাংলাদেশী, ধর্ম- {{p1_religion}}, পেশা- {{p1_profession}}। জাতীয় পরিচয়পত্র নং- {{p1_nid}}।</p><p><strong>২য় পক্ষ (গ্রহিতা)ঃ</strong> <br>নাম- {{p2_name}}, পিতা/স্বামী- {{p2_father}}, মাতা- {{p2_mother}}, ঠিকানাঃ {{p2_address}}। জাতীয়তা- বাংলাদেশী, ধর্ম- {{p2_religion}}, পেশা- {{p2_profession}}। জাতীয় পরিচয়পত্র নং- {{p2_nid}}।</p>\n<p>{পরম করুনাময় মহান আল্লাহ তায়ালার পবিত্র নাম স্মরণ করিয়া|পরম করুণাময় সৃষ্টিকর্তার নামে|বিসমিল্লাহির রাহমানির রাহিম স্মরণ পূর্বক} নগদ টাকা নেওয়ার {চুক্তিপত্র দলিলের আইনানুগ বয়ান আরম্ভ করিলাম|অঙ্গীকারনামা পত্র লেখা শুরু করিলাম}। যেহেতু আমি ২য় পক্ষ আমার {{loan_reason}} {{amount}}/- ({{amount_words}}) টাকার বিশেষ প্রয়োজন হওয়ায় ১ম পক্ষকে {টাকা ধার দেওয়ার প্রস্তাব দিলে|টাকা কর্জ/হাওলাত দেওয়ার অনুরোধ করিলে} আপনি ১ম পক্ষ নিম্নোক্ত স্বাক্ষীগণের সম্মুখে উক্ত টাকা {দিতে রাজি হন|প্রদান করিতে সম্মত হন}।</p>\n<p>আমি ২য় পক্ষ স্বাক্ষীগণের সম্মুখে শর্ত সাপেক্ষে অদ্য {{start_date}} ইং তারিখে নগদ {{amount}}/- ({{amount_words}}) টাকা ১ম পক্ষের নিকট হইতে সম্পূর্ণ {বুঝিয়া নিলাম|একযোগে গ্রহণ করিলাম}।</p>\n{{#if bank_name&&cheque_no}}<p>প্রকাশ থাকে যে, উক্ত কর্জ বা হাওলাত টাকার জামানত স্বরূপ আমি ২য় পক্ষ আমার নিজ নামীয় {{bank_name}}, অ্যাকাউন্ট নং- {{acc_no}} এর একটি স্বাক্ষরিত {ফাঁকা চেক|সিকিউরিটি চেক} (চেক নং- {{cheque_no}}) ১ম পক্ষের নিকট {গচ্ছিত রাখিলাম|জামানত হিসেবে জমা প্রদান করিলাম}। সম্পূর্ণ টাকা পরিশোধের পর আমি ২য় পক্ষ উক্ত চেকটি {ফেরত লইব|ফেরত পাইব}।</p>{{/if}}\n</div><div class=\"text-end mt-4\"><strong>চলমান পাতা নং-০২...</strong></div>"
+  },
+  {
+   "html": "<div class=\"text-center mb-4\"><strong>পাতা নং-০২</strong></div>\n<div class=\"text-justify\"><p><strong>শর্তাবলীঃ</strong></p>\n<p><strong>০১।</strong> আমি ২য় পক্ষ উক্ত {{amount}}/- ({{amount_words}}) টাকা সম্পূর্ণ {এককালীন বা কিস্তিতে|একযোগে} আগামী {{end_date}} ইং তারিখের মধ্যে ১ম পক্ষকে ফেরত প্রদানে {বাধ্য থাকিব|অঙ্গীকারাবদ্ধ রহিলাম}।</p>\n<p><strong>০২।</strong> উক্ত তারিখ মোতাবেক আমি ২য় পক্ষ সমুদয় টাকা ফেরত প্রদানে ব্যর্থ হইলে বা পরিশোধ করিতে না চাহিলে অথবা কোন প্রকার {টালবাহানা করিলে|অজুহাত প্রদর্শন করিলে}, ১ম পক্ষ আমার বিরুদ্ধে প্রচলিত আইন অনুযায়ী {আদালতের আশ্রয় গ্রহণ করিয়া|আইনগত ব্যবস্থা গ্রহণ পূর্বক} টাকা আদায় করিতে পারিবেন। ইহাতে আমার কিংবা আমার ওয়ারিশদের কোন প্রকার ওজর আপত্তি {চলিব না বা আইনত অগ্রাহ্য বলিয়া গণ্য হইবে|থাকিবে না}।</p>\n<p><strong>০৩।</strong> আমি ২য় পক্ষ (গ্রহিতা), আমার অবর্তমানে বা {মৃত্যুজনিত কারণে|অনুপস্থিতিতে} আমার স্থলাভিষিক্ত ওয়ারিশগণ উক্ত হাওলাত/কর্জকৃত টাকা ১ম পক্ষকে পরিশোধ করিতে সম্পূর্ণ {বাধ্য থাকিবেন|দায়বদ্ধ থাকিবেন}। আমি বা আমার ওয়ারিশগণ যদি উক্ত টাকা পরিশোধ করিতে অস্বীকার করেন তবে ১ম পক্ষ আমি ও আমার ওয়ারিশগণের বিরুদ্ধে যে কোন প্রকার {আইনানুগ ব্যবস্থা গ্রহণ করিতে পারিবেন|আইনি পদক্ষেপ গ্রহণ করিতে পারিবেন}।</p>\n<p><strong>০৪।</strong> তদ্রুপ ১ম পক্ষের (দাতা) {অনুপস্থিতিতে বা মৃত্যুজনিত কারণে|অবর্তমানে} আমি ২য় পক্ষ উক্ত টাকা ১ম পক্ষের {বৈধ ওয়ারিশদের|স্থলাভিষিক্ত ওয়ারিশগণের} নিকট নির্দিষ্ট সময়ের মধ্যে ফেরত দিতে বাধ্য থাকিব।</p>\n</div><div class=\"text-end mt-5\"><strong>চলমান পাতা নং-০৩...</strong></div>"
+  },
+  {
+   "html": "<div class=\"text-center mb-4\"><strong>পাতা নং-০৩</strong></div>\n<div class=\"text-justify\"><p><strong>সত্যপাঠঃ</strong></p>\n<p>এতদ্বার্থে স্বেচ্ছায়, {সরল মনে, সুস্থ শরীরে, স্বজ্ঞানে|সুস্থ মস্তিষ্কে ও স্বজ্ঞানে} অন্যের বিনা প্ররোচনায় ও বিনা তোষামদে অত্র কর্জ বা হাওলাত টাকা নেওয়ার অঙ্গীকারনামা পড়িয়া, বুঝিয়া ও উহার মর্ম অবগত হইয়া সাক্ষীগণের সম্মুখে উপরোল্লিখিত কর্জ বাবদ {{amount}}/- ({{amount_words}}) টাকা নগদ একযোগে বুঝিয়া পাইয়া অত্র চুক্তিপত্রে আমরা উভয় পক্ষ নিজ নিজ নাম সহি স্বাক্ষর সম্পাদন করিলাম।</p>\n<p><strong>সম্পাদনের তারিখ:</strong> {{start_date}} ইং।</p></div>\n<div class=\"mt-5 pt-4\"><table class=\"table table-borderless table-sm\"><tr><td width=\"50%\">\n<strong>স্বাক্ষীগণের স্বাক্ষরঃ</strong><br><br>\n১। _______________________<br><br>\n২। _______________________<br><br>\n৩। _______________________\n</td>\n<td width=\"50%\" class=\"text-end align-top\">_______________________<br><strong>১ম পক্ষের (দাতার) স্বাক্ষর</strong><br><br><br>_______________________<br><strong>২য় পক্ষের (গ্রহিতার) স্বাক্ষর</strong>\n{{#if has_guarantor}}<br><br><br>_______________________<br><strong>জামীনদারের স্বাক্ষর</strong>{{/if}}</td>\n</tr></table></div>"
+  }
+ ],
+ "id": "loan_agreement",
+ "version": 1
+}

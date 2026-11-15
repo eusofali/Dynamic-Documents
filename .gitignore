@@ -1,0 +1,6 @@
+/storage/*
+!/storage/.htaccess
+!/storage/index.html
+/dist/
+*.log
+.DS_Store

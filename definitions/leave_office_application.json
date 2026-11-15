@@ -1,0 +1,173 @@
+{
+ "id": "leave_office_application",
+ "version": 1,
+ "title": "ছুটির আবেদন – অফিস / প্রতিষ্ঠান",
+ "title_en": "Leave Application (Office)",
+ "category": "আবেদন / Applications",
+ "icon": "fa-briefcase",
+ "description": "চাকরিজীবীর ছুটির আবেদন। দিনের সংখ্যা তারিখ থেকে স্বয়ংক্রিয়।",
+ "page": {
+  "size": "a4",
+  "marginTop": "0.7in",
+  "margin": "1in",
+  "fontSize": 16,
+  "lineHeight": 1.55,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "letterhead": true,
+ "groups": [
+  {
+   "id": "g_to",
+   "title": "প্রাপক ও তারিখ",
+   "icon": "fa-envelope"
+  },
+  {
+   "id": "g_me",
+   "title": "আবেদনকারীর তথ্য",
+   "icon": "fa-user"
+  },
+  {
+   "id": "g_lv",
+   "title": "ছুটির তথ্য",
+   "icon": "fa-calendar-alt"
+  }
+ ],
+ "fields": [
+  {
+   "name": "date",
+   "label": "তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_to",
+   "required": true,
+   "default": "today"
+  },
+  {
+   "name": "addressee",
+   "label": "প্রাপকের পদবী",
+   "type": "text",
+   "col": 8,
+   "group": "g_to",
+   "required": true,
+   "default": "ব্যবস্থাপক / ম্যানেজার"
+  },
+  {
+   "name": "org",
+   "label": "প্রতিষ্ঠানের নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_to",
+   "required": true
+  },
+  {
+   "name": "org_address",
+   "label": "প্রতিষ্ঠানের ঠিকানা (ঐচ্ছিক)",
+   "type": "text",
+   "col": 6,
+   "group": "g_to"
+  },
+  {
+   "name": "name",
+   "label": "আবেদনকারীর নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_me",
+   "required": true
+  },
+  {
+   "name": "father",
+   "label": "পিতা/স্বামীর নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_me"
+  },
+  {
+   "name": "address",
+   "label": "ঠিকানা",
+   "type": "text",
+   "col": 8,
+   "group": "g_me",
+   "required": true,
+   "placeholder": "গ্রাম/মহল্লা, ডাকঘর, উপজেলা, জেলা"
+  },
+  {
+   "name": "mobile",
+   "label": "মোবাইল নম্বর",
+   "type": "text",
+   "col": 4,
+   "group": "g_me",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "designation",
+   "label": "আপনার পদবী",
+   "type": "text",
+   "col": 6,
+   "group": "g_me",
+   "required": true
+  },
+  {
+   "name": "reason",
+   "label": "ছুটির কারণ",
+   "type": "select",
+   "col": 6,
+   "group": "g_lv",
+   "options": [
+    "অসুস্থতার কারণে",
+    "পারিবারিক প্রয়োজনে",
+    "জরুরি ব্যক্তিগত কাজে",
+    "চিকিৎসার জন্য",
+    "পারিবারিক অনুষ্ঠানে যোগদানের জন্য"
+   ],
+   "default": "অসুস্থতার কারণে"
+  },
+  {
+   "name": "reason_other",
+   "label": "অন্য কারণ হলে লিখুন",
+   "type": "text",
+   "col": 6,
+   "group": "g_lv"
+  },
+  {
+   "name": "from",
+   "label": "ছুটি শুরু",
+   "type": "date",
+   "col": 4,
+   "group": "g_lv",
+   "required": true
+  },
+  {
+   "name": "to",
+   "label": "ছুটি শেষ",
+   "type": "date",
+   "col": 4,
+   "group": "g_lv",
+   "required": true
+  },
+  {
+   "name": "days",
+   "label": "মোট দিন (স্বয়ংক্রিয়)",
+   "type": "amount",
+   "col": 4,
+   "group": "g_lv",
+   "calc": "to-from+1",
+   "unit": "দিন"
+  },
+  {
+   "name": "rejoin",
+   "label": "ছুটি শেষে যথাসময়ে কাজে যোগদানের অঙ্গীকার যুক্ত করুন",
+   "type": "checkbox",
+   "col": 12,
+   "group": "g_lv",
+   "default": true
+  }
+ ],
+ "css": ".doc-page .letter-sign{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:34px;break-inside:avoid}.doc-page .letter-att{font-size:.92em;max-width:50%}.doc-page .letter-me{text-align:right;line-height:1.4}.doc-page .letter p{margin-bottom:.8em}",
+ "pages": [
+  {
+   "html": "<div class=\"letter\">\n<p class=\"mb-3\">তারিখ: {{date}} ইং</p>\n<p class=\"mb-3\">বরাবর,<br>{{addressee}}<br>{{org}}{{#if org_address}}<br>{{org_address}}{{/if}}</p>\n<p class=\"mb-3\"><strong>বিষয়ঃ {{days}} ({{days_words}}) দিনের ছুটি মঞ্জুরের আবেদন।</strong></p>\n<p class=\"mb-2\">{জনাব|মহোদয়},</p>\n<div class=\"text-justify\">\n<p>{সবিনয় নিবেদন এই যে,|বিনীত নিবেদন এই যে,} আমি আপনার প্রতিষ্ঠানে <strong>{{designation}}</strong> পদে কর্মরত আছি। আমি {{#if reason_other}}{{reason_other}}{{else}}{{reason}}{{/if}} {{from}} ইং তারিখ হতে {{to}} ইং তারিখ পর্যন্ত মোট <strong>{{days}} ({{days_words}}) দিন</strong> ছুটির প্রয়োজন।</p>\n<p>{অতএব, মহোদয়ের নিকট বিনীত প্রার্থনা,|অতএব, মহোদয়ের নিকট বিনীত অনুরোধ,} উক্ত সময়ের জন্য আমার ছুটি {মঞ্জুর করে বাধিত করবেন|মঞ্জুর করতে আপনার সদয় মর্জি হয়}।{{#if rejoin}} ছুটি শেষে আমি যথাসময়ে কাজে যোগদান করব।{{/if}}</p>\n</div>\n<div class=\"letter-sign\">\n<div class=\"letter-att\">{{#if attachments}}<strong>সংযুক্তিঃ</strong><br>{{attachments}}{{/if}}</div>\n<div class=\"letter-me\">{বিনীত নিবেদক|নিবেদক},<br><br><br>_______________________<br><strong>{{name}}</strong>{{#if father}}<br>পিতা/স্বামী- {{father}}{{/if}}<br>{{address}}<br>মোবাইল- {{mobile}}</div>\n</div>\n</div>"
+  }
+ ]
+}

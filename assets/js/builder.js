@@ -8,7 +8,7 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var esc = E.esc;
-  var TYPES = ['text', 'textarea', 'number', 'amount', 'date', 'select', 'checkbox', 'rows', 'photo'];
+  var TYPES = ['text', 'textarea', 'number', 'amount', 'date', 'select', 'checkbox', 'rows', 'photo', 'party'];
   var panes = $('#panes'), tab = 'info';
   def.groups = def.groups || []; def.fields = def.fields || []; def.pages = def.pages || []; def.page = def.page || {};
 
@@ -24,7 +24,7 @@
     clearTimeout(pt);
     pt = setTimeout(function () {
       try {
-        var r = E.render(def, E.sampleData(def), seed);
+        var r = E.render(def, E.sampleData(def), seed, { letterhead: BD.letterhead });
         var p = $('#preview');
         p.className = 'dd-doc' + (def.page.font === 'en' ? ' font-en' : '');
         p.setAttribute('style', r.vars);
@@ -75,6 +75,7 @@
         '<div class="col-md-4"><label class="form-label small fw-bold">Font</label><select class="form-select form-select-sm" data-o="page" data-k="font"><option value="bn" ' + (def.page.font !== 'en' ? 'selected' : '') + '>Bangla serif</option><option value="en" ' + (def.page.font === 'en' ? 'selected' : '') + '>English / sans</option></select></div>' +
         '<div class="col-md-4"><label class="form-label small fw-bold">Digits</label><select class="form-select form-select-sm" data-o="def" data-k="digits">' +
         [['bn', 'Bangla (০১২৩) for amounts/dates'], ['keep', 'As typed / English']].map(function (o) { return '<option value="' + o[0] + '" ' + ((def.digits || 'keep') === o[0] ? 'selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></div>' +
+        '<div class="col-12"><div class="form-check form-switch"><input type="checkbox" class="form-check-input" data-o="def" data-k="letterhead" data-bool="1" ' + (def.letterhead ? 'checked' : '') + '><label class="form-check-label small fw-bold">Print my business letterhead at the top of page 1 <span class="text-muted fw-normal">(set it up in Admin → Settings)</span></label></div></div>' +
         '<div class="col-12"><label class="form-label small fw-bold">Custom CSS <span class="text-muted fw-normal">(prefix selectors with <code>.doc-page</code>)</span></label><textarea class="form-control form-control-sm mono" rows="5" data-o="def" data-k="css">' + esc(def.css || '') + '</textarea></div>' +
         '</div>';
     } else if (tab === 'groups') {
@@ -112,6 +113,11 @@
   function chips() {
     var c = [];
     def.fields.forEach(function (f) {
+      if (f.type === 'party') {
+        ['_list', '_names', '_i', '_my', '_you', '_sig'].forEach(function (x) { c.push('{{' + f.name + x + '}}'); });
+        c.push('{{#if ' + f.name + '_multi}}…{{else}}…{{/if}}');
+        return;
+      }
       if (f.type === 'rows') { c.push('{{#each ' + f.name + '}}' + (f.columns || []).map(function (x) { return '{{' + x.name + '}}'; }).join(' ') + '{{/each}}'); return; }
       c.push('{{' + f.name + '}}');
       if (f.type === 'amount') c.push('{{' + f.name + '_words}}');
@@ -125,7 +131,7 @@
     var gopts = '<option value="">—</option>' + def.groups.map(function (g) { return '<option value="' + esc(g.id) + '" ' + (f.group === g.id ? 'selected' : '') + '>' + esc(g.title || g.id) + '</option>'; }).join('');
     var topts = TYPES.map(function (t) { return '<option ' + (f.type === t ? 'selected' : '') + '>' + t + '</option>'; }).join('');
     var opts = (f.options || []).map(function (o) { return typeof o === 'object' ? o.value + '|' + (o.label || '') : o; }).join('\n');
-    var cols = (f.columns || []).map(function (c) { return c.name + '|' + (c.label || ''); }).join('\n');
+    var cols = (f.columns || []).map(function (c) { return [c.name, c.label || '', c.col || '', c.type || '', c.bn ? 'bn' : ''].join('|').replace(/\|+$/, ''); }).join('\n');
     var d = 'data-o="fields" data-i="' + i + '"';
     return '<div class="card fld-card mb-2"><div class="card-body p-2"><div class="row g-2">' +
       '<div class="col-md-3"><label class="small fw-bold">Name</label><input class="form-control form-control-sm mono" ' + d + ' data-k="name" value="' + esc(f.name) + '"></div>' +
@@ -142,7 +148,10 @@
       (f.type === 'text' || f.type === 'textarea' ? '<div class="form-check d-inline-block"><input type="checkbox" class="form-check-input" ' + d + ' data-k="bn" data-bool="1" ' + (f.bn ? 'checked' : '') + '><label class="form-check-label small">Bangla digits</label></div>' : '') + '</div>' +
       (f.type === 'amount' ? '<div class="col-md-4"><label class="small">Auto-calc (a-b, a+b, a*b)</label><input class="form-control form-control-sm mono" ' + d + ' data-k="calc" value="' + esc(f.calc || '') + '" placeholder="total-paid"></div>' : '') +
       (f.type === 'select' ? '<div class="col-12"><label class="small">Options – one per line, <code>value|Label</code> or just text</label><textarea class="form-control form-control-sm mono" rows="3" ' + d + ' data-k="options" data-list="options">' + esc(opts) + '</textarea></div>' : '') +
-      (f.type === 'rows' ? '<div class="col-md-8"><label class="small">Columns – one per line, <code>name|Label</code></label><textarea class="form-control form-control-sm mono" rows="3" ' + d + ' data-k="columns" data-list="columns">' + esc(cols) + '</textarea></div><div class="col-md-4"><label class="small">Initial rows</label><input type="number" min="0" class="form-control form-control-sm" ' + d + ' data-k="minRows" data-num="1" value="' + esc(f.minRows == null ? 1 : f.minRows) + '"></div>' : '') +
+      ((f.type === 'rows' || f.type === 'party') ? '<div class="col-md-8"><label class="small">Columns – one per line: <code>name|Label|width 1-12|date|bn</code> (last three optional)</label><textarea class="form-control form-control-sm mono" rows="3" ' + d + ' data-k="columns" data-list="columns">' + esc(cols) + '</textarea></div><div class="col-md-4"><label class="small">Initial rows</label><input type="number" min="0" class="form-control form-control-sm" ' + d + ' data-k="minRows" data-num="1" value="' + esc(f.minRows == null ? 1 : f.minRows) + '"></div>' : '') +
+      (f.type === 'party' ? '<div class="col-md-8"><label class="small">How each person is written (template; blank = automatic). Use the column names, e.g. <code>&lt;strong&gt;{{name}}&lt;/strong&gt;, পিতা- {{father}}</code></label><textarea class="form-control form-control-sm mono" rows="2" ' + d + ' data-k="format">' + esc(f.format || '') + '</textarea></div>' +
+        '<div class="col-md-4"><label class="small">Signature label</label><input class="form-control form-control-sm" ' + d + ' data-k="signLabel" value="' + esc(f.signLabel || '') + '" placeholder="১ম পক্ষের (দাতার) স্বাক্ষর"></div>' +
+        '<div class="col-md-12 small text-muted">Gives <code>{{' + esc(f.name) + '_list}}</code> (all persons), <code>_names</code> ("A, B ও C"), <code>_i</code>/<code>_my</code>/<code>_you</code> (আমি/আমরা …), <code>_sig</code> (signature lines) and <code>{{#if ' + esc(f.name) + '_multi}}</code>.</div>' : '') +
       '</div></div></div>';
   }
 
@@ -188,7 +197,14 @@
     else if (el.hasAttribute('data-list')) {
       var lines = el.value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
       if (k === 'options') v = lines.map(function (l) { var p = l.split('|'); return p.length > 1 ? { value: p[0].trim(), label: p.slice(1).join('|').trim() } : l; });
-      else v = lines.map(function (l) { var p = l.split('|'); return { name: p[0].trim(), label: (p.slice(1).join('|') || p[0]).trim() }; });
+      else v = lines.map(function (l) {
+        var p = l.split('|').map(function (x) { return x.trim(); });
+        var c = { name: p[0], label: p[1] || p[0] };
+        if (p[2] && !isNaN(+p[2])) c.col = +p[2];
+        if (p[3] === 'date') c.type = 'date';
+        if (p[3] === 'bn' || p[4] === 'bn') c.bn = true;
+        return c;
+      });
     } else if (el.hasAttribute('data-num')) v = el.value === '' ? '' : Number(el.value);
     else v = el.value;
     if (k === 'fontSize' || k === 'lineHeight') v = v === '' ? '' : Number(v);
@@ -196,6 +212,7 @@
     if (el.hasAttribute('data-struct') && ev.type === 'change') {
       if (t.type === 'select' && !t.options) t.options = ['Option 1', 'Option 2'];
       if (t.type === 'rows' && !t.columns) t.columns = [{ name: 'col1', label: 'Column 1' }];
+      if (t.type === 'party' && !t.columns) { t.columns = [{ name: 'name', label: 'নাম', col: 6 }, { name: 'father', label: 'পিতা/স্বামীর নাম', col: 6 }, { name: 'mother', label: 'মাতার নাম', col: 6 }, { name: 'nid', label: 'এনআইডি', col: 6, bn: true }, { name: 'address', label: 'ঠিকানা', col: 12 }]; t.minRows = 1; }
       draw(); return;
     }
     preview();

@@ -228,6 +228,25 @@ function safe_next($next)
     return $next;
 }
 
+/** Business letterhead saved in Admin -> Settings (null when not configured). */
+function letterhead_settings()
+{
+    $name = trim((string)setting('lh_name', ''));
+    if ($name === '') {
+        return null;
+    }
+    return [
+        'name' => $name,
+        'tagline' => (string)setting('lh_tagline', ''),
+        'address' => (string)setting('lh_address', ''),
+        'phone' => (string)setting('lh_phone', ''),
+        'email' => (string)setting('lh_email', ''),
+        'logo' => (string)setting('lh_logo', ''),
+        'color' => (string)setting('lh_color', '#1f3a5f'),
+        'layout' => (string)setting('lh_layout', 'center'),
+    ];
+}
+
 function site_title()
 {
     return setting('site_title', 'Dynamic Documents');

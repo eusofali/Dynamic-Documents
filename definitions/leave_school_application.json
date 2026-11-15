@@ -1,0 +1,210 @@
+{
+ "id": "leave_school_application",
+ "version": 1,
+ "title": "ছুটির আবেদন – স্কুল / কলেজ",
+ "title_en": "Leave Application (School)",
+ "category": "আবেদন / Applications",
+ "icon": "fa-school",
+ "description": "ছাত্র-ছাত্রীর ছুটির আবেদন। দিনের সংখ্যা তারিখ থেকে স্বয়ংক্রিয়।",
+ "page": {
+  "size": "a4",
+  "marginTop": "0.7in",
+  "margin": "1in",
+  "fontSize": 16,
+  "lineHeight": 1.55,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "letterhead": true,
+ "groups": [
+  {
+   "id": "g_to",
+   "title": "প্রাপক ও তারিখ",
+   "icon": "fa-envelope"
+  },
+  {
+   "id": "g_st",
+   "title": "শিক্ষার্থীর তথ্য",
+   "icon": "fa-user-graduate"
+  },
+  {
+   "id": "g_lv",
+   "title": "ছুটির তথ্য",
+   "icon": "fa-calendar-alt"
+  }
+ ],
+ "fields": [
+  {
+   "name": "date",
+   "label": "তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_to",
+   "required": true,
+   "default": "today"
+  },
+  {
+   "name": "addressee",
+   "label": "প্রাপকের পদবী",
+   "type": "text",
+   "col": 8,
+   "group": "g_to",
+   "required": true,
+   "default": "প্রধান শিক্ষক"
+  },
+  {
+   "name": "org",
+   "label": "বিদ্যালয়ের নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_to",
+   "required": true
+  },
+  {
+   "name": "org_address",
+   "label": "প্রতিষ্ঠানের ঠিকানা (ঐচ্ছিক)",
+   "type": "text",
+   "col": 6,
+   "group": "g_to"
+  },
+  {
+   "name": "name",
+   "label": "শিক্ষার্থীর নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_st",
+   "required": true
+  },
+  {
+   "name": "sw",
+   "label": "ছাত্র / ছাত্রী",
+   "type": "select",
+   "col": 3,
+   "group": "g_st",
+   "options": [
+    "ছাত্র",
+    "ছাত্রী"
+   ],
+   "default": "ছাত্র"
+  },
+  {
+   "name": "father",
+   "label": "পিতার নাম",
+   "type": "text",
+   "col": 3,
+   "group": "g_st"
+  },
+  {
+   "name": "class",
+   "label": "শ্রেণি",
+   "type": "text",
+   "col": 4,
+   "group": "g_st",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "roll",
+   "label": "রোল নং",
+   "type": "text",
+   "col": 4,
+   "group": "g_st",
+   "bn": true
+  },
+  {
+   "name": "section",
+   "label": "শাখা (ঐচ্ছিক)",
+   "type": "text",
+   "col": 4,
+   "group": "g_st"
+  },
+  {
+   "name": "address",
+   "label": "ঠিকানা",
+   "type": "text",
+   "col": 8,
+   "group": "g_st",
+   "required": true
+  },
+  {
+   "name": "mobile",
+   "label": "অভিভাবকের মোবাইল",
+   "type": "text",
+   "col": 4,
+   "group": "g_st",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "reason",
+   "label": "ছুটির কারণ",
+   "type": "select",
+   "col": 6,
+   "group": "g_lv",
+   "options": [
+    "অসুস্থতার কারণে",
+    "পারিবারিক জরুরি প্রয়োজনে",
+    "নিকট আত্মীয়ের বিবাহ অনুষ্ঠানে যোগদানের জন্য",
+    "জরুরি ব্যক্তিগত কাজে"
+   ],
+   "default": "অসুস্থতার কারণে"
+  },
+  {
+   "name": "reason_other",
+   "label": "অন্য কারণ হলে লিখুন",
+   "type": "text",
+   "col": 6,
+   "group": "g_lv",
+   "help": "লিখলে উপরের তালিকার বদলে এটি ব্যবহৃত হবে"
+  },
+  {
+   "name": "when",
+   "label": "ছুটির ধরন",
+   "type": "select",
+   "col": 4,
+   "group": "g_lv",
+   "options": [
+    {
+     "value": "future",
+     "label": "আগাম ছুটি (এখনও নেওয়া হয়নি)"
+    },
+    {
+     "value": "past",
+     "label": "অনুপস্থিতি ক্ষমা (ছুটি নেওয়া হয়ে গেছে)"
+    }
+   ],
+   "default": "future"
+  },
+  {
+   "name": "from",
+   "label": "ছুটি শুরু",
+   "type": "date",
+   "col": 4,
+   "group": "g_lv",
+   "required": true
+  },
+  {
+   "name": "to",
+   "label": "ছুটি শেষ",
+   "type": "date",
+   "col": 4,
+   "group": "g_lv",
+   "required": true
+  },
+  {
+   "name": "days",
+   "label": "মোট দিন (স্বয়ংক্রিয়)",
+   "type": "amount",
+   "col": 4,
+   "group": "g_lv",
+   "calc": "to-from+1",
+   "unit": "দিন"
+  }
+ ],
+ "css": ".doc-page .letter-sign{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:34px;break-inside:avoid}.doc-page .letter-att{font-size:.92em;max-width:50%}.doc-page .letter-me{text-align:right;line-height:1.4}.doc-page .letter p{margin-bottom:.8em}",
+ "pages": [
+  {
+   "html": "<div class=\"letter\">\n<p class=\"mb-3\">তারিখ: {{date}} ইং</p>\n<p class=\"mb-3\">বরাবর,<br>{{addressee}}<br>{{org}}{{#if org_address}}<br>{{org_address}}{{/if}}</p>\n<p class=\"mb-3\"><strong>বিষয়ঃ {{days}} ({{days_words}}) দিনের ছুটি মঞ্জুরের জন্য আবেদন।</strong></p>\n<p class=\"mb-2\">{জনাব|মহোদয়},</p>\n<div class=\"text-justify\">\n<p>{সবিনয় নিবেদন এই যে,|বিনীত নিবেদন এই যে,} আমি আপনার বিদ্যালয়ের {{class}} শ্রেণির {{#if section}}({{section}} শাখা) {{/if}}একজন নিয়মিত {{sw}}{{#if roll}}, রোল নং- {{roll}}{{/if}}। আমি {{#if reason_other}}{{reason_other}}{{else}}{{reason}}{{/if}} {{from}} ইং তারিখ হতে {{to}} ইং তারিখ পর্যন্ত মোট <strong>{{days}} ({{days_words}}) দিন</strong> বিদ্যালয়ে {{#if when==past}}উপস্থিত থাকতে পারিনি{{else}}উপস্থিত থাকতে পারব না{{/if}}।</p>\n<p>{অতএব, মহোদয়ের নিকট বিনীত প্রার্থনা,|অতএব, মহোদয়ের নিকট বিনীত অনুরোধ,} {{#if when==past}}উক্ত {{days}} দিনের অনুপস্থিতি ক্ষমা করে ছুটি{{else}}উক্ত {{days}} দিনের ছুটি{{/if}} {মঞ্জুর করে বাধিত করবেন|মঞ্জুর করতে আপনার সদয় মর্জি হয়}।</p>\n</div>\n<div class=\"letter-sign\">\n<div class=\"letter-att\">{{#if attachments}}<strong>সংযুক্তিঃ</strong><br>{{attachments}}{{/if}}</div>\n<div class=\"letter-me\">{বিনীত নিবেদক|নিবেদক},<br><br><br>_______________________<br><strong>{{name}}</strong>{{#if father}}<br>পিতা- {{father}}{{/if}}<br>{{address}}<br>মোবাইল- {{mobile}}</div>\n</div>\n</div>"
+  }
+ ]
+}

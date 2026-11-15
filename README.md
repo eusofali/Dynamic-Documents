@@ -3,7 +3,13 @@
 A dynamic, **Bangla-first document builder** for shared hosting (cPanel, no root needed).
 Pick a document, fill in only the fields it needs, watch the document update **live**, then print or save as PDF.
 
-* 16 ready documents: marriage, name-correction, **name-change, lost-document, date-of-birth, citizenship/residence, parent consent (NOC), one-and-the-same-person and a free-text general declaration** affidavits, vehicle sale affidavit, land bainanama, loan (হাওলাত/কর্জ) agreement, shop rent agreement, job application, and three CV formats (modern 2-column, classic bio-data, and the standard one-page CV with photo upload – English or বাংলা, 6 colour themes)
+* **27 ready documents**
+  * 8 affidavits (marriage, name-correction, name-change, lost-document, date-of-birth, citizenship/residence, parent consent, one-and-the-same-person, plus a free-text general declaration) and vehicle sale
+  * contracts: land bainanama, loan (হাওলাত/কর্জ), shop rent – with **multi-person parties** (several sellers / buyers / borrowers / landlords; the wording switches to আমরা/আমাদের and every person gets a signature line)
+  * **11 A4 application letters** (no stamp paper): leave (school / office), bank account closing, loan application, trade licence, utility connection, scholarship, complaint, certificate request, resignation, and a general free-text application
+  * job application and three CV formats (modern, classic bio-data, and the standard one-page CV with photo upload)
+* **Business letterhead** – set your shop/organisation name, tagline, address, phone, logo and colour once in Admin → Settings; letter-type documents print it at the top (toggle per document)
+* **Direct PDF download** – one click, no server software needed (A4 / Legal pages, Bangla rendered exactly as on screen; bundled html2canvas + jsPDF, MIT). The PDF holds page images; use Print → Save as PDF if you need selectable text
 * **Amounts in words are automatic** (`৩,০০,০০০` → "তিন লক্ষ"), dates and Bangla digits formatted for you, balances auto-calculated
 * Wording variations (spintax) with a **Re-word** button
 * **Admin document builder** – create/edit documents (fields, sections, templates) in the browser with live preview; no code needed
@@ -64,7 +70,7 @@ Each document is one JSON file – see `definitions/*.json` for working examples
 }
 ```
 
-| Field types | `text` `textarea` `number` `amount` `date` `select` `checkbox` `rows` (repeating table) `photo` (upload, auto-cropped to passport ratio) |
+| Field types | `text` `textarea` `number` `amount` `date` `select` `checkbox` `rows` (repeating table) `photo` (upload, auto-cropped to passport ratio) `party` (one or more people – see below) |
 |---|---|
 | Field options | `required` `default` `placeholder` `help` `col` (1–12) `group` `show_if` `calc` `options` `columns` `bn` `suggest` |
 
@@ -76,6 +82,10 @@ Template syntax inside `pages[].html`:
 {{#each rows}}{{col}}{{@n}}{{/each}}
 {option A|option B}               wording variation (spintax, stable per draft until "Re-word")
 ```
+
+**Parties (several people):** a `party` field lists people as cards (name, father, address …). For a field named `p1` the template gets `{{p1_list}}` (every person, numbered when more than one), `{{p1_names}}` ("A, B ও C"), `{{p1_i}}` / `{{p1_my}}` / `{{p1_you}}` (আমি→আমরা, আমার→আমাদের, আপনি→আপনারা), `{{p1_sig}}` (a signature line per person, using the field's `signLabel`), `{{p1_count}}` and `{{#if p1_multi}}…{{/if}}`. `format` controls how each person is written.
+
+**Other helpers:** `"default": "today"` on date fields; `"calc": "to-from+1"` between two date fields gives the number of days (use `"unit": "দিন"` so the helper text says days, not taka); `"letterhead": true` on a document prints the business letterhead.
 
 A page can carry `"if": "layout==3"` so it is only printed in some variants. `computed` entries build joined lists (see the correction affidavit).
 

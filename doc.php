@@ -27,6 +27,8 @@ $boot = [
     'def' => $def,
     'draft' => $draft,
     'user' => current_user() ? true : false,
+    'letterhead' => !empty($def['letterhead']) ? letterhead_settings() : null,
+    'assets' => url('assets/vendor/'),
     'api' => url('api.php'),
     'home' => url(''),
     'login' => url('login.php') . '?next=' . rawurlencode($_SERVER['REQUEST_URI'] ?? ''),
@@ -37,6 +39,7 @@ layout_head($def['title'], ['body' => 'editor-page', 'nav' => false]);
   <a class="btn btn-sm btn-outline-light" href="<?= e(url('')) ?>" title="All documents"><i class="fas fa-arrow-left"></i></a>
   <div class="dd-title text-truncate"><i class="fas <?= e($def['icon'] ?? 'fa-file-alt') ?> me-2"></i><?= e($def['title']) ?></div>
   <div class="ms-auto d-flex gap-1 flex-wrap justify-content-end">
+    <?php if (!empty($def['letterhead'])): ?><button class="btn btn-sm btn-outline-light" id="btn-lh" title="Print with your business letterhead"><i class="fas fa-heading"></i> <span class="d-none d-xl-inline">Letterhead</span></button><?php endif; ?>
     <button class="btn btn-sm btn-outline-light" id="btn-respin" title="Re-generate the wording variations"><i class="fas fa-dice"></i> <span class="d-none d-xl-inline">Re-word</span></button>
     <div class="btn-group btn-group-sm">
       <button class="btn btn-outline-light" id="btn-fs-dec" title="Smaller text">A−</button>
@@ -44,6 +47,7 @@ layout_head($def['title'], ['body' => 'editor-page', 'nav' => false]);
     </div>
     <button class="btn btn-sm btn-outline-light" id="btn-reset" title="Clear the form"><i class="fas fa-eraser"></i> <span class="d-none d-xl-inline">Reset</span></button>
     <button class="btn btn-sm btn-info" id="btn-save"><i class="fas fa-save"></i> <span class="d-none d-md-inline">Save</span></button>
+    <button class="btn btn-sm btn-primary" id="btn-pdf" title="Download as PDF"><i class="fas fa-file-pdf"></i> <span class="d-none d-md-inline">PDF</span></button>
     <button class="btn btn-sm btn-success" id="btn-print"><i class="fas fa-print"></i> Print</button>
   </div>
 </div>
@@ -63,5 +67,6 @@ layout_head($def['title'], ['body' => 'editor-page', 'nav' => false]);
 <style id="def-style"></style>
 <script>window.DD = <?= json_for_script($boot) ?>;</script>
 <script src="<?= e(url('assets/js/engine.js')) ?>?v=<?= e(APP_VERSION) ?>"></script>
+<script src="<?= e(url('assets/js/pdf.js')) ?>?v=<?= e(APP_VERSION) ?>"></script>
 <script src="<?= e(url('assets/js/editor.js')) ?>?v=<?= e(APP_VERSION) ?>"></script>
 <?php layout_foot();

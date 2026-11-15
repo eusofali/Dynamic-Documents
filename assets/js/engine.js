@@ -206,15 +206,21 @@
   }
 
   /* ---------- values ---------- */
+  function todayIso() {
+    var d = new Date();
+    return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+  }
   function defaults(def) {
     var v = {};
     (def.fields || []).forEach(function (f) {
-      if (f.type === 'rows') {
+      if (f.type === 'rows' || f.type === 'party') {
         var rows = [], n = f.minRows == null ? 1 : f.minRows;
         for (var i = 0; i < n; i++) rows.push({});
         v[f.name] = rows;
       } else if (f.type === 'checkbox') {
         v[f.name] = f['default'] ? '1' : '';
+      } else if (f.type === 'date' && f['default'] === 'today') {
+        v[f.name] = todayIso();
       } else {
         v[f.name] = f['default'] == null ? '' : String(f['default']);
       }
@@ -225,12 +231,21 @@
   function computeCalc(def, vals) {
     (def.fields || []).forEach(function (f) {
       if (!f.calc) return;
-      var m = /^\s*([A-Za-z_]\w*)\s*([-+*])\s*([A-Za-z_]\w*)\s*$/.exec(f.calc);
+      var m = /^\s*([A-Za-z_]\w*)\s*([-+*])\s*([A-Za-z_]\w*)\s*(?:\+\s*(\d+))?\s*$/.exec(f.calc);
       if (!m) return;
+      var iso = /^\d{4}-\d{2}-\d{2}$/, r;
+      var e1 = String(vals[m[1]] == null ? '' : vals[m[1]]).trim(), e3 = String(vals[m[3]] == null ? '' : vals[m[3]]).trim();
+      if ((iso.test(e1) || iso.test(e3) || m[4]) && (e1 === '' || e3 === '')) { vals[f.name] = ''; return; }
+      if (iso.test(vals[m[1]] || '') && iso.test(vals[m[3]] || '') && m[2] === '-') {
+        // date - date = number of days (use "+1" to count both end days)
+        r = Math.round((Date.parse(vals[m[1]]) - Date.parse(vals[m[3]])) / 86400000) + (m[4] ? +m[4] : 0);
+        vals[f.name] = r < 0 ? '' : String(r);
+        return;
+      }
       var a = parseNum(vals[m[1]]), b = parseNum(vals[m[3]]);
       if (isNaN(a)) a = 0;
       if (isNaN(b)) b = 0;
-      var r = m[2] === '-' ? a - b : m[2] === '+' ? a + b : a * b;
+      r = (m[2] === '-' ? a - b : m[2] === '+' ? a + b : a * b) + (m[4] ? +m[4] : 0);
       vals[f.name] = (isNaN(a) && isNaN(b)) || r < 0 ? '' : String(r);
     });
     return vals;
@@ -251,11 +266,11 @@
 
   function makeCtx(def, vals, vis) {
     var bn = def.digits === 'bn' || (!!def.digits_if && cond(def.digits_if, function (n) { return vals[n]; }));
-    var raw = {}, out = {}, rowsMap = {}, ph = {};
+    var raw = {}, out = {}, rowsMap = {}, ph = {}, parties = [];
     (def.fields || []).forEach(function (f) {
       if (!vis[f.name]) return;
       var v = vals[f.name];
-      if (f.type === 'rows') {
+      if (f.type === 'rows' || f.type === 'party') {
         var list = [];
         (v || []).forEach(function (row) {
           var any = false, r = { raw: {}, out: {} };
@@ -263,12 +278,19 @@
             var cv = row && row[c.name] != null ? String(row[c.name]) : '';
             if (cv.trim() !== '') any = true;
             r.raw[c.name] = cv;
-            r.out[c.name] = esc(cv);
+            if (c.type === 'date') {
+              r.out[c.name] = fmtDate(cv, bn, false);
+              r.out[c.name + '_long'] = fmtDate(cv, bn, true);
+              r.out[c.name + '_dmy'] = fmtDate(cv, bn, 'dmy');
+            } else {
+              r.out[c.name] = esc(c.bn ? toBn(cv) : cv);
+            }
           });
           if (any) list.push(r);
         });
         rowsMap[f.name] = list;
         raw[f.name] = list;
+        if (f.type === 'party') parties.push(f);
         return;
       }
       v = v == null ? '' : String(v);
@@ -319,6 +341,42 @@
     }
     var ctx = make(raw, out, rowsMap, ph, null, 0);
 
+    // multi-person parties: pronouns, joined names, formatted list and signature lines
+    parties.forEach(function (f) {
+      var list = rowsMap[f.name] || [], multi = list.length > 1, N = f.name, cols = f.columns || [];
+      var nameCol = f.nameColumn || (cols[0] && cols[0].name);
+      var pr = f.pronouns || {};
+      out[N + '_i'] = multi ? (pr.iMulti || 'আমরা') : (pr.i || 'আমি');
+      out[N + '_my'] = multi ? (pr.myMulti || 'আমাদের') : (pr.my || 'আমার');
+      out[N + '_you'] = multi ? (pr.youMulti || 'আপনারা') : (pr.you || 'আপনি');
+      raw[N + '_multi'] = multi ? '1' : '';
+      raw[N + '_count'] = list.length;
+      out[N + '_count'] = bn ? toBn(list.length) : String(list.length);
+      var names = list.map(function (r) { return r.out[nameCol] || ''; }).filter(Boolean);
+      var and = f.and || ' ও ';
+      out[N + '_names'] = names.length > 1 ? names.slice(0, -1).join(', ') + and + names[names.length - 1] : (names[0] || '');
+      var fmt = f.format;
+      if (!fmt) {
+        fmt = cols.map(function (c, i) {
+          if (i === 0) return '<strong>{{' + c.name + '}}</strong>';
+          return '{{#if ' + c.name + '}}, ' + String(c.label || c.name).split(' / ')[0] + '- {{' + c.name + '}}{{/if}}';
+        }).join('');
+      }
+      var nodes = parse(fmt), items = '', sigs = '';
+      list.forEach(function (r, i) {
+        var cc = ctx.child(r, i + 1);
+        items += '<p class="party">' + (multi ? '(' + (bn ? toBn(i + 1) : (i + 1)) + ') ' : '') + renderNodes(nodes, cc) + '</p>';
+        sigs += '<div class="sig-line">__________________<br><strong>' + esc(f.signLabel || '') + '</strong>' + (multi ? '<br>' + (r.out[nameCol] || '') : '') + '</div>';
+      });
+      if (!list.length) {
+        items = f.required ? '<p class="party"><span class="ph">__________</span></p>' : '';
+        sigs = '<div class="sig-line">__________________<br><strong>' + esc(f.signLabel || '') + '</strong></div>';
+      }
+      out[N + '_list'] = items;
+      out[N + '_sig'] = sigs;
+      if (!out[N + '_names'] && f.required) out[N + '_names'] = '<span class="ph">__________</span>';
+    });
+
     (def.computed || []).forEach(function (cp) {
       var parts = [];
       (cp.items || []).forEach(function (it) {
@@ -344,15 +402,30 @@
     return '--pw:' + s[0] + ';--ph:' + s[1] + ';--pt:' + mt + ';--pm:' + m + ';--fs:' + (p.fontSize || 16) + 'px;--lh:' + (p.lineHeight || 1.5);
   }
 
-  function render(def, vals, seed) {
+  /* business letterhead: lh = {name, tagline, address, phone, email, logo, color, layout} */
+  function letterheadHtml(lh) {
+    if (!lh || !String(lh.name || '').trim()) return '';
+    var color = /^#[0-9a-fA-F]{6}$/.test(lh.color || '') ? lh.color : '#1f3a5f';
+    var logo = /^data:image\/(png|jpe?g|webp);base64,[A-Za-z0-9+\/=]+$/.test(lh.logo || '') ? '<div class="lh-logo"><img alt="" src="' + lh.logo + '"></div>' : '';
+    var contact = [lh.address, lh.phone ? 'মোবাইল/Phone: ' + lh.phone : '', lh.email ? 'Email: ' + lh.email : ''].filter(function (x) { return x && String(x).trim(); }).map(esc).join(' &nbsp;|&nbsp; ');
+    return '<div class="lh lh-' + (lh.layout === 'left' ? 'left' : 'center') + '" style="--lh-color:' + color + '">' + logo +
+      '<div class="lh-text"><div class="lh-name">' + esc(lh.name) + '</div>' +
+      (lh.tagline ? '<div class="lh-tag">' + esc(lh.tagline) + '</div>' : '') +
+      (contact ? '<div class="lh-contact">' + contact + '</div>' : '') + '</div></div>';
+  }
+
+  function render(def, vals, seed, opts) {
+    opts = opts || {};
     vals = computeCalc(def, JSON.parse(JSON.stringify(vals || {})));
     var vm = visibleMap(def, vals);
     var ctx = makeCtx(def, vals, vm.fields);
-    var html = '', missing = [];
+    var html = '', missing = [], first = true;
+    var lhHtml = def.letterhead && opts.letterhead ? letterheadHtml(opts.letterhead) : '';
     (def.pages || []).forEach(function (pg, idx) {
       if (pg['if'] && !cond(pg['if'], ctx.raw)) return;
       var src = spin(pg.html || '', (seed || 1) + idx * 7919);
-      html += '<section class="doc-page ' + (pg['class'] || '') + '">' + renderNodes(parse(src), ctx) + '</section>';
+      html += '<section class="doc-page ' + (pg['class'] || '') + '">' + (first ? lhHtml : '') + renderNodes(parse(src), ctx) + '</section>';
+      first = false;
     });
     (def.fields || []).forEach(function (f) {
       if (!f.required || !vm.fields[f.name]) return;
@@ -368,9 +441,9 @@
     (def.fields || []).forEach(function (f) {
       if (f.calc) return;
       var cur = v[f.name];
-      if (f.type === 'rows') {
+      if (f.type === 'rows' || f.type === 'party') {
         var rows = [];
-        for (var i = 1; i <= 2; i++) {
+        for (var i = 1; i <= (f.type === 'party' ? 2 : 2); i++) {
           var r = {};
           (f.columns || []).forEach(function (c) { r[c.name] = '‹' + (c.label || c.name) + ' ' + i + '›'; });
           rows.push(r);
@@ -394,7 +467,7 @@
   var api = {
     render: render, defaults: defaults, computeCalc: computeCalc, visibleMap: visibleMap, sampleData: sampleData,
     spinAudit: spinAudit, words: words, toBn: toBn, toEn: toEn, parseNum: parseNum, fmtAmount: fmtAmount, fmtDate: fmtDate, cond: cond, spin: spin, esc: esc,
-    pageCss: pageCss, pageVars: pageVars, isEmpty: isEmpty
+    pageCss: pageCss, pageVars: pageVars, isEmpty: isEmpty, letterheadHtml: letterheadHtml, todayIso: todayIso
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.DDEngine = api;

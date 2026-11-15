@@ -1,0 +1,150 @@
+{
+ "id": "general_application",
+ "version": 1,
+ "title": "সাধারণ আবেদনপত্র (নিজে লিখুন)",
+ "title_en": "General Application (free text)",
+ "category": "আবেদন / Applications",
+ "icon": "fa-pen-fancy",
+ "description": "যেকোনো বিষয়ে আবেদন – শুধু বিষয় ও বক্তব্য লিখুন, বাকি সব স্বয়ংক্রিয়।",
+ "page": {
+  "size": "a4",
+  "marginTop": "0.7in",
+  "margin": "1in",
+  "fontSize": 16,
+  "lineHeight": 1.55,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "letterhead": true,
+ "groups": [
+  {
+   "id": "g_to",
+   "title": "প্রাপক ও তারিখ",
+   "icon": "fa-envelope"
+  },
+  {
+   "id": "g_me",
+   "title": "আবেদনকারীর তথ্য",
+   "icon": "fa-user"
+  },
+  {
+   "id": "g_gn",
+   "title": "বিষয় ও বক্তব্য",
+   "icon": "fa-pen"
+  },
+  {
+   "id": "g_att",
+   "title": "সংযুক্তি",
+   "icon": "fa-paperclip"
+  }
+ ],
+ "fields": [
+  {
+   "name": "date",
+   "label": "তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_to",
+   "required": true,
+   "default": "today"
+  },
+  {
+   "name": "addressee",
+   "label": "প্রাপকের পদবী",
+   "type": "text",
+   "col": 8,
+   "group": "g_to",
+   "required": true,
+   "default": ""
+  },
+  {
+   "name": "org",
+   "label": "প্রতিষ্ঠানের নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_to",
+   "required": true
+  },
+  {
+   "name": "org_address",
+   "label": "প্রতিষ্ঠানের ঠিকানা (ঐচ্ছিক)",
+   "type": "text",
+   "col": 6,
+   "group": "g_to"
+  },
+  {
+   "name": "name",
+   "label": "আবেদনকারীর নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_me",
+   "required": true
+  },
+  {
+   "name": "father",
+   "label": "পিতা/স্বামীর নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_me"
+  },
+  {
+   "name": "address",
+   "label": "ঠিকানা",
+   "type": "text",
+   "col": 8,
+   "group": "g_me",
+   "required": true,
+   "placeholder": "গ্রাম/মহল্লা, ডাকঘর, উপজেলা, জেলা"
+  },
+  {
+   "name": "mobile",
+   "label": "মোবাইল নম্বর",
+   "type": "text",
+   "col": 4,
+   "group": "g_me",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "subject",
+   "label": "বিষয়",
+   "type": "text",
+   "col": 12,
+   "group": "g_gn",
+   "required": true,
+   "placeholder": "যেমন: নাম সংশোধনের আবেদন"
+  },
+  {
+   "name": "text",
+   "label": "আবেদনের বক্তব্য",
+   "type": "textarea",
+   "col": 12,
+   "group": "g_gn",
+   "required": true,
+   "rows": 8
+  },
+  {
+   "name": "prayer",
+   "label": "শেষ প্রার্থনা",
+   "type": "text",
+   "col": 12,
+   "group": "g_gn",
+   "default": "আমার আবেদনটি সদয় বিবেচনা করে প্রয়োজনীয় ব্যবস্থা গ্রহণ করতে আপনার মর্জি হয়।"
+  },
+  {
+   "name": "attachments",
+   "label": "সংযুক্তি (প্রতি লাইনে একটি; না লাগলে মুছে দিন)",
+   "type": "textarea",
+   "col": 12,
+   "group": "g_att",
+   "rows": 3,
+   "default": ""
+  }
+ ],
+ "css": ".doc-page .letter-sign{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:34px;break-inside:avoid}.doc-page .letter-att{font-size:.92em;max-width:50%}.doc-page .letter-me{text-align:right;line-height:1.4}.doc-page .letter p{margin-bottom:.8em}",
+ "pages": [
+  {
+   "html": "<div class=\"letter\">\n<p class=\"mb-3\">তারিখ: {{date}} ইং</p>\n<p class=\"mb-3\">বরাবর,<br>{{addressee}}<br>{{org}}{{#if org_address}}<br>{{org_address}}{{/if}}</p>\n<p class=\"mb-3\"><strong>বিষয়ঃ {{subject}}।</strong></p>\n<p class=\"mb-2\">{জনাব|মহোদয়},</p>\n<div class=\"text-justify\">\n<p>{সবিনয় নিবেদন এই যে,|বিনীত নিবেদন এই যে,} {{text}}</p>\n<p>{অতএব, মহোদয়ের নিকট বিনীত প্রার্থনা,|অতএব, মহোদয়ের নিকট বিনীত অনুরোধ,} {{prayer}}</p>\n</div>\n<div class=\"letter-sign\">\n<div class=\"letter-att\">{{#if attachments}}<strong>সংযুক্তিঃ</strong><br>{{attachments}}{{/if}}</div>\n<div class=\"letter-me\">{বিনীত নিবেদক|নিবেদক},<br><br><br>_______________________<br><strong>{{name}}</strong>{{#if father}}<br>পিতা/স্বামী- {{father}}{{/if}}<br>{{address}}<br>মোবাইল- {{mobile}}</div>\n</div>\n</div>"
+  }
+ ]
+}

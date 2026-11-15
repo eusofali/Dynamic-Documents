@@ -1,0 +1,179 @@
+{
+ "id": "loan_application",
+ "version": 1,
+ "title": "ঋণের আবেদন (ব্যাংক / এনজিও / সমিতি)",
+ "title_en": "Loan Application",
+ "category": "আবেদন / Applications",
+ "icon": "fa-hand-holding-usd",
+ "description": "ব্যাংক, এনজিও বা সমিতির নিকট ঋণের আবেদন। টাকার পরিমাণ কথায় স্বয়ংক্রিয়।",
+ "page": {
+  "size": "a4",
+  "marginTop": "0.7in",
+  "margin": "1in",
+  "fontSize": 16,
+  "lineHeight": 1.55,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "letterhead": true,
+ "groups": [
+  {
+   "id": "g_to",
+   "title": "প্রাপক ও তারিখ",
+   "icon": "fa-envelope"
+  },
+  {
+   "id": "g_me",
+   "title": "আবেদনকারীর তথ্য",
+   "icon": "fa-user"
+  },
+  {
+   "id": "g_ln",
+   "title": "ঋণের তথ্য",
+   "icon": "fa-coins"
+  },
+  {
+   "id": "g_att",
+   "title": "সংযুক্তি",
+   "icon": "fa-paperclip"
+  }
+ ],
+ "fields": [
+  {
+   "name": "date",
+   "label": "তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_to",
+   "required": true,
+   "default": "today"
+  },
+  {
+   "name": "addressee",
+   "label": "প্রাপকের পদবী",
+   "type": "text",
+   "col": 8,
+   "group": "g_to",
+   "required": true,
+   "default": "ব্যবস্থাপক / শাখা ব্যবস্থাপক"
+  },
+  {
+   "name": "org",
+   "label": "প্রতিষ্ঠানের নাম ও শাখা",
+   "type": "text",
+   "col": 6,
+   "group": "g_to",
+   "required": true
+  },
+  {
+   "name": "org_address",
+   "label": "প্রতিষ্ঠানের ঠিকানা (ঐচ্ছিক)",
+   "type": "text",
+   "col": 6,
+   "group": "g_to"
+  },
+  {
+   "name": "name",
+   "label": "আবেদনকারীর নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_me",
+   "required": true
+  },
+  {
+   "name": "father",
+   "label": "পিতা/স্বামীর নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_me"
+  },
+  {
+   "name": "address",
+   "label": "ঠিকানা",
+   "type": "text",
+   "col": 8,
+   "group": "g_me",
+   "required": true,
+   "placeholder": "গ্রাম/মহল্লা, ডাকঘর, উপজেলা, জেলা"
+  },
+  {
+   "name": "mobile",
+   "label": "মোবাইল নম্বর",
+   "type": "text",
+   "col": 4,
+   "group": "g_me",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "amount",
+   "label": "প্রয়োজনীয় ঋণের পরিমাণ",
+   "type": "amount",
+   "col": 4,
+   "group": "g_ln",
+   "required": true
+  },
+  {
+   "name": "purpose",
+   "label": "ঋণের উদ্দেশ্য",
+   "type": "text",
+   "col": 8,
+   "group": "g_ln",
+   "required": true,
+   "placeholder": "যেমন: ব্যবসার মূলধন বৃদ্ধি / গবাদি পশু পালন / কৃষি কাজ"
+  },
+  {
+   "name": "income",
+   "label": "বর্তমান পেশা ও আয়ের উৎস",
+   "type": "text",
+   "col": 8,
+   "group": "g_ln",
+   "required": true,
+   "placeholder": "যেমন: মুদি দোকান, মাসিক গড় আয় প্রায় ২০,০০০ টাকা"
+  },
+  {
+   "name": "period",
+   "label": "পরিশোধের মেয়াদ",
+   "type": "text",
+   "col": 4,
+   "group": "g_ln",
+   "required": true,
+   "placeholder": "যেমন: ১২ মাস"
+  },
+  {
+   "name": "repay",
+   "label": "পরিশোধের পদ্ধতি",
+   "type": "select",
+   "col": 6,
+   "group": "g_ln",
+   "options": [
+    "মাসিক কিস্তিতে",
+    "ত্রৈমাসিক কিস্তিতে",
+    "এককালীন"
+   ],
+   "default": "মাসিক কিস্তিতে"
+  },
+  {
+   "name": "security",
+   "label": "জামানত / গ্যারান্টার (থাকলে)",
+   "type": "text",
+   "col": 6,
+   "group": "g_ln"
+  },
+  {
+   "name": "attachments",
+   "label": "সংযুক্তি (প্রতি লাইনে একটি; না লাগলে মুছে দিন)",
+   "type": "textarea",
+   "col": 12,
+   "group": "g_att",
+   "rows": 3,
+   "default": "১। জাতীয় পরিচয়পত্রের ফটোকপি।\n২। পাসপোর্ট সাইজের ছবি ০২ কপি।\n৩। ট্রেড লাইসেন্স / আয়ের প্রমাণপত্র (থাকলে)।"
+  }
+ ],
+ "css": ".doc-page .letter-sign{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:34px;break-inside:avoid}.doc-page .letter-att{font-size:.92em;max-width:50%}.doc-page .letter-me{text-align:right;line-height:1.4}.doc-page .letter p{margin-bottom:.8em}",
+ "pages": [
+  {
+   "html": "<div class=\"letter\">\n<p class=\"mb-3\">তারিখ: {{date}} ইং</p>\n<p class=\"mb-3\">বরাবর,<br>{{addressee}}<br>{{org}}{{#if org_address}}<br>{{org_address}}{{/if}}</p>\n<p class=\"mb-3\"><strong>বিষয়ঃ ঋণ মঞ্জুরের জন্য আবেদন।</strong></p>\n<p class=\"mb-2\">{জনাব|মহোদয়},</p>\n<div class=\"text-justify\">\n<p>{সবিনয় নিবেদন এই যে,|বিনীত নিবেদন এই যে,} আমি <strong>{{income}}</strong> এর মাধ্যমে জীবিকা নির্বাহ করি। আমার {{purpose}} প্রয়োজনে <strong>{{amount}}/- ({{amount_words}}) টাকা</strong> ঋণের প্রয়োজন।</p>\n<p>আমি উক্ত ঋণ {{period}} মেয়াদের মধ্যে {{repay}} পরিশোধ করব।{{#if security}} জামানত হিসেবে {{security}} প্রদান করা হবে।{{/if}}</p>\n<p>{অতএব, মহোদয়ের নিকট বিনীত প্রার্থনা,|অতএব, মহোদয়ের নিকট বিনীত অনুরোধ,} আমার আবেদন {সদয় বিবেচনা করে ঋণ মঞ্জুর করে বাধিত করবেন|বিবেচনা করে প্রয়োজনীয় ঋণ মঞ্জুর করবেন}।</p>\n</div>\n<div class=\"letter-sign\">\n<div class=\"letter-att\">{{#if attachments}}<strong>সংযুক্তিঃ</strong><br>{{attachments}}{{/if}}</div>\n<div class=\"letter-me\">{বিনীত নিবেদক|নিবেদক},<br><br><br>_______________________<br><strong>{{name}}</strong>{{#if father}}<br>পিতা/স্বামী- {{father}}{{/if}}<br>{{address}}<br>মোবাইল- {{mobile}}</div>\n</div>\n</div>"
+  }
+ ]
+}

@@ -1,0 +1,177 @@
+{
+ "id": "trade_license_application",
+ "version": 1,
+ "title": "ট্রেড লাইসেন্সের আবেদন",
+ "title_en": "Trade License Application",
+ "category": "আবেদন / Applications",
+ "icon": "fa-store",
+ "description": "নতুন বা নবায়নের জন্য ইউনিয়ন পরিষদ / পৌরসভার নিকট আবেদন।",
+ "page": {
+  "size": "a4",
+  "marginTop": "0.7in",
+  "margin": "1in",
+  "fontSize": 16,
+  "lineHeight": 1.55,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "letterhead": true,
+ "groups": [
+  {
+   "id": "g_to",
+   "title": "প্রাপক ও তারিখ",
+   "icon": "fa-envelope"
+  },
+  {
+   "id": "g_me",
+   "title": "আবেদনকারীর তথ্য",
+   "icon": "fa-user"
+  },
+  {
+   "id": "g_tl",
+   "title": "ব্যবসার তথ্য",
+   "icon": "fa-shop"
+  },
+  {
+   "id": "g_att",
+   "title": "সংযুক্তি",
+   "icon": "fa-paperclip"
+  }
+ ],
+ "fields": [
+  {
+   "name": "date",
+   "label": "তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_to",
+   "required": true,
+   "default": "today"
+  },
+  {
+   "name": "addressee",
+   "label": "প্রাপকের পদবী",
+   "type": "text",
+   "col": 8,
+   "group": "g_to",
+   "required": true,
+   "default": "চেয়ারম্যান / মেয়র"
+  },
+  {
+   "name": "org",
+   "label": "ইউনিয়ন পরিষদ / পৌরসভার নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_to",
+   "required": true
+  },
+  {
+   "name": "org_address",
+   "label": "প্রতিষ্ঠানের ঠিকানা (ঐচ্ছিক)",
+   "type": "text",
+   "col": 6,
+   "group": "g_to"
+  },
+  {
+   "name": "name",
+   "label": "আবেদনকারীর নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_me",
+   "required": true
+  },
+  {
+   "name": "father",
+   "label": "পিতা/স্বামীর নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_me"
+  },
+  {
+   "name": "address",
+   "label": "ঠিকানা",
+   "type": "text",
+   "col": 8,
+   "group": "g_me",
+   "required": true,
+   "placeholder": "গ্রাম/মহল্লা, ডাকঘর, উপজেলা, জেলা"
+  },
+  {
+   "name": "mobile",
+   "label": "মোবাইল নম্বর",
+   "type": "text",
+   "col": 4,
+   "group": "g_me",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "kind",
+   "label": "আবেদনের ধরন",
+   "type": "select",
+   "col": 4,
+   "group": "g_tl",
+   "options": [
+    {
+     "value": "new",
+     "label": "নতুন লাইসেন্স"
+    },
+    {
+     "value": "renew",
+     "label": "নবায়ন"
+    }
+   ],
+   "default": "new"
+  },
+  {
+   "name": "old_no",
+   "label": "পুরাতন লাইসেন্স নং",
+   "type": "text",
+   "col": 4,
+   "group": "g_tl",
+   "show_if": "kind==renew",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "biz_name",
+   "label": "প্রতিষ্ঠানের নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_tl",
+   "required": true
+  },
+  {
+   "name": "biz_type",
+   "label": "ব্যবসার ধরন",
+   "type": "text",
+   "col": 6,
+   "group": "g_tl",
+   "required": true,
+   "placeholder": "যেমন: মুদি ও জেনারেল স্টোর"
+  },
+  {
+   "name": "biz_address",
+   "label": "ব্যবসার ঠিকানা",
+   "type": "text",
+   "col": 6,
+   "group": "g_tl",
+   "required": true
+  },
+  {
+   "name": "attachments",
+   "label": "সংযুক্তি (প্রতি লাইনে একটি; না লাগলে মুছে দিন)",
+   "type": "textarea",
+   "col": 12,
+   "group": "g_att",
+   "rows": 3,
+   "default": "১। জাতীয় পরিচয়পত্রের ফটোকপি।\n২। পাসপোর্ট সাইজের ছবি ০২ কপি।\n৩। দোকান ঘরের ভাড়ার চুক্তিপত্র / মালিকানার কাগজ।\n৪। হালনাগাদ কর পরিশোধের রসিদ।"
+  }
+ ],
+ "css": ".doc-page .letter-sign{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:34px;break-inside:avoid}.doc-page .letter-att{font-size:.92em;max-width:50%}.doc-page .letter-me{text-align:right;line-height:1.4}.doc-page .letter p{margin-bottom:.8em}",
+ "pages": [
+  {
+   "html": "<div class=\"letter\">\n<p class=\"mb-3\">তারিখ: {{date}} ইং</p>\n<p class=\"mb-3\">বরাবর,<br>{{addressee}}<br>{{org}}{{#if org_address}}<br>{{org_address}}{{/if}}</p>\n<p class=\"mb-3\"><strong>বিষয়ঃ {{#if kind==renew}}ট্রেড লাইসেন্স নবায়নের{{else}}নতুন ট্রেড লাইসেন্স প্রদানের{{/if}} আবেদন।</strong></p>\n<p class=\"mb-2\">{জনাব|মহোদয়},</p>\n<div class=\"text-justify\">\n<p>{সবিনয় নিবেদন এই যে,|বিনীত নিবেদন এই যে,} আমি <strong>{{biz_address}}</strong> ঠিকানায় <strong>{{biz_name}}</strong> নামে {{biz_type}} ব্যবসা পরিচালনা করে {আসছি|আসতেছি}।</p>\n<p>{{#if kind==renew}}আমার পুরাতন ট্রেড লাইসেন্স নং- {{old_no}}। উক্ত লাইসেন্স নবায়ন করা প্রয়োজন।{{else}}উক্ত ব্যবসার জন্য আমার একটি বৈধ ট্রেড লাইসেন্স প্রয়োজন।{{/if}}</p>\n<p>{অতএব, মহোদয়ের নিকট বিনীত প্রার্থনা,|অতএব, মহোদয়ের নিকট বিনীত অনুরোধ,} প্রয়োজনীয় ফি পরিশোধ সাপেক্ষে {{#if kind==renew}}লাইসেন্সটি নবায়ন{{else}}আমাকে ট্রেড লাইসেন্স প্রদান{{/if}} {করে বাধিত করবেন|করার ব্যবস্থা গ্রহণ করবেন}।</p>\n</div>\n<div class=\"letter-sign\">\n<div class=\"letter-att\">{{#if attachments}}<strong>সংযুক্তিঃ</strong><br>{{attachments}}{{/if}}</div>\n<div class=\"letter-me\">{বিনীত নিবেদক|নিবেদক},<br><br><br>_______________________<br><strong>{{name}}</strong>{{#if father}}<br>পিতা/স্বামী- {{father}}{{/if}}<br>{{address}}<br>মোবাইল- {{mobile}}</div>\n</div>\n</div>"
+  }
+ ]
+}

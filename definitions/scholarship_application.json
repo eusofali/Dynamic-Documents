@@ -1,0 +1,173 @@
+{
+ "id": "scholarship_application",
+ "version": 1,
+ "title": "বৃত্তি / উপবৃত্তির আবেদন",
+ "title_en": "Scholarship Application",
+ "category": "আবেদন / Applications",
+ "icon": "fa-award",
+ "description": "শিক্ষা প্রতিষ্ঠানের বৃত্তি/উপবৃত্তি/বেতন মওকুফের আবেদন।",
+ "page": {
+  "size": "a4",
+  "marginTop": "0.7in",
+  "margin": "1in",
+  "fontSize": 16,
+  "lineHeight": 1.55,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "letterhead": true,
+ "groups": [
+  {
+   "id": "g_to",
+   "title": "প্রাপক ও তারিখ",
+   "icon": "fa-envelope"
+  },
+  {
+   "id": "g_st",
+   "title": "শিক্ষার্থীর তথ্য",
+   "icon": "fa-user-graduate"
+  },
+  {
+   "id": "g_sc",
+   "title": "আবেদনের তথ্য",
+   "icon": "fa-award"
+  },
+  {
+   "id": "g_att",
+   "title": "সংযুক্তি",
+   "icon": "fa-paperclip"
+  }
+ ],
+ "fields": [
+  {
+   "name": "date",
+   "label": "তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_to",
+   "required": true,
+   "default": "today"
+  },
+  {
+   "name": "addressee",
+   "label": "প্রাপকের পদবী",
+   "type": "text",
+   "col": 8,
+   "group": "g_to",
+   "required": true,
+   "default": "প্রধান শিক্ষক / অধ্যক্ষ"
+  },
+  {
+   "name": "org",
+   "label": "শিক্ষা প্রতিষ্ঠানের নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_to",
+   "required": true
+  },
+  {
+   "name": "org_address",
+   "label": "প্রতিষ্ঠানের ঠিকানা (ঐচ্ছিক)",
+   "type": "text",
+   "col": 6,
+   "group": "g_to"
+  },
+  {
+   "name": "name",
+   "label": "শিক্ষার্থীর নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_st",
+   "required": true
+  },
+  {
+   "name": "father",
+   "label": "পিতার নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_st",
+   "required": true
+  },
+  {
+   "name": "class",
+   "label": "শ্রেণি / বর্ষ",
+   "type": "text",
+   "col": 4,
+   "group": "g_st",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "roll",
+   "label": "রোল নং",
+   "type": "text",
+   "col": 4,
+   "group": "g_st",
+   "bn": true
+  },
+  {
+   "name": "result",
+   "label": "সর্বশেষ ফলাফল (জিপিএ)",
+   "type": "text",
+   "col": 4,
+   "group": "g_st",
+   "bn": true
+  },
+  {
+   "name": "address",
+   "label": "ঠিকানা",
+   "type": "text",
+   "col": 8,
+   "group": "g_st",
+   "required": true
+  },
+  {
+   "name": "mobile",
+   "label": "মোবাইল",
+   "type": "text",
+   "col": 4,
+   "group": "g_st",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "kind",
+   "label": "আবেদনের বিষয়",
+   "type": "select",
+   "col": 6,
+   "group": "g_sc",
+   "options": [
+    "বৃত্তি",
+    "উপবৃত্তি",
+    "বেতন মওকুফ",
+    "আর্থিক সহায়তা"
+   ],
+   "default": "বৃত্তি"
+  },
+  {
+   "name": "family",
+   "label": "পরিবারের আর্থিক অবস্থা",
+   "type": "textarea",
+   "col": 12,
+   "group": "g_sc",
+   "required": true,
+   "rows": 3,
+   "placeholder": "যেমন: আমার পিতা একজন দিনমজুর। মাসিক আয় প্রায় ১০,০০০ টাকা। পরিবারে ০৫ জন সদস্য।"
+  },
+  {
+   "name": "attachments",
+   "label": "সংযুক্তি (প্রতি লাইনে একটি; না লাগলে মুছে দিন)",
+   "type": "textarea",
+   "col": 12,
+   "group": "g_att",
+   "rows": 3,
+   "default": "১। সর্বশেষ পরীক্ষার ফলাফলের ফটোকপি।\n২। অভিভাবকের আয়ের প্রত্যয়নপত্র।\n৩। জাতীয় পরিচয়পত্র / জন্ম নিবন্ধনের ফটোকপি।"
+  }
+ ],
+ "css": ".doc-page .letter-sign{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:34px;break-inside:avoid}.doc-page .letter-att{font-size:.92em;max-width:50%}.doc-page .letter-me{text-align:right;line-height:1.4}.doc-page .letter p{margin-bottom:.8em}",
+ "pages": [
+  {
+   "html": "<div class=\"letter\">\n<p class=\"mb-3\">তারিখ: {{date}} ইং</p>\n<p class=\"mb-3\">বরাবর,<br>{{addressee}}<br>{{org}}{{#if org_address}}<br>{{org_address}}{{/if}}</p>\n<p class=\"mb-3\"><strong>বিষয়ঃ {{kind}} মঞ্জুরের জন্য আবেদন।</strong></p>\n<p class=\"mb-2\">{জনাব|মহোদয়},</p>\n<div class=\"text-justify\">\n<p>{সবিনয় নিবেদন এই যে,|বিনীত নিবেদন এই যে,} আমি আপনার প্রতিষ্ঠানের {{class}} শ্রেণির একজন নিয়মিত শিক্ষার্থী{{#if roll}} (রোল নং- {{roll}}){{/if}}{{#if result}}। আমার সর্বশেষ ফলাফল {{result}}{{/if}}।</p>\n<p>আমার পরিবারের আর্থিক অবস্থা নিম্নরূপঃ<br>{{family}}</p>\n<p>আর্থিক অসচ্ছলতার কারণে আমার লেখাপড়া চালিয়ে যেতে কষ্ট হচ্ছে। {অতএব, মহোদয়ের নিকট বিনীত প্রার্থনা,|অতএব, মহোদয়ের নিকট বিনীত অনুরোধ,} আমাকে {{kind}} প্রদান {করে বাধিত করবেন|করার ব্যবস্থা গ্রহণ করবেন}।</p>\n</div>\n<div class=\"letter-sign\">\n<div class=\"letter-att\">{{#if attachments}}<strong>সংযুক্তিঃ</strong><br>{{attachments}}{{/if}}</div>\n<div class=\"letter-me\">{বিনীত নিবেদক|নিবেদক},<br><br><br>_______________________<br><strong>{{name}}</strong>{{#if father}}<br>পিতা- {{father}}{{/if}}<br>{{address}}<br>মোবাইল- {{mobile}}</div>\n</div>\n</div>"
+  }
+ ]
+}

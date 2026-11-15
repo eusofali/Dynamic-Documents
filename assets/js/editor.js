@@ -12,6 +12,9 @@
   var fs = (def.page && def.page.fontSize) || 16;
   var zoomManual = null;
   var lastSuggest = {};
+  var LH_KEY = 'dd:lh:' + def.id;
+  var useLH = true;
+  try { if (localStorage.getItem(LH_KEY) === '0') useLH = false; } catch (e) { /* ignore */ }
 
   /* ---------- restore ---------- */
   function merge(src) {
@@ -60,6 +63,10 @@
     } else if (f.type === 'photo') {
       wrap.appendChild(label);
       wrap.appendChild(buildPhoto(f));
+      inputs[f.name] = wrap;
+    } else if (f.type === 'party') {
+      wrap.appendChild(label);
+      wrap.appendChild(buildParty(f));
       inputs[f.name] = wrap;
     } else if (f.type === 'rows') {
       wrap.appendChild(label);
@@ -134,6 +141,63 @@
     return box;
   }
 
+  /* party: one card per person (several sellers, buyers, borrowers ...) */
+  function buildParty(f) {
+    var box = el('div');
+    var list = el('div');
+    var cols = f.columns || [];
+    var who = f.personLabel || 'ব্যক্তি';
+
+    function renumber() {
+      var cards = $$('.party-card', list);
+      cards.forEach(function (c, i) {
+        $('.party-no', c).textContent = who + ' ' + (cards.length > 1 ? (i + 1) : '');
+        $('.party-del', c).style.visibility = cards.length > 1 ? 'visible' : 'hidden';
+      });
+    }
+    function sync() {
+      values[f.name] = $$('.party-card', list).map(function (card) {
+        var o = {};
+        $$('[data-c]', card).forEach(function (inp) { o[inp.getAttribute('data-c')] = inp.value; });
+        return o;
+      });
+      changed(f.name);
+    }
+    function addPerson(rowVals, silent) {
+      var card = el('div', { 'class': 'party-card border rounded p-2 mb-2 bg-white' });
+      var head = el('div', { 'class': 'd-flex align-items-center mb-1' }, '<strong class="small text-primary party-no"></strong>');
+      var del = el('button', { type: 'button', 'class': 'btn btn-sm btn-outline-danger ms-auto party-del', title: 'Remove this person' }, '<i class="fas fa-user-minus"></i>');
+      del.addEventListener('click', function () { card.remove(); renumber(); sync(); });
+      head.appendChild(del); card.appendChild(head);
+      var row = el('div', { 'class': 'row g-2' });
+      cols.forEach(function (c) {
+        var w = el('div', { 'class': 'col-12 col-md-' + (c.col || 6) });
+        w.appendChild(el('label', { 'class': 'small fw-bold mb-0' }, E.esc(c.label || c.name)));
+        var inp = el('input', { 'class': 'form-control form-control-sm', type: c.type === 'date' ? 'date' : 'text', 'data-c': c.name });
+        if (c.placeholder) inp.setAttribute('placeholder', c.placeholder);
+        inp.value = rowVals && rowVals[c.name] != null ? rowVals[c.name] : (c['default'] || '');
+        inp.addEventListener('input', sync);
+        if (c.type === 'date') inp.addEventListener('change', sync);
+        w.appendChild(inp); row.appendChild(w);
+      });
+      card.appendChild(row); list.appendChild(card);
+      renumber();
+      if (!silent) sync();
+    }
+    var initial = (values[f.name] && values[f.name].length) ? values[f.name] : [{}];
+    initial.forEach(function (r) { addPerson(r, true); });
+    // store column defaults (e.g. religion) of the initial cards without re-rendering
+    values[f.name] = $$('.party-card', list).map(function (card) {
+      var o = {};
+      $$('[data-c]', card).forEach(function (inp) { o[inp.getAttribute('data-c')] = inp.value; });
+      return o;
+    });
+    var add = el('button', { 'class': 'btn btn-sm btn-outline-primary', type: 'button' }, '<i class="fas fa-user-plus"></i> ' + E.esc(f.addLabel || 'আরও একজন যুক্ত করুন'));
+    add.addEventListener('click', function () { addPerson({}); });
+    box.appendChild(list); box.appendChild(add);
+    return box;
+  }
+
   function buildRows(f) {
     var box = el('div', { 'class': 'table-responsive' });
     var table = el('table', { 'class': 'table table-sm table-bordered rows-table align-middle mb-1' });
@@ -145,7 +209,7 @@
       var tr = el('tr');
       (f.columns || []).forEach(function (c) {
         var td = el('td');
-        var inp = el('input', { 'class': 'form-control form-control-sm', type: 'text', placeholder: c.placeholder || '' });
+        var inp = el('input', { 'class': 'form-control form-control-sm', type: c.type === 'date' ? 'date' : 'text', placeholder: c.placeholder || '' });
         inp.value = rowVals && rowVals[c.name] != null ? rowVals[c.name] : '';
         inp.addEventListener('input', sync);
         td.appendChild(inp); tr.appendChild(td);
@@ -214,14 +278,14 @@
   }
 
   function update() {
-    var r = E.render(def, values, seed);
+    var r = E.render(def, values, seed, { letterhead: useLH ? DD.letterhead : null });
     var vm = r.visible;
     (def.fields || []).forEach(function (f) {
       var w = $('[data-field="' + f.name + '"]', form);
       if (w) w.style.display = vm.fields[f.name] ? '' : 'none';
       if (f.type === 'amount') {
         var wd = $('[data-words="' + f.name + '"]', form);
-        if (wd) { var n = E.parseNum(values[f.name]); wd.textContent = isNaN(n) ? '' : '= ' + E.words(n) + ' টাকা'; }
+        if (wd) { var n = E.parseNum(values[f.name]); wd.textContent = isNaN(n) ? '' : '= ' + E.words(n) + (f.unit === '' ? '' : ' ' + (f.unit || 'টাকা')); }
       }
     });
     $$('[data-group]', form).forEach(function (c) {
@@ -296,7 +360,7 @@
     buildForm(); update();
   });
   $('#btn-print').addEventListener('click', function () {
-    var r = E.render(def, values, seed);
+    var r = E.render(def, values, seed, { letterhead: useLH ? DD.letterhead : null });
     if (r.missing.length) {
       r.missing.forEach(function (n) {
         var i = inputs[n]; if (i && i.classList) i.classList.add('is-missing');
@@ -321,6 +385,38 @@
     zoomManual = Math.max(0.3, Math.min(2, cur + (e.deltaY < 0 ? 0.05 : -0.05)));
     fit();
   }, { passive: false });
+
+  /* letterhead toggle */
+  var lhBtn = $('#btn-lh');
+  if (lhBtn) {
+    function lhState() {
+      lhBtn.classList.toggle('btn-warning', useLH && !!DD.letterhead);
+      lhBtn.classList.toggle('btn-outline-light', !(useLH && !!DD.letterhead));
+    }
+    lhBtn.addEventListener('click', function () {
+      if (!DD.letterhead) { toast('Set up your business letterhead in Admin → Settings'); return; }
+      useLH = !useLH;
+      try { localStorage.setItem(LH_KEY, useLH ? '1' : '0'); } catch (e) { /* ignore */ }
+      lhState(); update(); toast(useLH ? 'Letterhead on' : 'Letterhead off');
+    });
+    lhState();
+  }
+
+  /* direct PDF download */
+  var pdfBtn = $('#btn-pdf');
+  if (pdfBtn) {
+    pdfBtn.addEventListener('click', function () {
+      var r = E.render(def, values, seed, { letterhead: useLH ? DD.letterhead : null });
+      if (r.missing.length && !confirm(r.missing.length + ' required field(s) are empty. Download PDF anyway?')) return;
+      var old = pdfBtn.innerHTML;
+      pdfBtn.disabled = true; pdfBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> PDF…';
+      var title = (draftTitle() + ' - ' + def.title).replace(/[\\/:*?"<>|]+/g, ' ').trim();
+      var fileBase = def.id + '-' + E.todayIso();   // ASCII-only: some browsers drop non-Latin download names
+      window.DDPdf.download($('#preview'), def, fileBase, DD.assets, title).then(function () { toast('PDF downloaded ✔'); })
+        .catch(function (e) { toast('PDF failed: ' + (e && e.message ? e.message : e)); })
+        .then(function () { pdfBtn.disabled = false; pdfBtn.innerHTML = old; });
+    });
+  }
 
   buildForm();
   update();

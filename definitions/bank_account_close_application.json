@@ -1,0 +1,205 @@
+{
+ "id": "bank_account_close_application",
+ "version": 1,
+ "title": "ব্যাংক হিসাব বন্ধের আবেদন",
+ "title_en": "Bank Account Closing Request",
+ "category": "আবেদন / Applications",
+ "icon": "fa-university",
+ "description": "ব্যাংকে সঞ্চয়ী/চলতি ইত্যাদি হিসাব বন্ধ করার আবেদন।",
+ "page": {
+  "size": "a4",
+  "marginTop": "0.7in",
+  "margin": "1in",
+  "fontSize": 16,
+  "lineHeight": 1.55,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "letterhead": true,
+ "groups": [
+  {
+   "id": "g_to",
+   "title": "প্রাপক ও তারিখ",
+   "icon": "fa-envelope"
+  },
+  {
+   "id": "g_me",
+   "title": "আবেদনকারীর তথ্য",
+   "icon": "fa-user"
+  },
+  {
+   "id": "g_bk",
+   "title": "হিসাবের তথ্য",
+   "icon": "fa-credit-card"
+  },
+  {
+   "id": "g_att",
+   "title": "সংযুক্তি",
+   "icon": "fa-paperclip"
+  }
+ ],
+ "fields": [
+  {
+   "name": "date",
+   "label": "তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_to",
+   "required": true,
+   "default": "today"
+  },
+  {
+   "name": "addressee",
+   "label": "প্রাপকের পদবী",
+   "type": "text",
+   "col": 8,
+   "group": "g_to",
+   "required": true,
+   "default": "ব্যবস্থাপক"
+  },
+  {
+   "name": "org",
+   "label": "ব্যাংকের নাম ও শাখা",
+   "type": "text",
+   "col": 6,
+   "group": "g_to",
+   "required": true
+  },
+  {
+   "name": "org_address",
+   "label": "প্রতিষ্ঠানের ঠিকানা (ঐচ্ছিক)",
+   "type": "text",
+   "col": 6,
+   "group": "g_to"
+  },
+  {
+   "name": "name",
+   "label": "আবেদনকারীর নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_me",
+   "required": true
+  },
+  {
+   "name": "father",
+   "label": "পিতা/স্বামীর নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_me"
+  },
+  {
+   "name": "address",
+   "label": "ঠিকানা",
+   "type": "text",
+   "col": 8,
+   "group": "g_me",
+   "required": true,
+   "placeholder": "গ্রাম/মহল্লা, ডাকঘর, উপজেলা, জেলা"
+  },
+  {
+   "name": "mobile",
+   "label": "মোবাইল নম্বর",
+   "type": "text",
+   "col": 4,
+   "group": "g_me",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "acc_name",
+   "label": "হিসাবের নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_bk",
+   "required": true
+  },
+  {
+   "name": "acc_no",
+   "label": "হিসাব নম্বর",
+   "type": "text",
+   "col": 6,
+   "group": "g_bk",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "acc_type",
+   "label": "হিসাবের ধরন",
+   "type": "select",
+   "col": 6,
+   "group": "g_bk",
+   "options": [
+    "সঞ্চয়ী হিসাব",
+    "চলতি হিসাব",
+    "মেয়াদি আমানত (FDR)",
+    "ডিপিএস হিসাব",
+    "বেতন হিসাব"
+   ],
+   "default": "সঞ্চয়ী হিসাব"
+  },
+  {
+   "name": "reason",
+   "label": "বন্ধের কারণ",
+   "type": "select",
+   "col": 6,
+   "group": "g_bk",
+   "options": [
+    "আর প্রয়োজন না থাকায়",
+    "বসবাসের ঠিকানা পরিবর্তনের কারণে",
+    "ব্যক্তিগত কারণে",
+    "অন্য ব্যাংকে হিসাব স্থানান্তরের জন্য"
+   ],
+   "default": "আর প্রয়োজন না থাকায়"
+  },
+  {
+   "name": "payout",
+   "label": "অবশিষ্ট টাকা",
+   "type": "select",
+   "col": 6,
+   "group": "g_bk",
+   "options": [
+    {
+     "value": "cash",
+     "label": "নগদে/পে-অর্ডারে নেব"
+    },
+    {
+     "value": "transfer",
+     "label": "অন্য হিসাবে স্থানান্তর হবে"
+    }
+   ],
+   "default": "cash"
+  },
+  {
+   "name": "other_acc",
+   "label": "যে হিসাবে স্থানান্তর (ব্যাংক ও হিসাব নং)",
+   "type": "text",
+   "col": 6,
+   "group": "g_bk",
+   "show_if": "payout==transfer",
+   "required": true
+  },
+  {
+   "name": "return_cards",
+   "label": "অব্যবহৃত চেক বই / কার্ড ফেরত দেওয়া হলো – লাইনটি যুক্ত করুন",
+   "type": "checkbox",
+   "col": 12,
+   "group": "g_bk",
+   "default": true
+  },
+  {
+   "name": "attachments",
+   "label": "সংযুক্তি (প্রতি লাইনে একটি; না লাগলে মুছে দিন)",
+   "type": "textarea",
+   "col": 12,
+   "group": "g_att",
+   "rows": 3,
+   "default": "১। জাতীয় পরিচয়পত্রের ফটোকপি।\n২। অব্যবহৃত চেক বই / কার্ড (থাকলে)।"
+  }
+ ],
+ "css": ".doc-page .letter-sign{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:34px;break-inside:avoid}.doc-page .letter-att{font-size:.92em;max-width:50%}.doc-page .letter-me{text-align:right;line-height:1.4}.doc-page .letter p{margin-bottom:.8em}",
+ "pages": [
+  {
+   "html": "<div class=\"letter\">\n<p class=\"mb-3\">তারিখ: {{date}} ইং</p>\n<p class=\"mb-3\">বরাবর,<br>{{addressee}}<br>{{org}}{{#if org_address}}<br>{{org_address}}{{/if}}</p>\n<p class=\"mb-3\"><strong>বিষয়ঃ {{acc_type}} (হিসাব নং- {{acc_no}}) বন্ধের আবেদন।</strong></p>\n<p class=\"mb-2\">{জনাব|মহোদয়},</p>\n<div class=\"text-justify\">\n<p>{সবিনয় নিবেদন এই যে,|বিনীত নিবেদন এই যে,} আমি আপনার ব্যাংকের উপরোক্ত শাখায় <strong>{{acc_name}}</strong> নামে একটি {{acc_type}} (হিসাব নং- <strong>{{acc_no}}</strong>) পরিচালনা করে আসছি। {{reason}} আমি উক্ত হিসাবটি বন্ধ করতে ইচ্ছুক।</p>\n<p>উক্ত হিসাবে জমাকৃত অবশিষ্ট টাকা আমাকে {{#if payout==transfer}}নিম্নোক্ত হিসাবে স্থানান্তর করার জন্য অনুরোধ করছি: {{other_acc}}{{else}}নগদে বা পে-অর্ডারের মাধ্যমে পরিশোধ করার জন্য অনুরোধ করছি{{/if}}।{{#if return_cards}} হিসাবের অব্যবহৃত চেক বই ও কার্ড ফেরত দেওয়া হলো।{{/if}}</p>\n<p>{অতএব, মহোদয়ের নিকট বিনীত প্রার্থনা,|অতএব, মহোদয়ের নিকট বিনীত অনুরোধ,} উক্ত হিসাবটি {বন্ধ করে বাধিত করবেন|বন্ধ করার প্রয়োজনীয় ব্যবস্থা গ্রহণ করবেন}।</p>\n</div>\n<div class=\"letter-sign\">\n<div class=\"letter-att\">{{#if attachments}}<strong>সংযুক্তিঃ</strong><br>{{attachments}}{{/if}}</div>\n<div class=\"letter-me\">{বিনীত নিবেদক|নিবেদক},<br><br><br>_______________________<br><strong>{{name}}</strong>{{#if father}}<br>পিতা/স্বামী- {{father}}{{/if}}<br>{{address}}<br>মোবাইল- {{mobile}}</div>\n</div>\n</div>"
+  }
+ ]
+}

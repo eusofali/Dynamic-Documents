@@ -35,7 +35,7 @@ if ($isNew) {
     }
 }
 unset($def['id']);
-$boot = ['def' => $def, 'id' => $id, 'isNew' => $isNew, 'api' => url('api.php'), 'adminUrl' => url('admin/')];
+$boot = ['def' => $def, 'letterhead' => letterhead_settings(), 'id' => $id, 'isNew' => $isNew, 'api' => url('api.php'), 'adminUrl' => url('admin/')];
 layout_head('Builder', ['nav' => true]);
 ?>
 <div class="container-fluid py-3">

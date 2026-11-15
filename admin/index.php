@@ -13,6 +13,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($act === 'settings') {
         set_setting('site_title', trim($_POST['site_title'] ?? '') ?: 'Dynamic Documents');
         set_setting('require_login', !empty($_POST['require_login']) ? '1' : '0');
+        // business letterhead
+        $cut = function ($k, $n) { return mb_substr(trim((string)($_POST[$k] ?? '')), 0, $n); };
+        set_setting('lh_name', $cut('lh_name', 120));
+        set_setting('lh_tagline', $cut('lh_tagline', 160));
+        set_setting('lh_address', $cut('lh_address', 220));
+        set_setting('lh_phone', $cut('lh_phone', 80));
+        set_setting('lh_email', $cut('lh_email', 120));
+        $col = trim((string)($_POST['lh_color'] ?? ''));
+        set_setting('lh_color', preg_match('/^#[0-9a-fA-F]{6}$/', $col) ? $col : '#1f3a5f');
+        set_setting('lh_layout', ($_POST['lh_layout'] ?? '') === 'left' ? 'left' : 'center');
+        $logo = (string)($_POST['lh_logo'] ?? '');
+        if ($logo === '' || (strlen($logo) < 400000 && preg_match('#^data:image/(png|jpe?g|webp);base64,[A-Za-z0-9+/=]+$#', $logo))) {
+            set_setting('lh_logo', $logo);
+        } else {
+            $flash['err'][] = 'Logo was not a valid small image and was ignored.';
+        }
         $flash['ok'][] = 'Settings saved.';
         $tab = 'settings';
     } elseif ($act === 'import') {
@@ -118,12 +134,60 @@ layout_head('Admin');
   </script>
 
   <?php elseif ($tab === 'settings'): ?>
-  <form method="post" class="card card-body" style="max-width:560px">
+  <form method="post" class="row g-3" id="settings-form">
     <input type="hidden" name="_csrf" value="<?= e(csrf_token()) ?>"><input type="hidden" name="act" value="settings">
-    <div class="mb-3"><label class="form-label">Site title</label><input class="form-control" name="site_title" value="<?= e(site_title()) ?>"></div>
-    <div class="form-check form-switch mb-3"><input class="form-check-input" type="checkbox" name="require_login" id="rl" value="1" <?= setting('require_login', '0') === '1' ? 'checked' : '' ?>><label class="form-check-label" for="rl">Require login to use the generators</label></div>
-    <button class="btn btn-primary align-self-start">Save</button>
+    <div class="col-lg-6"><div class="card card-body h-100">
+      <h2 class="h6">General</h2>
+      <div class="mb-3"><label class="form-label">Site title</label><input class="form-control" name="site_title" value="<?= e(site_title()) ?>"></div>
+      <div class="form-check form-switch mb-3"><input class="form-check-input" type="checkbox" name="require_login" id="rl" value="1" <?= setting('require_login', '0') === '1' ? 'checked' : '' ?>><label class="form-check-label" for="rl">Require login to use the generators</label></div>
+    </div></div>
+    <div class="col-lg-6"><div class="card card-body">
+      <h2 class="h6"><i class="fas fa-heading text-primary"></i> Business letterhead <small class="text-muted fw-normal">(printed on application letters &amp; other documents that use it)</small></h2>
+      <div class="row g-2">
+        <div class="col-12"><label class="form-label small mb-0">Business / shop name</label><input class="form-control" name="lh_name" id="lh_name" value="<?= e(setting('lh_name', '')) ?>" placeholder="e.g. আল-আমিন দলিল লেখক ও কম্পিউটার কম্পোজ"></div>
+        <div class="col-12"><label class="form-label small mb-0">Tagline</label><input class="form-control" name="lh_tagline" id="lh_tagline" value="<?= e(setting('lh_tagline', '')) ?>" placeholder="e.g. এফিডেভিট · দলিল · আবেদনপত্র · অনলাইন সেবা"></div>
+        <div class="col-12"><label class="form-label small mb-0">Address</label><input class="form-control" name="lh_address" id="lh_address" value="<?= e(setting('lh_address', '')) ?>"></div>
+        <div class="col-md-6"><label class="form-label small mb-0">Phone</label><input class="form-control" name="lh_phone" id="lh_phone" value="<?= e(setting('lh_phone', '')) ?>"></div>
+        <div class="col-md-6"><label class="form-label small mb-0">Email</label><input class="form-control" name="lh_email" id="lh_email" value="<?= e(setting('lh_email', '')) ?>"></div>
+        <div class="col-md-4"><label class="form-label small mb-0">Colour</label><input type="color" class="form-control form-control-color w-100" name="lh_color" id="lh_color" value="<?= e(setting('lh_color', '#1f3a5f')) ?>"></div>
+        <div class="col-md-4"><label class="form-label small mb-0">Layout</label><select class="form-select" name="lh_layout" id="lh_layout"><option value="center" <?= setting('lh_layout', 'center') !== 'left' ? 'selected' : '' ?>>Centered</option><option value="left" <?= setting('lh_layout', 'center') === 'left' ? 'selected' : '' ?>>Logo left</option></select></div>
+        <div class="col-md-4"><label class="form-label small mb-0">Logo (optional)</label><input type="file" accept="image/*" class="form-control" id="lh_file"></div>
+        <input type="hidden" name="lh_logo" id="lh_logo" value="<?= e(setting('lh_logo', '')) ?>">
+        <div class="col-12"><button type="button" class="btn btn-sm btn-outline-secondary" id="lh_clear_logo">Remove logo</button></div>
+      </div>
+      <div class="border rounded mt-3 p-3 bg-white dd-doc" id="lh_preview" style="width:auto;--fs:15px;--lh:1.4"></div>
+    </div></div>
+    <div class="col-12"><button class="btn btn-primary">Save settings</button></div>
   </form>
+  <link rel="stylesheet" href="../assets/css/app.css?v=<?= e(APP_VERSION) ?>">
+  <script src="../assets/js/engine.js?v=<?= e(APP_VERSION) ?>"></script>
+  <script>
+  (function () {
+    var $ = function (id) { return document.getElementById(id); };
+    function draw() {
+      var html = DDEngine.letterheadHtml({ name: $('lh_name').value, tagline: $('lh_tagline').value, address: $('lh_address').value, phone: $('lh_phone').value, email: $('lh_email').value, color: $('lh_color').value, layout: $('lh_layout').value, logo: $('lh_logo').value });
+      $('lh_preview').innerHTML = html || '<span class="text-muted small">Fill in the business name to see the letterhead preview.</span>';
+    }
+    ['lh_name', 'lh_tagline', 'lh_address', 'lh_phone', 'lh_email', 'lh_color', 'lh_layout'].forEach(function (id) { $(id).addEventListener('input', draw); $(id).addEventListener('change', draw); });
+    $('lh_clear_logo').addEventListener('click', function () { $('lh_logo').value = ''; $('lh_file').value = ''; draw(); });
+    $('lh_file').addEventListener('change', function () {
+      var f = this.files[0]; if (!f) return;
+      var fr = new FileReader();
+      fr.onload = function () {
+        var im = new Image();
+        im.onload = function () {
+          var max = 160, r = Math.min(1, max / Math.max(im.width, im.height));
+          var c = document.createElement('canvas'); c.width = Math.round(im.width * r); c.height = Math.round(im.height * r);
+          c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+          $('lh_logo').value = c.toDataURL('image/png'); draw();
+        };
+        im.src = fr.result;
+      };
+      fr.readAsDataURL(f);
+    });
+    draw();
+  })();
+  </script>
 
   <?php elseif ($tab === 'users'): ?>
   <div class="row g-3"><div class="col-lg-7"><div class="table-responsive"><table class="table align-middle bg-white shadow-sm">

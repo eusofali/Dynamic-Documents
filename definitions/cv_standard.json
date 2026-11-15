@@ -1,0 +1,417 @@
+{
+ "id": "cv_standard",
+ "version": 1,
+ "title": "সিভি – স্ট্যান্ডার্ড ফরম্যাট (ছবিসহ)",
+ "title_en": "CV – Standard Bangladeshi format (with photo)",
+ "category": "আবেদন / Applications",
+ "icon": "fa-user-tie",
+ "description": "এক পেজের পেশাদার সিভি: ছবি আপলোড, ৬টি রঙ, NID/জন্মনিবন্ধন, অভিজ্ঞতা বা নতুনদের জন্য কর্ম যোগ্যতা অনুচ্ছেদ। ইংরেজি ও বাংলা।",
+ "page": {
+  "size": "a4",
+  "marginTop": "0.6in",
+  "margin": "0.7in",
+  "fontSize": 15,
+  "lineHeight": 1.35,
+  "font": "en"
+ },
+ "digits": "keep",
+ "digits_if": "lang==bangla",
+ "groups": [
+  {
+   "id": "g_fmt",
+   "title": "ফরম্যাট / Format",
+   "icon": "fa-sliders-h"
+  },
+  {
+   "id": "g_head",
+   "title": "নাম, ছবি ও যোগাযোগ / Name, photo & contact",
+   "icon": "fa-id-card"
+  },
+  {
+   "id": "g_pers",
+   "title": "ব্যক্তিগত তথ্য / Personal details",
+   "icon": "fa-user"
+  },
+  {
+   "id": "g_obj",
+   "title": "লক্ষ্য ও দক্ষতা / Objective & skills",
+   "icon": "fa-bullseye"
+  },
+  {
+   "id": "g_edu",
+   "title": "শিক্ষাগত যোগ্যতা / Education",
+   "icon": "fa-graduation-cap"
+  },
+  {
+   "id": "g_exp",
+   "title": "কর্ম অভিজ্ঞতা / Experience",
+   "icon": "fa-briefcase"
+  },
+  {
+   "id": "g_extra",
+   "title": "অন্যান্য / Extras",
+   "icon": "fa-plus-circle"
+  }
+ ],
+ "fields": [
+  {
+   "name": "lang",
+   "label": "ভাষা / Language",
+   "type": "select",
+   "col": 4,
+   "group": "g_fmt",
+   "options": [
+    {
+     "value": "english",
+     "label": "English"
+    },
+    {
+     "value": "bangla",
+     "label": "বাংলা"
+    }
+   ],
+   "default": "english"
+  },
+  {
+   "name": "theme",
+   "label": "রং / Colour theme",
+   "type": "select",
+   "col": 4,
+   "group": "g_fmt",
+   "options": [
+    {
+     "value": "blue",
+     "label": "Sky blue"
+    },
+    {
+     "value": "teal",
+     "label": "Teal"
+    },
+    {
+     "value": "green",
+     "label": "Green"
+    },
+    {
+     "value": "slate",
+     "label": "Grey"
+    },
+    {
+     "value": "rose",
+     "label": "Rose"
+    },
+    {
+     "value": "gold",
+     "label": "Gold"
+    }
+   ],
+   "default": "blue"
+  },
+  {
+   "name": "show_photo",
+   "label": "ছবির ঘর দেখান / Show photo box",
+   "type": "checkbox",
+   "col": 4,
+   "group": "g_fmt",
+   "default": true
+  },
+  {
+   "name": "photo",
+   "label": "পাসপোর্ট সাইজ ছবি / Passport photo (optional)",
+   "type": "photo",
+   "col": 12,
+   "group": "g_head",
+   "show_if": "show_photo",
+   "help": "ছবি আপলোড না করলে প্রিন্টে ফাঁকা ঘর থাকবে – হাতে ছবি লাগানো যাবে।"
+  },
+  {
+   "name": "name",
+   "label": "পূর্ণ নাম / Full name",
+   "type": "text",
+   "col": 6,
+   "group": "g_head",
+   "required": true
+  },
+  {
+   "name": "headline",
+   "label": "পদবী / Headline (optional)",
+   "type": "text",
+   "col": 6,
+   "group": "g_head",
+   "placeholder": "e.g. Medical Promotion Officer"
+  },
+  {
+   "name": "mobile",
+   "label": "মোবাইল / Cell",
+   "type": "text",
+   "col": 6,
+   "group": "g_head",
+   "required": true,
+   "placeholder": "01XXX-XXXXXX"
+  },
+  {
+   "name": "email",
+   "label": "ই-মেইল / Email (optional)",
+   "type": "text",
+   "col": 6,
+   "group": "g_head"
+  },
+  {
+   "name": "father",
+   "label": "পিতার নাম / Father’s name",
+   "type": "text",
+   "col": 6,
+   "group": "g_pers",
+   "required": true
+  },
+  {
+   "name": "mother",
+   "label": "মাতার নাম / Mother’s name",
+   "type": "text",
+   "col": 6,
+   "group": "g_pers",
+   "required": true
+  },
+  {
+   "name": "dob",
+   "label": "জন্ম তারিখ / Date of birth",
+   "type": "date",
+   "col": 4,
+   "group": "g_pers",
+   "required": true
+  },
+  {
+   "name": "id_type",
+   "label": "পরিচয়পত্রের ধরন / ID type",
+   "type": "select",
+   "col": 4,
+   "group": "g_pers",
+   "options": [
+    {
+     "value": "none",
+     "label": "— None —"
+    },
+    {
+     "value": "nid",
+     "label": "National ID"
+    },
+    {
+     "value": "birth",
+     "label": "Birth Certificate"
+    },
+    {
+     "value": "passport",
+     "label": "Passport"
+    }
+   ],
+   "default": "none"
+  },
+  {
+   "name": "id_no",
+   "label": "পরিচয়পত্র নং / ID number",
+   "type": "text",
+   "col": 4,
+   "group": "g_pers",
+   "show_if": "id_type!=none",
+   "required": true
+  },
+  {
+   "name": "perm_address",
+   "label": "স্থায়ী ঠিকানা / Permanent address",
+   "type": "textarea",
+   "col": 6,
+   "group": "g_pers",
+   "required": true,
+   "rows": 3,
+   "placeholder": "Vill: …, P.O: …,\nP.S: …, Dist: …"
+  },
+  {
+   "name": "same_addr",
+   "label": "বর্তমান ঠিকানা স্থায়ী ঠিকানার একই / Present = permanent",
+   "type": "checkbox",
+   "col": 6,
+   "group": "g_pers",
+   "default": true
+  },
+  {
+   "name": "pres_address",
+   "label": "বর্তমান ঠিকানা / Present address",
+   "type": "textarea",
+   "col": 6,
+   "group": "g_pers",
+   "required": true,
+   "rows": 3,
+   "show_if": "!same_addr"
+  },
+  {
+   "name": "religion",
+   "label": "ধর্ম / Religion",
+   "type": "text",
+   "col": 3,
+   "group": "g_pers",
+   "required": true,
+   "default": "Islam"
+  },
+  {
+   "name": "gender",
+   "label": "লিঙ্গ / Gender",
+   "type": "select",
+   "col": 3,
+   "group": "g_pers",
+   "options": [
+    {
+     "value": "male",
+     "label": "Male / পুরুষ"
+    },
+    {
+     "value": "female",
+     "label": "Female / মহিলা"
+    }
+   ],
+   "default": "male"
+  },
+  {
+   "name": "nationality",
+   "label": "জাতীয়তা / Nationality",
+   "type": "text",
+   "col": 3,
+   "group": "g_pers",
+   "required": true,
+   "default": "Bangladeshi"
+  },
+  {
+   "name": "marital",
+   "label": "বৈবাহিক অবস্থা / Marital status",
+   "type": "select",
+   "col": 3,
+   "group": "g_pers",
+   "options": [
+    {
+     "value": "unmarried",
+     "label": "Unmarried / অবিবাহিত"
+    },
+    {
+     "value": "married",
+     "label": "Married / বিবাহিত"
+    },
+    {
+     "value": "divorced",
+     "label": "Divorced / তালাকপ্রাপ্ত"
+    },
+    {
+     "value": "widowed",
+     "label": "Widowed / বিধবা-বিপত্নীক"
+    }
+   ],
+   "default": "unmarried"
+  },
+  {
+   "name": "spouse",
+   "label": "স্ত্রী/স্বামীর নাম / Spouse name (optional)",
+   "type": "text",
+   "col": 6,
+   "group": "g_pers",
+   "show_if": "marital==married"
+  },
+  {
+   "name": "blood",
+   "label": "রক্তের গ্রুপ / Blood group (optional)",
+   "type": "text",
+   "col": 3,
+   "group": "g_pers"
+  },
+  {
+   "name": "objective",
+   "label": "ক্যারিয়ার অবজেক্টিভ / Career objective (ঐচ্ছিক)",
+   "type": "textarea",
+   "col": 12,
+   "group": "g_obj",
+   "placeholder": "ফাঁকা রাখলে একটি স্ট্যান্ডার্ড অবজেক্টিভ স্বয়ংক্রিয়ভাবে বসবে।"
+  },
+  {
+   "name": "skills",
+   "label": "দক্ষতা / Skills & additional qualifications (ঐচ্ছিক)",
+   "type": "textarea",
+   "col": 12,
+   "group": "g_obj",
+   "placeholder": "প্রতি লাইনে একটি / one per line"
+  },
+  {
+   "name": "edu",
+   "label": "শিক্ষাগত যোগ্যতা",
+   "type": "rows",
+   "col": 12,
+   "group": "g_edu",
+   "minRows": 2,
+   "columns": [
+    {
+     "name": "exam",
+     "label": "পরীক্ষা / Exam"
+    },
+    {
+     "name": "result",
+     "label": "ফলাফল / Result"
+    },
+    {
+     "name": "year",
+     "label": "সাল / Year"
+    },
+    {
+     "name": "board",
+     "label": "বোর্ড / Board"
+    }
+   ]
+  },
+  {
+   "name": "exp",
+   "label": "কর্ম অভিজ্ঞতা",
+   "type": "rows",
+   "col": 12,
+   "group": "g_exp",
+   "minRows": 0,
+   "help": "অভিজ্ঞতা না থাকলে ফাঁকা রাখুন – নিচের “কর্ম যোগ্যতা” অনুচ্ছেদ ব্যবহার হবে।",
+   "columns": [
+    {
+     "name": "org",
+     "label": "প্রতিষ্ঠান / Company"
+    },
+    {
+     "name": "post",
+     "label": "পদবী / Designation"
+    },
+    {
+     "name": "duration",
+     "label": "সময়কাল / Duration"
+    }
+   ]
+  },
+  {
+   "name": "working_text",
+   "label": "কর্ম যোগ্যতা অনুচ্ছেদ / Working-qualification paragraph",
+   "type": "textarea",
+   "col": 12,
+   "group": "g_exp",
+   "show_if": "!exp",
+   "rows": 3,
+   "placeholder": "Motivated and hardworking graduate seeking an entry-level position where I can apply my skills…"
+  },
+  {
+   "name": "reference",
+   "label": "রেফারেন্স / Reference (ঐচ্ছিক)",
+   "type": "textarea",
+   "col": 12,
+   "group": "g_extra",
+   "rows": 3
+  }
+ ],
+ "css": ".doc-page .cvc{--ac:#92cddc;--ac2:#d8e4bc;font-family:'Roboto','Hind Siliguri',Calibri,Arial,sans-serif;font-size:.93em;line-height:1.35;color:#1b1b1b}\n.doc-page .cvc.theme-teal{--ac:#86d3c9;--ac2:#d5efeb}.doc-page .cvc.theme-green{--ac:#b5d99c;--ac2:#e4f1d8}.doc-page .cvc.theme-slate{--ac:#cfd5dc;--ac2:#eceff2}.doc-page .cvc.theme-rose{--ac:#f4bccb;--ac2:#fde6ec}.doc-page .cvc.theme-gold{--ac:#f2d78f;--ac2:#fbf1d3}\n.doc-page .cvc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:6px}\n.doc-page .cvc-head-text{flex:1;text-align:center;padding-top:4px}\n.doc-page .cvc-h1{font-size:1.05em;letter-spacing:.18em;text-transform:uppercase;color:#5b6570;font-weight:500}\n.doc-page .cvc-name{font-size:1.85em;font-weight:700;color:#14284b;text-transform:uppercase;line-height:1.15;margin:3px 0}\n.doc-page .cvc-headline{font-size:1.05em;font-weight:500;color:#2f6f8f;margin-bottom:2px}\n.doc-page .cvc-contact{font-size:1.02em;font-weight:500}\n.doc-page .cvc-photo{flex:0 0 auto;width:34mm;height:42mm;border:1px solid #6b7280;display:flex;align-items:center;justify-content:center;text-align:center;font-size:.7em;color:#9aa1a9;text-transform:uppercase;overflow:hidden;background:#fff}\n.doc-page .cvc-photo img{width:100%;height:100%;object-fit:cover;display:block}\n.doc-page .cvc-bar{background:var(--ac);font-weight:700;text-transform:uppercase;font-size:.95em;padding:2px 8px;margin:11px 0 6px;letter-spacing:.02em;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-after:avoid}\n.doc-page .cvc-p{text-align:justify;margin:0 0 4px}\n.doc-page .cvc-info{width:100%;border-collapse:collapse}\n.doc-page .cvc-info td{padding:1.5px 0;vertical-align:top}\n.doc-page .cvc-info td:first-child{width:27%}\n.doc-page .cvc-info td:nth-child(2){width:3%;text-align:center}\n.doc-page .cvc-table{width:100%;border-collapse:collapse;text-align:center;margin-bottom:2px}\n.doc-page .cvc-table th{background:var(--ac2);border:1px solid #222;padding:3px 6px;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact}\n.doc-page .cvc-table td{border:1px solid #222;padding:3px 6px}\n.doc-page .cvc-table tr{break-inside:avoid}\n.doc-page .cvc-sign{display:flex;justify-content:space-between;align-items:flex-end;margin-top:26px;break-inside:avoid}\n.doc-page .cvc-sigline{border-top:1px solid #222;min-width:170px;text-align:center;padding-top:3px}",
+ "pages": [
+  {
+   "if": "lang==english",
+   "html": "<div class=\"cvc theme-{{theme}}\">\n<div class=\"cvc-head\">\n<div class=\"cvc-head-text\"><div class=\"cvc-h1\">Curriculum Vitae Of</div><div class=\"cvc-name\">{{name}}</div>{{#if headline}}<div class=\"cvc-headline\">{{headline}}</div>{{/if}}\n<div class=\"cvc-contact\">Cell: {{mobile}}{{#if email}} &nbsp;|&nbsp; Email: {{email}}{{/if}}</div></div>\n{{#if show_photo}}<div class=\"cvc-photo\">{{#if photo}}{{photo}}{{else}}<span>Affix<br>passport<br>photo</span>{{/if}}</div>{{/if}}\n</div>\n<div class=\"cvc-bar\">Career Objective</div>\n<p class=\"cvc-p\">{{#if objective}}{{objective}}{{else}}{To build up myself as a challenging and responsible person, utilizing my education and experience, and to show my creativity and integrity while working in a competitive, dynamic and disciplined job environment to enrich my professional skills, competency and expertise.|To work in a dynamic and well-reputed organization where I can apply my education and skills with honesty and sincerity, grow professionally and contribute to the success of the organization.}{{/if}}</p>\n<div class=\"cvc-bar\">Personal Details</div>\n<table class=\"cvc-info\">\n<tr><td>Name</td><td>:</td><td><strong>{{name}}</strong></td></tr>\n<tr><td>Father’s Name</td><td>:</td><td>{{father}}</td></tr>\n<tr><td>Mother’s Name</td><td>:</td><td>{{mother}}</td></tr>\n<tr><td>Date of birth</td><td>:</td><td>{{dob_dmy}}</td></tr>\n{{#if id_no}}<tr><td>{{#if id_type==nid}}National ID No.{{/if}}{{#if id_type==birth}}Birth Certificate No.{{/if}}{{#if id_type==passport}}Passport No.{{/if}}</td><td>:</td><td>{{id_no}}</td></tr>{{/if}}\n<tr><td>Permanent address</td><td>:</td><td>{{perm_address}}</td></tr>\n<tr><td>Present Address</td><td>:</td><td>{{#if same_addr}}{{perm_address}}{{else}}{{pres_address}}{{/if}}</td></tr>\n<tr><td>Religion</td><td>:</td><td>{{religion}}</td></tr>\n<tr><td>Gender</td><td>:</td><td>{{#if gender==male}}Male{{/if}}{{#if gender==female}}Female{{/if}}</td></tr>\n<tr><td>Nationality</td><td>:</td><td>{{nationality}}</td></tr>\n<tr><td>Marital Status</td><td>:</td><td>{{#if marital==unmarried}}Unmarried{{/if}}{{#if marital==divorced}}Divorced{{/if}}{{#if marital==widowed}}Widowed{{/if}}{{#if marital==married}}Married{{#if spouse}} (Spouse Name: {{spouse}}){{/if}}{{/if}}</td></tr>\n{{#if blood}}<tr><td>Blood Group</td><td>:</td><td>{{blood}}</td></tr>{{/if}}\n</table>\n{{#if edu}}<div class=\"cvc-bar\">Education Qualification</div>\n<table class=\"cvc-table\"><thead><tr><th>Exam</th><th>Result</th><th>Passing Year</th><th>Board</th></tr></thead><tbody>\n{{#each edu}}<tr><td>{{exam}}</td><td>{{result}}</td><td>{{year}}</td><td>{{board}}</td></tr>{{/each}}\n</tbody></table>{{/if}}\n{{#if exp}}<div class=\"cvc-bar\">Work Experience</div>\n<table class=\"cvc-table\"><thead><tr><th>Name of Company</th><th>Designation</th><th>Duration</th></tr></thead><tbody>\n{{#each exp}}<tr><td>{{org}}</td><td>{{post}}</td><td>{{duration}}</td></tr>{{/each}}\n</tbody></table>{{else}}{{#if working_text}}<div class=\"cvc-bar\">Working Qualification</div><p class=\"cvc-p\">{{working_text}}</p>{{/if}}{{/if}}\n{{#if skills}}<div class=\"cvc-bar\">Skills &amp; Additional Qualifications</div><p class=\"cvc-p\">{{skills}}</p>{{/if}}\n{{#if reference}}<div class=\"cvc-bar\">Reference</div><p class=\"cvc-p\">{{reference}}</p>{{/if}}\n<div class=\"cvc-bar\">Declarations</div>\n<p class=\"cvc-p\">{I do hereby declare that the above information is true and correct to the best of my knowledge.|I hereby declare that all the information given above is true and complete to the best of my knowledge and belief.}</p>\n<div class=\"cvc-sign\"><div><strong>{{name}}</strong><br>Date: ..................</div><div class=\"cvc-sigline\">Signature</div></div>\n</div>"
+  },
+  {
+   "if": "lang==bangla",
+   "html": "<div class=\"cvc theme-{{theme}}\">\n<div class=\"cvc-head\">\n<div class=\"cvc-head-text\"><div class=\"cvc-h1\">জীবন বৃত্তান্ত</div><div class=\"cvc-name\">{{name}}</div>{{#if headline}}<div class=\"cvc-headline\">{{headline}}</div>{{/if}}\n<div class=\"cvc-contact\">মোবাইল: {{mobile}}{{#if email}} &nbsp;|&nbsp; ইমেইল: {{email}}{{/if}}</div></div>\n{{#if show_photo}}<div class=\"cvc-photo\">{{#if photo}}{{photo}}{{else}}<span>পাসপোর্ট<br>সাইজ<br>ছবি</span>{{/if}}</div>{{/if}}\n</div>\n<div class=\"cvc-bar\">ক্যারিয়ার অবজেক্টিভ</div>\n<p class=\"cvc-p\">{{#if objective}}{{objective}}{{else}}{যেকোনো চ্যালেঞ্জিং ও সম্মানজনক পেশায় নিজেকে যুক্ত করে|একটি সুপ্রতিষ্ঠিত প্রতিষ্ঠানে দায়িত্বশীল পদে কাজ করে} নিজের {শিক্ষা, দক্ষতা ও সততা|মেধা, শ্রম ও একাগ্রতা} প্রমাণের মাধ্যমে প্রতিষ্ঠানের {উন্নয়ন ও সাফল্যে অবদান রাখা|লক্ষ্য অর্জনে সহায়তা করা} আমার মূল লক্ষ্য।{{/if}}</p>\n<div class=\"cvc-bar\">ব্যক্তিগত তথ্য</div>\n<table class=\"cvc-info\">\n<tr><td>নাম</td><td>:</td><td><strong>{{name}}</strong></td></tr>\n<tr><td>পিতার নাম</td><td>:</td><td>{{father}}</td></tr>\n<tr><td>মাতার নাম</td><td>:</td><td>{{mother}}</td></tr>\n<tr><td>জন্ম তারিখ</td><td>:</td><td>{{dob_dmy}}</td></tr>\n{{#if id_no}}<tr><td>{{#if id_type==nid}}জাতীয় পরিচয়পত্র নং{{/if}}{{#if id_type==birth}}জন্ম নিবন্ধন নং{{/if}}{{#if id_type==passport}}পাসপোর্ট নং{{/if}}</td><td>:</td><td>{{id_no}}</td></tr>{{/if}}\n<tr><td>স্থায়ী ঠিকানা</td><td>:</td><td>{{perm_address}}</td></tr>\n<tr><td>বর্তমান ঠিকানা</td><td>:</td><td>{{#if same_addr}}{{perm_address}}{{else}}{{pres_address}}{{/if}}</td></tr>\n<tr><td>ধর্ম</td><td>:</td><td>{{religion}}</td></tr>\n<tr><td>লিঙ্গ</td><td>:</td><td>{{#if gender==male}}পুরুষ{{/if}}{{#if gender==female}}মহিলা{{/if}}</td></tr>\n<tr><td>জাতীয়তা</td><td>:</td><td>{{nationality}}</td></tr>\n<tr><td>বৈবাহিক অবস্থা</td><td>:</td><td>{{#if marital==unmarried}}অবিবাহিত{{/if}}{{#if marital==divorced}}তালাকপ্রাপ্ত{{/if}}{{#if marital==widowed}}বিধবা/বিপত্নীক{{/if}}{{#if marital==married}}বিবাহিত{{#if spouse}} (স্ত্রী/স্বামীর নাম: {{spouse}}){{/if}}{{/if}}</td></tr>\n{{#if blood}}<tr><td>রক্তের গ্রুপ</td><td>:</td><td>{{blood}}</td></tr>{{/if}}\n</table>\n{{#if edu}}<div class=\"cvc-bar\">শিক্ষাগত যোগ্যতা</div>\n<table class=\"cvc-table\"><thead><tr><th>পরীক্ষা</th><th>ফলাফল</th><th>পাসের সাল</th><th>বোর্ড</th></tr></thead><tbody>\n{{#each edu}}<tr><td>{{exam}}</td><td>{{result}}</td><td>{{year}}</td><td>{{board}}</td></tr>{{/each}}\n</tbody></table>{{/if}}\n{{#if exp}}<div class=\"cvc-bar\">কর্ম অভিজ্ঞতা</div>\n<table class=\"cvc-table\"><thead><tr><th>প্রতিষ্ঠানের নাম</th><th>পদবী</th><th>সময়কাল</th></tr></thead><tbody>\n{{#each exp}}<tr><td>{{org}}</td><td>{{post}}</td><td>{{duration}}</td></tr>{{/each}}\n</tbody></table>{{else}}{{#if working_text}}<div class=\"cvc-bar\">কর্ম যোগ্যতা</div><p class=\"cvc-p\">{{working_text}}</p>{{/if}}{{/if}}\n{{#if skills}}<div class=\"cvc-bar\">দক্ষতা ও অতিরিক্ত যোগ্যতা</div><p class=\"cvc-p\">{{skills}}</p>{{/if}}\n{{#if reference}}<div class=\"cvc-bar\">রেফারেন্স</div><p class=\"cvc-p\">{{reference}}</p>{{/if}}\n<div class=\"cvc-bar\">ঘোষণা</div>\n<p class=\"cvc-p\">{আমি এই মর্মে ঘোষণা করিতেছি যে, উপরে প্রদত্ত সকল তথ্য আমার জানামতে সত্য ও সঠিক।|আমি অঙ্গীকার করিতেছি যে, উপরোক্ত সকল তথ্য আমার জ্ঞান ও বিশ্বাস মতে সম্পূর্ণ সত্য ও নির্ভুল।}</p>\n<div class=\"cvc-sign\"><div><strong>{{name}}</strong><br>তারিখ: ..................</div><div class=\"cvc-sigline\">স্বাক্ষর</div></div>\n</div>"
+  }
+ ]
+}

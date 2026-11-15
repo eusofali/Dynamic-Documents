@@ -30,8 +30,13 @@
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
+  function nonBlank(x) { return x !== undefined && x !== null && String(x).trim() !== ''; }
   function isEmpty(v) {
-    if (Array.isArray(v)) return v.length === 0;
+    if (Array.isArray(v)) {
+      return !v.some(function (r) {
+        return r && typeof r === 'object' ? Object.keys(r).some(function (k) { return nonBlank(r[k]); }) : nonBlank(r);
+      });
+    }
     return v === undefined || v === null || String(v).trim() === '' || v === '0';
   }
 
@@ -73,7 +78,9 @@
     var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
     if (!m) return iso || '';
     var d = m[3], mo = +m[2], y = m[1], s;
-    if (long) {
+    if (long === 'dmy') {
+      s = d + ' ' + (bn ? MONTHS_BN : MONTHS_EN)[mo - 1] + ' ' + y;
+    } else if (long) {
       s = (+d) + ' ' + (bn ? MONTHS_BN : MONTHS_EN)[mo - 1] + ', ' + y;
     } else {
       s = d + '/' + m[2] + '/' + y;
@@ -215,7 +222,7 @@
   }
 
   function makeCtx(def, vals, vis) {
-    var bn = def.digits === 'bn';
+    var bn = def.digits === 'bn' || (!!def.digits_if && cond(def.digits_if, function (n) { return vals[n]; }));
     var raw = {}, out = {}, rowsMap = {}, ph = {};
     (def.fields || []).forEach(function (f) {
       if (!vis[f.name]) return;
@@ -247,8 +254,12 @@
         out[f.name] = fmtDate(v, bn, false);
         out[f.name + '_long'] = fmtDate(v, bn, true);
         raw[f.name + '_long'] = out[f.name + '_long'];
+        out[f.name + '_dmy'] = fmtDate(v, bn, 'dmy');
       } else if (f.type === 'textarea') {
         out[f.name] = esc(v).replace(/\r?\n/g, '<br>');
+      } else if (f.type === 'photo') {
+        out[f.name] = /^data:image\/(png|jpe?g|webp);base64,[A-Za-z0-9+\/=]+$/.test(v) ? '<img class="doc-photo" alt="" src="' + v + '">' : '';
+        if (!out[f.name]) raw[f.name] = '';
       } else if (f.type === 'checkbox') {
         out[f.name] = v ? '✔' : '';
       } else {

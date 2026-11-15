@@ -90,7 +90,7 @@ function def_validate($d)
     if (!isset($d['pages']) || !is_array($d['pages']) || !count($d['pages'])) {
         return [null, 'At least one page is required.'];
     }
-    $types = ['text', 'textarea', 'number', 'amount', 'date', 'select', 'checkbox', 'rows'];
+    $types = ['text', 'textarea', 'number', 'amount', 'date', 'select', 'checkbox', 'rows', 'photo'];
     $seen = [];
     foreach ($d['fields'] as $i => $f) {
         $n = $f['name'] ?? '';

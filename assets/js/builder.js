@@ -8,7 +8,7 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var esc = E.esc;
-  var TYPES = ['text', 'textarea', 'number', 'amount', 'date', 'select', 'checkbox', 'rows'];
+  var TYPES = ['text', 'textarea', 'number', 'amount', 'date', 'select', 'checkbox', 'rows', 'photo'];
   var panes = $('#panes'), tab = 'info';
   def.groups = def.groups || []; def.fields = def.fields || []; def.pages = def.pages || []; def.page = def.page || {};
 

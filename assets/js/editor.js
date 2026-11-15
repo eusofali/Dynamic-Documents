@@ -57,6 +57,10 @@
       fc.appendChild(input);
       fc.appendChild(el('label', { 'class': 'form-check-label fw-bold', 'for': 'f_' + f.name }, E.esc(f.label || f.name)));
       wrap.appendChild(fc);
+    } else if (f.type === 'photo') {
+      wrap.appendChild(label);
+      wrap.appendChild(buildPhoto(f));
+      inputs[f.name] = wrap;
     } else if (f.type === 'rows') {
       wrap.appendChild(label);
       wrap.appendChild(buildRows(f));
@@ -87,6 +91,47 @@
     if (f.help) wrap.appendChild(el('div', { 'class': 'form-text' }, E.esc(f.help)));
     inputs[f.name] = inputs[f.name] || input;
     return wrap;
+  }
+
+  /* photo: choose a file, centre-crop to passport ratio, downscale, store as a small JPEG data URL */
+  function buildPhoto(f) {
+    var box = el('div', { 'class': 'd-flex align-items-center gap-3' });
+    var img = el('img', { 'class': 'rounded border bg-white', style: 'width:72px;height:88px;object-fit:cover;display:none', alt: '' });
+    var file = el('input', { type: 'file', accept: 'image/*', 'class': 'form-control form-control-sm', id: 'f_' + f.name });
+    var rm = el('button', { type: 'button', 'class': 'btn btn-sm btn-outline-danger', style: 'display:none' }, '<i class="fas fa-trash"></i>');
+    var col = el('div', { 'class': 'flex-grow-1' });
+    col.appendChild(file); col.appendChild(rm);
+    box.appendChild(img); box.appendChild(col);
+    function show() {
+      var v = values[f.name];
+      img.style.display = v ? '' : 'none'; rm.style.display = v ? '' : 'none';
+      if (v) img.src = v;
+    }
+    file.addEventListener('change', function () {
+      var fl = file.files && file.files[0];
+      if (!fl) return;
+      if (!/^image\//.test(fl.type)) { toast('Please choose an image file'); return; }
+      var fr = new FileReader();
+      fr.onload = function () {
+        var im = new Image();
+        im.onload = function () {
+          var W = 360, H = 440, c = document.createElement('canvas');
+          c.width = W; c.height = H;
+          var ctx = c.getContext('2d'), r = Math.max(W / im.width, H / im.height);
+          var sw = W / r, sh = H / r;
+          ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H);
+          ctx.drawImage(im, (im.width - sw) / 2, (im.height - sh) / 2, sw, sh, 0, 0, W, H);
+          values[f.name] = c.toDataURL('image/jpeg', 0.86);
+          show(); changed(f.name);
+        };
+        im.onerror = function () { toast('Could not read that image'); };
+        im.src = fr.result;
+      };
+      fr.readAsDataURL(fl);
+    });
+    rm.addEventListener('click', function () { values[f.name] = ''; file.value = ''; show(); changed(f.name); });
+    show();
+    return box;
   }
 
   function buildRows(f) {

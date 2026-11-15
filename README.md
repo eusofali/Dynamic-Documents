@@ -3,7 +3,7 @@
 A dynamic, **Bangla-first document builder** for shared hosting (cPanel, no root needed).
 Pick a document, fill in only the fields it needs, watch the document update **live**, then print or save as PDF.
 
-* 8 ready documents: marriage affidavit, name/age correction affidavit, vehicle sale affidavit, land bainanama, loan (হাওলাত/কর্জ) agreement, shop rent agreement, job application, CV / bio-data
+* 9 ready documents: marriage affidavit, name/age correction affidavit, vehicle sale affidavit, land bainanama, loan (হাওলাত/কর্জ) agreement, shop rent agreement, job application, and two CV formats (modern 2-column / classic bio-data) plus the **standard one-page CV with photo upload** (English or বাংলা, 6 colour themes, NID / birth-certificate / passport number, fresher "working qualification" paragraph)
 * **Amounts in words are automatic** (`৩,০০,০০০` → "তিন লক্ষ"), dates and Bangla digits formatted for you, balances auto-calculated
 * Wording variations (spintax) with a **Re-word** button
 * **Admin document builder** – create/edit documents (fields, sections, templates) in the browser with live preview; no code needed
@@ -64,14 +64,14 @@ Each document is one JSON file – see `definitions/*.json` for working examples
 }
 ```
 
-| Field types | `text` `textarea` `number` `amount` `date` `select` `checkbox` `rows` (repeating table) |
+| Field types | `text` `textarea` `number` `amount` `date` `select` `checkbox` `rows` (repeating table) `photo` (upload, auto-cropped to passport ratio) |
 |---|---|
 | Field options | `required` `default` `placeholder` `help` `col` (1–12) `group` `show_if` `calc` `options` `columns` `bn` `suggest` |
 
 Template syntax inside `pages[].html`:
 
 ```
-{{field}}                         escaped value   (amount → {{f}} and {{f_words}};  date → {{f}} and {{f_long}})
+{{field}}                         escaped value   (amount → {{f}} and {{f_words}};  date → {{f}}, {{f_long}} "5 March, 2001" and {{f_dmy}} "05 March 2001")
 {{#if a}}…{{else}}…{{/if}}        conditions: a | !a | a==x | a!=x | a&&b
 {{#each rows}}{{col}}{{@n}}{{/each}}
 {option A|option B}               wording variation (spintax, stable per draft until "Re-word")

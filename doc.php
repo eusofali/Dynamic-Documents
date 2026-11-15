@@ -39,6 +39,7 @@ layout_head($def['title'], ['body' => 'editor-page', 'nav' => false]);
   <a class="btn btn-sm btn-outline-light" href="<?= e(url('')) ?>" title="All documents"><i class="fas fa-arrow-left"></i></a>
   <div class="dd-title text-truncate"><i class="fas <?= e($def['icon'] ?? 'fa-file-alt') ?> me-2"></i><?= e($def['title']) ?></div>
   <div class="ms-auto d-flex gap-1 flex-wrap justify-content-end">
+    <?php if (!empty($def['guide'])): ?><button class="btn btn-sm btn-outline-light" id="btn-guide" title="Show a scan of your pre-printed form behind the text to line things up (screen only)"><i class="fas fa-image"></i> <span class="d-none d-xl-inline">Guide</span></button><input type="file" id="guide-file" accept="image/*" hidden><?php endif; ?>
     <?php if (!empty($def['letterhead'])): ?><button class="btn btn-sm btn-outline-light" id="btn-lh" title="Print with your business letterhead"><i class="fas fa-heading"></i> <span class="d-none d-xl-inline">Letterhead</span></button><?php endif; ?>
     <button class="btn btn-sm btn-outline-light" id="btn-respin" title="Re-generate the wording variations"><i class="fas fa-dice"></i> <span class="d-none d-xl-inline">Re-word</span></button>
     <div class="btn-group btn-group-sm">

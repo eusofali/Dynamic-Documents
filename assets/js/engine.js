@@ -67,11 +67,12 @@
     var n = parseFloat(s);
     return isNaN(n) ? NaN : n;
   }
-  function fmtAmount(v, bn) {
+  function fmtAmount(v, bn, dec, plain) {
     var n = parseNum(v);
     if (isNaN(n)) return '';
-    var s = groupIN(n);
-    if (n % 1 !== 0) s += '.' + String(n.toFixed(2)).split('.')[1];
+    var s = plain ? String(Math.floor(n)) : groupIN(n);
+    if (dec) s += '.' + n.toFixed(dec).split('.')[1];
+    else if (n % 1 !== 0) s += '.' + String(n.toFixed(2)).split('.')[1];
     return bn ? toBn(s) : s;
   }
   function fmtDate(iso, bn, long) {
@@ -231,6 +232,15 @@
   function computeCalc(def, vals) {
     (def.fields || []).forEach(function (f) {
       if (!f.calc) return;
+      if (/^\s*[A-Za-z_]\w*(\s*\+\s*[A-Za-z_]\w*){2,}\s*$/.test(f.calc)) {
+        var sum = 0, any = false;
+        f.calc.split('+').forEach(function (nm) {
+          var x = parseNum(vals[nm.trim()]);
+          if (!isNaN(x)) { sum += x; any = true; }
+        });
+        vals[f.name] = any ? String(sum) : '';
+        return;
+      }
       var m = /^\s*([A-Za-z_]\w*)\s*([-+*])\s*([A-Za-z_]\w*)\s*(?:\+\s*(\d+))?\s*$/.exec(f.calc);
       if (!m) return;
       var iso = /^\d{4}-\d{2}-\d{2}$/, r;
@@ -296,7 +306,7 @@
       v = v == null ? '' : String(v);
       raw[f.name] = v;
       if (f.type === 'amount') {
-        out[f.name] = fmtAmount(v, bn);
+        out[f.name] = fmtAmount(v, bn, f.decimals, f.plain);
         var n = parseNum(v);
         out[f.name + '_words'] = isNaN(n) ? '' : words(n);
         raw[f.name + '_words'] = out[f.name + '_words'];
@@ -389,16 +399,24 @@
   }
 
   /* ---------- page / render ---------- */
-  function pageCss(def) {
+  function topMargin(def, vals) {
+    var p = def.page || {};
+    if (p.marginTopField && vals) {
+      var n = parseNum(vals[p.marginTopField]);
+      if (!isNaN(n) && n >= 0 && n <= 8) return n + (p.marginTopUnit || 'in');
+    }
+    return p.marginTop == null ? (p.margin == null ? '1in' : p.margin) : p.marginTop;
+  }
+  function pageCss(def, vals) {
     var p = def.page || {}, s = SIZES[p.size || 'a4'] || SIZES.a4;
     var m = p.margin == null ? '1in' : p.margin;
-    var mt = p.marginTop == null ? m : p.marginTop;
+    var mt = topMargin(def, vals);
     return '@page{size:' + s[2] + ';margin:' + mt + ' ' + m + ' ' + m + ' ' + m + '}';
   }
-  function pageVars(def) {
+  function pageVars(def, vals) {
     var p = def.page || {}, s = SIZES[p.size || 'a4'] || SIZES.a4;
     var m = p.margin == null ? '1in' : p.margin;
-    var mt = p.marginTop == null ? m : p.marginTop;
+    var mt = topMargin(def, vals);
     return '--pw:' + s[0] + ';--ph:' + s[1] + ';--pt:' + mt + ';--pm:' + m + ';--fs:' + (p.fontSize || 16) + 'px;--lh:' + (p.lineHeight || 1.5);
   }
 
@@ -433,7 +451,7 @@
       if (f.type === 'checkbox') return;
       if (isEmpty(v) && v !== '0') missing.push(f.name);
     });
-    return { html: html, css: pageCss(def) + (def.css || ''), vars: pageVars(def), missing: missing, visible: vm };
+    return { html: html, css: pageCss(def, vals) + (def.css || ''), vars: pageVars(def, vals), missing: missing, visible: vm };
   }
 
   function sampleData(def) {

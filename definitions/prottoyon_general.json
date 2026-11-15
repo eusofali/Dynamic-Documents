@@ -1,0 +1,108 @@
+{
+ "title": "প্রত্যয়ন পত্র – নিজের লেখা বক্তব্য",
+ "title_en": "Testimonial (free text)",
+ "description": "যেকোনো বিষয়ে প্রত্যয়নের বক্তব্য নিজে লিখুন; ৩ ইঞ্চি উপরের মার্জিন ও স্বাক্ষরকারীর নাম স্বয়ংক্রিয়।",
+ "groups": [
+  {
+   "id": "g_set",
+   "title": "ধরন ও প্যাডের মাপ",
+   "icon": "fa-sliders-h"
+  },
+  {
+   "id": "g_txt",
+   "title": "বক্তব্য",
+   "icon": "fa-pen"
+  },
+  {
+   "id": "g_sign",
+   "title": "স্বাক্ষরকারীর নাম (ঐচ্ছিক – প্যাডে ছাপা না থাকলে)",
+   "icon": "fa-signature"
+  }
+ ],
+ "fields": [
+  {
+   "name": "top_space",
+   "label": "উপরের মার্জিন (ইঞ্চি)",
+   "type": "number",
+   "col": 4,
+   "group": "g_set",
+   "required": true,
+   "sticky": true,
+   "default": "3",
+   "help": "প্যাডের মাপ অনুযায়ী বদলান (যেমন ২.৫ বা ৩.২)। মনে থাকবে।"
+  },
+  {
+   "name": "heading",
+   "label": "শিরোনাম",
+   "type": "text",
+   "col": 8,
+   "group": "g_set",
+   "default": "প্রত্যয়ন পত্র"
+  },
+  {
+   "name": "text",
+   "label": "প্রত্যয়নের বক্তব্য",
+   "type": "textarea",
+   "col": 12,
+   "group": "g_txt",
+   "required": true,
+   "rows": 8,
+   "placeholder": "এই মর্মে প্রত্যয়ন করা যাচ্ছে যে, …"
+  },
+  {
+   "name": "show_sign",
+   "label": "নিচে স্বাক্ষরকারীর নাম ও পদবী ছাপুন",
+   "type": "checkbox",
+   "col": 12,
+   "group": "g_sign"
+  },
+  {
+   "name": "sign_name",
+   "label": "নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_sign",
+   "show_if": "show_sign"
+  },
+  {
+   "name": "sign_title",
+   "label": "পদবী",
+   "type": "text",
+   "col": 4,
+   "group": "g_sign",
+   "show_if": "show_sign",
+   "default": "ওয়ার্ড কাউন্সিলর"
+  },
+  {
+   "name": "sign_office",
+   "label": "কার্যালয়",
+   "type": "text",
+   "col": 4,
+   "group": "g_sign",
+   "show_if": "show_sign",
+   "default": "০৮ নং ওয়ার্ড, নওগাঁ পৌরসভা"
+  }
+ ],
+ "pages": [
+  {
+   "html": "<div class=\"pt-title\">{{heading}}</div>\n<div class=\"pt-body\"><p>{{text}}</p></div>\n{{#if show_sign}}<div class=\"pt-sign\">_______________________<br><strong>{{sign_name}}</strong><br>{{sign_title}}<br>{{sign_office}}</div>{{/if}}"
+  }
+ ],
+ "id": "prottoyon_general",
+ "version": 1,
+ "category": "প্রত্যয়ন / Testimonials",
+ "icon": "fa-stamp",
+ "page": {
+  "size": "a4",
+  "marginTop": "3in",
+  "marginTopField": "top_space",
+  "marginTopUnit": "in",
+  "margin": "0.95in",
+  "fontSize": 18,
+  "lineHeight": 1.85,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "notice": "এটি শুধু প্রত্যয়নের লেখা (টেক্সট) তৈরি করে। সীল, স্বাক্ষর, লোগো বা লেটারহেড ছাপা হয় না – সেগুলো অনুমোদিত কর্মকর্তার প্যাড/স্বাক্ষরে থাকবে। প্যাডের উপরের ফাঁকা জায়গা “উপরের মার্জিন” দিয়ে ঠিক করুন।",
+ "css": ".doc-page .pt-title{text-align:center;font-weight:700;font-size:1.3em;text-decoration:underline;text-underline-offset:5px;margin:0 0 1em}.doc-page .pt-body p{text-indent:2.6em;margin-bottom:.8em;text-align:justify}.doc-page .pt-sign{margin:64px 0 0 auto;width:52%;text-align:center;line-height:1.35;break-inside:avoid}"
+}

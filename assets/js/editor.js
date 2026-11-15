@@ -31,6 +31,21 @@
       if (saved) { merge(saved.values); seed = saved.seed || seed; }
     } catch (e) { /* storage unavailable */ }
   }
+  var STICKY_KEY = 'dd:sticky:' + def.id;
+  function loadSticky() {
+    try {
+      var st = JSON.parse(localStorage.getItem(STICKY_KEY) || 'null');
+      if (st) (def.fields || []).forEach(function (f) { if (f.sticky && st[f.name] !== undefined) values[f.name] = st[f.name]; });
+    } catch (e) { /* ignore */ }
+  }
+  function saveSticky() {
+    try {
+      var st = {};
+      (def.fields || []).forEach(function (f) { if (f.sticky) st[f.name] = values[f.name]; });
+      localStorage.setItem(STICKY_KEY, JSON.stringify(st));
+    } catch (e) { /* ignore */ }
+  }
+  if (!DD.draft) loadSticky();
   E.computeCalc(def, values);
 
   /* ---------- form building ---------- */
@@ -238,6 +253,7 @@
 
   function buildForm() {
     form.innerHTML = '';
+    if (def.notice) form.insertAdjacentHTML('afterbegin', '<div class="alert alert-warning small"><i class="fas fa-info-circle"></i> ' + E.esc(def.notice) + '</div>');
     var groups = def.groups && def.groups.length ? def.groups : [{ id: '_', title: def.title }];
     groups.forEach(function (g) {
       var card = el('div', { 'class': 'card', 'data-group': g.id });
@@ -254,6 +270,8 @@
   /* ---------- reacting to changes ---------- */
   var timer = null;
   function changed(name) {
+    var cf = (def.fields || []).filter(function (x) { return x.name === name; })[0];
+    if (cf && cf.sticky) saveSticky();
     // suggested defaults that depend on this field (e.g. fuel type by vehicle type)
     (def.fields || []).forEach(function (f) {
       if (!f.suggest || !f.suggest[name]) return;
@@ -299,6 +317,7 @@
     prev.innerHTML = r.html;
     $('#page-style').textContent = r.css.split('}')[0] + '}';
     $('#def-style').textContent = r.css.slice(r.css.indexOf('}') + 1);
+    applyGuide();
     fit();
     $$('.is-missing', form).forEach(function (n) { n.classList.remove('is-missing'); });
   }
@@ -355,7 +374,7 @@
   $('#btn-fs-dec').addEventListener('click', function () { fs = Math.max(10, fs - 1); update(); });
   $('#btn-reset').addEventListener('click', function () {
     if (!confirm('Clear all entries in this form?')) return;
-    values = E.defaults(def); draftId = 0;
+    values = E.defaults(def); draftId = 0; loadSticky();
     try { localStorage.removeItem(LS_KEY); } catch (e) { /* ignore */ }
     buildForm(); update();
   });
@@ -385,6 +404,51 @@
     zoomManual = Math.max(0.3, Math.min(2, cur + (e.deltaY < 0 ? 0.05 : -0.05)));
     fit();
   }, { passive: false });
+
+  /* guide image: scan of the pre-printed form, shown behind the text on screen only (never printed) */
+  var GUIDE_KEY = 'dd:guide:' + def.id;
+  function applyGuide() {
+    var prev = $('#preview'), g = null;
+    try { g = localStorage.getItem(GUIDE_KEY); } catch (e) { /* ignore */ }
+    if (g && /^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(g)) {
+      prev.style.setProperty('--guide', 'url("' + g + '")');
+      prev.classList.add('has-guide');
+    } else {
+      prev.style.removeProperty('--guide');
+      prev.classList.remove('has-guide');
+    }
+  }
+  var guideBtn = $('#btn-guide'), guideFile = $('#guide-file');
+  if (guideBtn && guideFile) {
+    guideBtn.addEventListener('click', function () {
+      var has = false;
+      try { has = !!localStorage.getItem(GUIDE_KEY); } catch (e) { /* ignore */ }
+      if (has && confirm('Remove the guide image?\n\nOK = remove it   |   Cancel = choose a different image')) {
+        try { localStorage.removeItem(GUIDE_KEY); } catch (e) { /* ignore */ }
+        applyGuide(); return;
+      }
+      guideFile.click();
+    });
+    guideFile.addEventListener('change', function () {
+      var fl = guideFile.files && guideFile.files[0];
+      if (!fl) return;
+      var fr = new FileReader();
+      fr.onload = function () {
+        var im = new Image();
+        im.onload = function () {
+          var W = 1400, r = Math.min(1, W / im.width), c = document.createElement('canvas');
+          c.width = Math.round(im.width * r); c.height = Math.round(im.height * r);
+          c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+          try { localStorage.setItem(GUIDE_KEY, c.toDataURL('image/jpeg', 0.8)); toast('Guide image set (stays on this computer, never printed)'); }
+          catch (e) { toast('Image too large for browser storage'); }
+          applyGuide();
+        };
+        im.src = fr.result;
+      };
+      fr.readAsDataURL(fl);
+      guideFile.value = '';
+    });
+  }
 
   /* letterhead toggle */
   var lhBtn = $('#btn-lh');

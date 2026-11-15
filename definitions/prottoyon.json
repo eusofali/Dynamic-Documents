@@ -1,0 +1,379 @@
+{
+ "title": "প্রত্যয়ন পত্র (ওয়ার্ড কাউন্সিলর / চেয়ারম্যান)",
+ "title_en": "Testimonial (Prottoyon Potro)",
+ "description": "স্থায়ী বাসিন্দা ও চরিত্র, ভিন্ন নামে পরিচিত, নতুন ভোটার সুপারিশ, শিক্ষার্থী প্রত্যয়ন – ৩ ইঞ্চি উপরের মার্জিনসহ A4 প্যাডে ছাপার জন্য।",
+ "groups": [
+  {
+   "id": "g_set",
+   "title": "ধরন ও প্যাডের মাপ",
+   "icon": "fa-sliders-h"
+  },
+  {
+   "id": "g_who",
+   "title": "ব্যক্তির তথ্য",
+   "icon": "fa-user"
+  },
+  {
+   "id": "g_addr",
+   "title": "ঠিকানা",
+   "icon": "fa-map-marker-alt"
+  },
+  {
+   "id": "g_kind",
+   "title": "প্রত্যয়নের বিশেষ তথ্য",
+   "icon": "fa-clipboard-check"
+  },
+  {
+   "id": "g_txt",
+   "title": "যে লাইনগুলো থাকবে",
+   "icon": "fa-check-square"
+  },
+  {
+   "id": "g_sign",
+   "title": "স্বাক্ষরকারীর নাম (ঐচ্ছিক – প্যাডে ছাপা না থাকলে)",
+   "icon": "fa-signature"
+  }
+ ],
+ "fields": [
+  {
+   "name": "kind",
+   "label": "প্রত্যয়নের ধরন",
+   "type": "select",
+   "col": 8,
+   "group": "g_set",
+   "options": [
+    {
+     "value": "resident",
+     "label": "স্থায়ী বাসিন্দা ও চরিত্র সনদ"
+    },
+    {
+     "value": "name_variant",
+     "label": "একই ব্যক্তি – ভিন্ন নামে পরিচিত"
+    },
+    {
+     "value": "non_voter",
+     "label": "ভোটার নন – নতুন ভোটার নিবন্ধনের সুপারিশ"
+    },
+    {
+     "value": "student",
+     "label": "শিক্ষার্থী প্রত্যয়ন (স্কুল/কলেজ)"
+    }
+   ],
+   "default": "resident"
+  },
+  {
+   "name": "top_space",
+   "label": "উপরের মার্জিন (ইঞ্চি)",
+   "type": "number",
+   "col": 4,
+   "group": "g_set",
+   "required": true,
+   "sticky": true,
+   "default": "3",
+   "help": "প্যাডের মাপ অনুযায়ী বদলান (যেমন ২.৫ বা ৩.২)। মনে থাকবে।"
+  },
+  {
+   "name": "name",
+   "label": "নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_who",
+   "required": true
+  },
+  {
+   "name": "rel",
+   "label": "সম্পর্কের ধরন",
+   "type": "select",
+   "col": 6,
+   "group": "g_who",
+   "show_if": "kind!=student",
+   "options": [
+    {
+     "value": "parents",
+     "label": "পিতা ও মাতার নাম দেখান"
+    },
+    {
+     "value": "husband",
+     "label": "বিবাহিতা নারী – স্বামীর নামও দেখান"
+    }
+   ],
+   "default": "parents"
+  },
+  {
+   "name": "spouse",
+   "label": "স্বামীর নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_who",
+   "show_if": "rel==husband&&kind!=student",
+   "required": true
+  },
+  {
+   "name": "father",
+   "label": "পিতার নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_who",
+   "required": true
+  },
+  {
+   "name": "mother",
+   "label": "মাতার নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_who",
+   "required": true
+  },
+  {
+   "name": "holding",
+   "label": "হোল্ডিং নং (থাকলে)",
+   "type": "text",
+   "col": 4,
+   "group": "g_who",
+   "show_if": "kind!=student",
+   "bn": true
+  },
+  {
+   "name": "nid",
+   "label": "জাতীয় পরিচয়পত্র নং",
+   "type": "text",
+   "col": 4,
+   "group": "g_who",
+   "show_if": "kind!=student",
+   "bn": true
+  },
+  {
+   "name": "village",
+   "label": "গ্রাম / মহল্লা",
+   "type": "text",
+   "col": 6,
+   "group": "g_addr",
+   "required": true
+  },
+  {
+   "name": "po",
+   "label": "ডাকঘর",
+   "type": "text",
+   "col": 6,
+   "group": "g_addr",
+   "required": true,
+   "default": "নওগাঁ-৬৫০০"
+  },
+  {
+   "name": "upazila",
+   "label": "উপজেলা",
+   "type": "text",
+   "col": 4,
+   "group": "g_addr",
+   "required": true,
+   "default": "নওগাঁ সদর"
+  },
+  {
+   "name": "local_type",
+   "label": "পৌরসভা / ইউনিয়ন",
+   "type": "select",
+   "col": 4,
+   "group": "g_addr",
+   "options": [
+    {
+     "value": "pourashava",
+     "label": "পৌরসভা"
+    },
+    {
+     "value": "union",
+     "label": "ইউনিয়ন"
+    }
+   ],
+   "default": "pourashava"
+  },
+  {
+   "name": "local_name",
+   "label": "পৌরসভা / ইউনিয়নের নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_addr",
+   "required": true,
+   "default": "নওগাঁ"
+  },
+  {
+   "name": "district",
+   "label": "জেলা",
+   "type": "text",
+   "col": 4,
+   "group": "g_addr",
+   "required": true,
+   "default": "নওগাঁ"
+  },
+  {
+   "name": "ward",
+   "label": "ওয়ার্ড নং",
+   "type": "text",
+   "col": 4,
+   "group": "g_addr",
+   "show_if": "kind!=student",
+   "default": "০৮"
+  },
+  {
+   "name": "alias",
+   "label": "যে নামেও পরিচিত",
+   "type": "text",
+   "col": 6,
+   "group": "g_kind",
+   "show_if": "kind==name_variant",
+   "required": true
+  },
+  {
+   "name": "dob",
+   "label": "জন্ম তারিখ (জাতীয় পরিচয়পত্র অনুযায়ী)",
+   "type": "date",
+   "col": 6,
+   "group": "g_kind",
+   "show_if": "kind==name_variant"
+  },
+  {
+   "name": "school",
+   "label": "বিদ্যালয়ের নাম (ফাঁকা = “অত্র বিদ্যালয়”)",
+   "type": "text",
+   "col": 6,
+   "group": "g_kind",
+   "show_if": "kind==student"
+  },
+  {
+   "name": "class",
+   "label": "শ্রেণি",
+   "type": "text",
+   "col": 3,
+   "group": "g_kind",
+   "show_if": "kind==student",
+   "required": true,
+   "bn": true
+  },
+  {
+   "name": "roll",
+   "label": "রোল",
+   "type": "text",
+   "col": 3,
+   "group": "g_kind",
+   "show_if": "kind==student",
+   "bn": true
+  },
+  {
+   "name": "status",
+   "label": "বর্তমান অবস্থা",
+   "type": "select",
+   "col": 6,
+   "group": "g_kind",
+   "show_if": "kind==student",
+   "options": [
+    {
+     "value": "now",
+     "label": "অধ্যয়নরত আছে"
+    },
+    {
+     "value": "past",
+     "label": "অধ্যয়নরত ছিল"
+    }
+   ],
+   "default": "now"
+  },
+  {
+   "name": "chk_rules",
+   "label": "বিদ্যালয়ের নিয়ম-নীতি অমান্য করে নাই",
+   "type": "checkbox",
+   "col": 6,
+   "group": "g_kind",
+   "show_if": "kind==student",
+   "default": true
+  },
+  {
+   "name": "chk_char",
+   "label": "স্বভাব চরিত্র ভালো",
+   "type": "checkbox",
+   "col": 4,
+   "group": "g_txt",
+   "show_if": "kind!=name_variant&&kind!=non_voter",
+   "default": true
+  },
+  {
+   "name": "chk_anti",
+   "label": "সমাজ/রাষ্ট্রবিরোধী কাজে জড়িত নয়",
+   "type": "checkbox",
+   "col": 4,
+   "group": "g_txt",
+   "show_if": "kind!=name_variant",
+   "default": true
+  },
+  {
+   "name": "chk_know",
+   "label": "আমি তাকে চিনি ও জানি",
+   "type": "checkbox",
+   "col": 4,
+   "group": "g_txt",
+   "show_if": "kind!=student",
+   "default": true
+  },
+  {
+   "name": "wish",
+   "label": "ভবিষ্যৎ / সার্বিক কল্যাণ কামনা",
+   "type": "checkbox",
+   "col": 4,
+   "group": "g_txt",
+   "default": true
+  },
+  {
+   "name": "show_sign",
+   "label": "নিচে স্বাক্ষরকারীর নাম ও পদবী ছাপুন",
+   "type": "checkbox",
+   "col": 12,
+   "group": "g_sign"
+  },
+  {
+   "name": "sign_name",
+   "label": "নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_sign",
+   "show_if": "show_sign"
+  },
+  {
+   "name": "sign_title",
+   "label": "পদবী",
+   "type": "text",
+   "col": 4,
+   "group": "g_sign",
+   "show_if": "show_sign",
+   "default": "ওয়ার্ড কাউন্সিলর"
+  },
+  {
+   "name": "sign_office",
+   "label": "কার্যালয়",
+   "type": "text",
+   "col": 4,
+   "group": "g_sign",
+   "show_if": "show_sign",
+   "default": "০৮ নং ওয়ার্ড, নওগাঁ পৌরসভা"
+  }
+ ],
+ "pages": [
+  {
+   "html": "<div class=\"pt-title\">প্রত্যয়ন পত্র</div>\n<div class=\"pt-body\">\n{{#if kind==resident}}<p>এই মর্মে প্রত্যয়ন করা যাচ্ছে যে, <strong>{{name}}</strong>, {{#if rel==husband}}স্বামী- {{spouse}}, {{/if}}পিতা- {{father}}, মাতা- {{mother}}, {{#if holding}}হোল্ডিং নং- {{holding}}, {{/if}}গ্রাম- {{village}}, ডাকঘর- {{po}}, উপজেলা- {{upazila}}, {{#if local_type==union}}ইউনিয়ন- {{local_name}}{{else}}পৌরসভা- {{local_name}}{{/if}}, জেলা- {{district}}। সে {{#if local_type==union}}{{local_name}} ইউনিয়নের{{else}}{{local_name}} পৌরসভার{{/if}}{{#if ward}} {{ward}} নং ওয়ার্ডের{{/if}} একজন স্থায়ী বাসিন্দা।{{#if nid}} তার জাতীয় পরিচয়পত্র নং- {{nid}}।{{/if}}{{#if chk_char}} তার স্বভাব চরিত্র ভালো।{{/if}}{{#if chk_anti}} আমার জানামতে সে কোন সমাজবিরোধী বা রাষ্ট্রবিরোধী কাজের সহিত জড়িত নেই।{{/if}}{{#if chk_know}} আমি তাকে চিনি ও জানি।{{/if}}</p>{{/if}}\n{{#if kind==name_variant}}<p>এই মর্মে প্রত্যয়ন করা যাচ্ছে যে, <strong>{{name}}</strong>, {{#if rel==husband}}স্বামী- {{spouse}}, {{/if}}পিতা- {{father}}, মাতা- {{mother}}, {{#if holding}}হোল্ডিং নং- {{holding}}, {{/if}}গ্রাম- {{village}}, ডাকঘর- {{po}}, উপজেলা- {{upazila}}, {{#if local_type==union}}ইউনিয়ন- {{local_name}}{{else}}পৌরসভা- {{local_name}}{{/if}}, জেলা- {{district}}।{{#if dob}} তার জাতীয় পরিচয়পত্র অনুযায়ী জন্ম তারিখ- {{dob}} ইং{{#if nid}} এবং জাতীয় পরিচয়পত্র নং- {{nid}}{{/if}}।{{else}}{{#if nid}} তার জাতীয় পরিচয়পত্র নং- {{nid}}।{{/if}}{{/if}} সে <strong>{{alias}}</strong> নামেও পরিচিত, অর্থাৎ একই ব্যক্তি <strong>{{name}}</strong> ও <strong>{{alias}}</strong> এই দুই নামেই পরিচিত।{{#if chk_anti}} আমার জানামতে সে কোন সমাজবিরোধী বা রাষ্ট্রবিরোধী কাজের সহিত জড়িত নেই।{{/if}}{{#if chk_know}} আমি তাকে চিনি ও জানি।{{/if}}</p>{{/if}}\n{{#if kind==non_voter}}<p>এই মর্মে প্রত্যয়ন করা যাচ্ছে যে, <strong>{{name}}</strong>, {{#if rel==husband}}স্বামী- {{spouse}}, {{/if}}পিতা- {{father}}, মাতা- {{mother}}, {{#if holding}}হোল্ডিং নং- {{holding}}, {{/if}}গ্রাম- {{village}}, ডাকঘর- {{po}}, উপজেলা- {{upazila}}, {{#if local_type==union}}ইউনিয়ন- {{local_name}}{{else}}পৌরসভা- {{local_name}}{{/if}}, জেলা- {{district}}। সে {{#if local_type==union}}{{local_name}} ইউনিয়নের{{else}}{{local_name}} পৌরসভার{{/if}}{{#if ward}} {{ward}} নং ওয়ার্ডের{{/if}} একজন স্থায়ী বাসিন্দা।{{#if nid}} তার জাতীয় পরিচয়পত্র নং- {{nid}}।{{/if}}{{#if chk_anti}} আমার জানামতে সে কোন সমাজবিরোধী বা রাষ্ট্রবিরোধী কাজের সহিত জড়িত নেই।{{/if}}{{#if chk_know}} আমি তাকে চিনি ও জানি।{{/if}} সে পূর্বে কোন ভোটার নিবন্ধন করে নাই বা হয় নাই। তাকে নতুন ভোটার নিবন্ধন করার জন্য সুপারিশ করছি।</p>{{/if}}\n{{#if kind==student}}<p>এই মর্মে প্রত্যয়ন প্রদান করা যাচ্ছে যে, <strong>{{name}}</strong>, পিতা- {{father}}, মাতা- {{mother}}, গ্রাম- {{village}}, ডাকঘর- {{po}}, উপজেলা- {{upazila}}, {{#if local_type==union}}ইউনিয়ন- {{local_name}}{{else}}পৌরসভা- {{local_name}}{{/if}}, জেলা- {{district}}। সে {{#if school}}{{school}}-এর{{else}}অত্র বিদ্যালয়ের{{/if}} {{class}} শ্রেণিতে {{#if status==past}}অধ্যয়নরত ছিল{{else}}অধ্যয়নরত আছে{{/if}}।{{#if roll}} তার শ্রেণি রোল- {{roll}}।{{/if}}{{#if chk_rules}} সে অধ্যয়নরত অবস্থায় বিদ্যালয়ের কোন নিয়ম-নীতি অমান্য করে নাই{{#if chk_anti}} এবং রাষ্ট্রবিরোধী কোন কার্যকলাপের সঙ্গে জড়িত নয়{{/if}}।{{else}}{{#if chk_anti}} সে রাষ্ট্রবিরোধী কোন কার্যকলাপের সঙ্গে জড়িত নয়।{{/if}}{{/if}}</p>\n{{#if chk_char}}<p>আমার জানা মতে তার স্বভাব চরিত্র ভালো।</p>{{/if}}{{/if}}\n{{#if wish}}<p>{{#if kind==student}}আমি তার সার্বিক মঙ্গল কামনা {করি|করছি}।{{else}}আমি তার ভবিষ্যৎ জীবনের সার্বিক সাফল্য কামনা {করছি|করি}।{{/if}}</p>{{/if}}\n</div>\n{{#if show_sign}}<div class=\"pt-sign\">_______________________<br><strong>{{sign_name}}</strong><br>{{sign_title}}<br>{{sign_office}}</div>{{/if}}"
+  }
+ ],
+ "id": "prottoyon",
+ "version": 1,
+ "category": "প্রত্যয়ন / Testimonials",
+ "icon": "fa-stamp",
+ "page": {
+  "size": "a4",
+  "marginTop": "3in",
+  "marginTopField": "top_space",
+  "marginTopUnit": "in",
+  "margin": "0.95in",
+  "fontSize": 18,
+  "lineHeight": 1.85,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "notice": "এটি শুধু প্রত্যয়নের লেখা (টেক্সট) তৈরি করে। সীল, স্বাক্ষর, লোগো বা লেটারহেড ছাপা হয় না – সেগুলো অনুমোদিত কর্মকর্তার প্যাড/স্বাক্ষরে থাকবে। প্যাডের উপরের ফাঁকা জায়গা “উপরের মার্জিন” দিয়ে ঠিক করুন।",
+ "css": ".doc-page .pt-title{text-align:center;font-weight:700;font-size:1.3em;text-decoration:underline;text-underline-offset:5px;margin:0 0 1em}.doc-page .pt-body p{text-indent:2.6em;margin-bottom:.8em;text-align:justify}.doc-page .pt-sign{margin:64px 0 0 auto;width:52%;text-align:center;line-height:1.35;break-inside:avoid}"
+}

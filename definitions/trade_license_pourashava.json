@@ -1,0 +1,397 @@
+{
+ "id": "trade_license_pourashava",
+ "version": 1,
+ "title": "ট্রেড/প্রফেশন লাইসেন্স – পৌরসভা ফর্মে ছাপা",
+ "title_en": "Trade/Profession Licence – print on Pourashava pre-printed form",
+ "category": "ফর্ম প্রিন্ট / Pre-printed forms",
+ "icon": "fa-id-card",
+ "description": "পৌরসভার প্রি-প্রিন্টেড ট্রেড/প্রফেশন লাইসেন্স কাগজে তথ্য ও আদায়ের হিসাব নির্ভুল জায়গায় ছাপা (সীল/স্বাক্ষর/QR ছাপা হয় না)।",
+ "notice": "শুধু সরকার/পৌরসভা/ইউনিয়ন পরিষদের অনুমোদিত প্রি-প্রিন্টেড লাইসেন্স কাগজে তথ্য ছাপার জন্য। এই টুল সীল, স্বাক্ষর, লোগো বা QR কোড তৈরি করে না। লাইসেন্স নম্বর, ফি ও মেয়াদ কর্তৃপক্ষের রেকর্ড অনুযায়ী হুবহু বসাতে হবে। প্রথমে সাদা কাগজে প্রিন্ট করে প্রি-প্রিন্টেড কাগজের সাথে মিলিয়ে নিন (উপরের “Guide” বাটনে ফর্মের স্ক্যান দিলে পর্দায় মিলিয়ে দেখা যায়; “মিলানোর সমন্বয়” দিয়ে সরান – মনে থাকবে)।",
+ "guide": true,
+ "page": {
+  "size": "a4",
+  "marginTop": "0",
+  "margin": "0",
+  "fontSize": 16,
+  "lineHeight": 1.2,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "groups": [
+  {
+   "id": "g_cal",
+   "title": "মিলানোর সমন্বয় (প্রিন্টার/কাগজ অনুযায়ী একবার ঠিক করুন)",
+   "icon": "fa-arrows-alt"
+  },
+  {
+   "id": "g_top",
+   "title": "লাইসেন্সের শীর্ষ তথ্য",
+   "icon": "fa-hashtag"
+  },
+  {
+   "id": "g_biz",
+   "title": "প্রতিষ্ঠান ও মালিক",
+   "icon": "fa-store"
+  },
+  {
+   "id": "g_fee1",
+   "title": "আদায়ের বিবরণ – বাম সারণি",
+   "icon": "fa-coins"
+  },
+  {
+   "id": "g_fee2",
+   "title": "আদায়ের বিবরণ – ডান সারণি (ধরন ক)",
+   "icon": "fa-coins",
+   "show_if": "layout==two"
+  }
+ ],
+ "fields": [
+  {
+   "name": "cal_x",
+   "label": "ডানে (+) / বামে (−) সরান – মিমি",
+   "type": "number",
+   "col": 6,
+   "group": "g_cal",
+   "sticky": true,
+   "default": "0"
+  },
+  {
+   "name": "cal_y",
+   "label": "নিচে (+) / উপরে (−) সরান – মিমি",
+   "type": "number",
+   "col": 6,
+   "group": "g_cal",
+   "sticky": true,
+   "default": "0"
+  },
+  {
+   "name": "layout",
+   "label": "কাগজের ধরন (আপনার প্রি-প্রিন্টেড ফর্ম যেটার মতো)",
+   "type": "select",
+   "col": 12,
+   "group": "g_top",
+   "options": [
+    {
+     "value": "two",
+     "label": "ধরন ক – আদায়ের দুইটি সারণি (বাম: ফি, ডান: হাল সারচার্জ/ভ্যাট/আয়কর/আবেদন ফি)"
+    },
+    {
+     "value": "one",
+     "label": "ধরন খ – আদায়ের একটি সারণি (শুধু ফি, বকেয়া, সারচার্জ, মোট)"
+    }
+   ],
+   "default": "two"
+  },
+  {
+   "name": "lic_no",
+   "label": "লাইসেন্স নং",
+   "type": "text",
+   "col": 4,
+   "group": "g_top",
+   "bn": true
+  },
+  {
+   "name": "lic_id",
+   "label": "লাইসেন্স আইডি",
+   "type": "text",
+   "col": 4,
+   "group": "g_top",
+   "bn": true
+  },
+  {
+   "name": "ward",
+   "label": "ওয়ার্ড নং",
+   "type": "text",
+   "col": 4,
+   "group": "g_top",
+   "bn": true
+  },
+  {
+   "name": "circle",
+   "label": "সার্কেল / রাস্তা / মহল্লা",
+   "type": "text",
+   "col": 6,
+   "group": "g_top"
+  },
+  {
+   "name": "issue_date",
+   "label": "লাইসেন্স ইস্যুর তারিখ",
+   "type": "date",
+   "col": 3,
+   "group": "g_top",
+   "default": "today"
+  },
+  {
+   "name": "renew_date",
+   "label": "নবায়নের তারিখ",
+   "type": "date",
+   "col": 3,
+   "group": "g_top"
+  },
+  {
+   "name": "fy",
+   "label": "নবায়নের অর্থ বছর",
+   "type": "text",
+   "col": 4,
+   "group": "g_top",
+   "placeholder": "২০২৬-২০২৭",
+   "bn": true
+  },
+  {
+   "name": "valid_year",
+   "label": "মেয়াদ (… ইং সনের ৩০ জুন পর্যন্ত) – সাল",
+   "type": "text",
+   "col": 4,
+   "group": "g_top",
+   "bn": true
+  },
+  {
+   "name": "photo",
+   "label": "মালিকের ছবি (ছবির ঘরে ছাপা হবে)",
+   "type": "photo",
+   "col": 12,
+   "group": "g_top"
+  },
+  {
+   "name": "biz_name",
+   "label": "১। ব্যবসা প্রতিষ্ঠানের নাম",
+   "type": "text",
+   "col": 12,
+   "group": "g_biz",
+   "required": true
+  },
+  {
+   "name": "biz_type",
+   "label": "২। ব্যবসার ধরন",
+   "type": "text",
+   "col": 12,
+   "group": "g_biz",
+   "required": true
+  },
+  {
+   "name": "owner",
+   "label": "৩। মালিকের নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_biz",
+   "required": true
+  },
+  {
+   "name": "father",
+   "label": "৪। পিতা/স্বামীর নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_biz",
+   "required": true
+  },
+  {
+   "name": "mother",
+   "label": "৫। মাতার নাম",
+   "type": "text",
+   "col": 4,
+   "group": "g_biz",
+   "required": true
+  },
+  {
+   "name": "biz_address",
+   "label": "৬। ব্যবসা প্রতিষ্ঠানের ঠিকানা",
+   "type": "text",
+   "col": 12,
+   "group": "g_biz",
+   "required": true
+  },
+  {
+   "name": "pres_address",
+   "label": "৭। মালিকের ঠিকানা (বর্তমান)",
+   "type": "text",
+   "col": 12,
+   "group": "g_biz",
+   "required": true
+  },
+  {
+   "name": "same_addr",
+   "label": "স্থায়ী ঠিকানা বর্তমান ঠিকানার একই",
+   "type": "checkbox",
+   "col": 12,
+   "group": "g_biz",
+   "default": true
+  },
+  {
+   "name": "perm_address",
+   "label": "৮। মালিকের ঠিকানা (স্থায়ী)",
+   "type": "text",
+   "col": 12,
+   "group": "g_biz",
+   "show_if": "!same_addr"
+  },
+  {
+   "name": "nid",
+   "label": "৯। ন্যাশনাল আইডি নং",
+   "type": "text",
+   "col": 4,
+   "group": "g_biz",
+   "bn": true
+  },
+  {
+   "name": "phone",
+   "label": "১০। ফোন/মোবাইল",
+   "type": "text",
+   "col": 4,
+   "group": "g_biz",
+   "bn": true
+  },
+  {
+   "name": "tin",
+   "label": "টিআইএন নম্বর",
+   "type": "text",
+   "col": 4,
+   "group": "g_biz",
+   "bn": true
+  },
+  {
+   "name": "f_lic",
+   "label": "ট্রেড লাইসেন্স / নবায়ন ফি",
+   "type": "amount",
+   "col": 4,
+   "group": "g_fee1",
+   "plain": true,
+   "decimals": 2,
+   "default": "0"
+  },
+  {
+   "name": "f_sign",
+   "label": "সাইনবোর্ড / সাইবার কর",
+   "type": "amount",
+   "col": 4,
+   "group": "g_fee1",
+   "plain": true,
+   "decimals": 2,
+   "default": "0"
+  },
+  {
+   "name": "f_misc",
+   "label": "বিবিধ",
+   "type": "amount",
+   "col": 4,
+   "group": "g_fee1",
+   "plain": true,
+   "decimals": 2,
+   "default": "0"
+  },
+  {
+   "name": "f_arrears",
+   "label": "বকেয়া",
+   "type": "amount",
+   "col": 4,
+   "group": "g_fee1",
+   "plain": true,
+   "decimals": 2,
+   "default": "0"
+  },
+  {
+   "name": "f_sur",
+   "label": "সারচার্জ",
+   "type": "amount",
+   "col": 4,
+   "group": "g_fee1",
+   "plain": true,
+   "decimals": 2,
+   "default": "0"
+  },
+  {
+   "name": "f_hal",
+   "label": "হাল সারচার্জ",
+   "type": "amount",
+   "col": 4,
+   "group": "g_fee2",
+   "plain": true,
+   "decimals": 2,
+   "show_if": "layout==two",
+   "default": "0"
+  },
+  {
+   "name": "f_vat",
+   "label": "ভ্যাট",
+   "type": "amount",
+   "col": 4,
+   "group": "g_fee2",
+   "plain": true,
+   "decimals": 2,
+   "show_if": "layout==two",
+   "default": "0"
+  },
+  {
+   "name": "f_vat_arr",
+   "label": "ভ্যাট বকেয়া",
+   "type": "amount",
+   "col": 4,
+   "group": "g_fee2",
+   "plain": true,
+   "decimals": 2,
+   "show_if": "layout==two",
+   "default": "0"
+  },
+  {
+   "name": "f_tax",
+   "label": "আয়কর",
+   "type": "amount",
+   "col": 4,
+   "group": "g_fee2",
+   "plain": true,
+   "decimals": 2,
+   "show_if": "layout==two",
+   "default": "0"
+  },
+  {
+   "name": "f_tax_arr",
+   "label": "আয়কর বকেয়া",
+   "type": "amount",
+   "col": 4,
+   "group": "g_fee2",
+   "plain": true,
+   "decimals": 2,
+   "show_if": "layout==two",
+   "default": "0"
+  },
+  {
+   "name": "f_app",
+   "label": "আবেদন ফি",
+   "type": "amount",
+   "col": 4,
+   "group": "g_fee2",
+   "plain": true,
+   "decimals": 2,
+   "show_if": "layout==two",
+   "default": "0"
+  },
+  {
+   "name": "grand",
+   "label": "সর্বমোট (স্বয়ংক্রিয় – দুই সারণির যোগফল)",
+   "type": "amount",
+   "col": 12,
+   "group": "g_fee2",
+   "plain": true,
+   "decimals": 2,
+   "show_if": "layout==two",
+   "calc": "f_lic+f_sign+f_misc+f_arrears+f_sur+f_hal+f_vat+f_vat_arr+f_tax+f_tax_arr+f_app"
+  },
+  {
+   "name": "grand1",
+   "label": "সর্বমোট (স্বয়ংক্রিয়)",
+   "type": "amount",
+   "col": 12,
+   "group": "g_fee1",
+   "plain": true,
+   "decimals": 2,
+   "show_if": "layout==one",
+   "calc": "f_lic+f_sign+f_misc+f_arrears+f_sur"
+  }
+ ],
+ "css": ".doc-page .pbox{overflow:hidden}",
+ "pages": [
+  {
+   "class": "ov-page",
+   "html": "<div class=\"ov\" style=\"transform:translate({{cal_x}}mm,{{cal_y}}mm)\"><div class=\"ov-in\" style=\"{{#if layout==one}}transform:translateY(-1.2mm){{/if}}\">\n<div class=\"o\" style=\"left:55.0mm;top:33.1mm;width:81.6mm\">{{lic_no}}</div>\n<div class=\"o\" style=\"left:55.0mm;top:41.9mm;width:81.6mm\">{{lic_id}}</div>\n<div class=\"o\" style=\"left:55.0mm;top:48.7mm;width:81.6mm\">{{ward}}</div>\n<div class=\"o sm\" style=\"left:55.0mm;top:55.5mm;width:88.3mm\">{{circle}}</div>\n<div class=\"o\" style=\"left:55.0mm;top:62.2mm;width:81.6mm\">{{issue_date}}</div>\n<div class=\"o\" style=\"left:55.0mm;top:68.9mm;width:81.6mm\">{{fy}}</div>\n<div class=\"o\" style=\"left:55.0mm;top:75.6mm;width:81.6mm\">{{renew_date}}</div>\n<div class=\"o r\" style=\"left:127.8mm;top:92.4mm;width:17.7mm\">{{valid_year}}</div>\n<div class=\"o\" style=\"left:51.7mm;top:101.4mm;width:135.9mm\">{{biz_name}}</div>\n<div class=\"o sm\" style=\"left:51.7mm;top:110.8mm;width:135.9mm\">{{biz_type}}</div>\n<div class=\"o\" style=\"left:51.7mm;top:120.0mm;width:135.9mm\">{{owner}}</div>\n<div class=\"o\" style=\"left:51.7mm;top:129.6mm;width:135.9mm\">{{father}}</div>\n<div class=\"o\" style=\"left:51.7mm;top:139.0mm;width:135.9mm\">{{mother}}</div>\n<div class=\"o sm\" style=\"left:51.7mm;top:148.2mm;width:135.9mm\">{{biz_address}}</div>\n<div class=\"o sm\" style=\"left:51.7mm;top:157.4mm;width:135.9mm\">{{pres_address}}</div>\n<div class=\"o sm\" style=\"left:51.7mm;top:167.2mm;width:135.9mm\">{{#if same_addr}}{{pres_address}}{{else}}{{perm_address}}{{/if}}</div>\n<div class=\"o\" style=\"left:51.7mm;top:176.7mm;width:95.1mm\">{{nid}}</div>\n<div class=\"o\" style=\"left:51.7mm;top:185.8mm;width:57.1mm\">{{phone}}</div>\n<div class=\"o\" style=\"left:139.3mm;top:185.8mm;width:48.9mm\">{{tin}}</div>\n{{#if layout==one}}\n<div class=\"o r\" style=\"left:106.0mm;top:207.5mm;width:26.5mm\">{{f_lic}}</div>\n<div class=\"o r\" style=\"left:106.0mm;top:213.1mm;width:26.5mm\">{{f_sign}}</div>\n<div class=\"o r\" style=\"left:106.0mm;top:218.6mm;width:26.5mm\">{{f_misc}}</div>\n<div class=\"o r\" style=\"left:106.0mm;top:224.1mm;width:26.5mm\">{{f_arrears}}</div>\n<div class=\"o r\" style=\"left:106.0mm;top:229.6mm;width:26.5mm\">{{f_sur}}</div>\n<div class=\"o r\" style=\"left:106.0mm;top:235.1mm;width:26.5mm\">{{grand1}}</div>\n<div class=\"o r\" style=\"left:107.4mm;top:245.0mm;width:20.4mm\">{{grand1}}</div>\n{{else}}\n<div class=\"o r\" style=\"left:104.7mm;top:206.4mm;width:26.5mm\">{{f_lic}}</div>\n<div class=\"o r\" style=\"left:104.7mm;top:212.4mm;width:26.5mm\">{{f_sign}}</div>\n<div class=\"o r\" style=\"left:104.7mm;top:218.4mm;width:26.5mm\">{{f_misc}}</div>\n<div class=\"o r\" style=\"left:104.7mm;top:224.4mm;width:26.5mm\">{{f_arrears}}</div>\n<div class=\"o r\" style=\"left:104.7mm;top:230.3mm;width:26.5mm\">{{f_sur}}</div>\n<div class=\"o r\" style=\"left:104.7mm;top:236.3mm;width:26.5mm\">{{grand}}</div>\n<div class=\"o r\" style=\"left:160.4mm;top:206.4mm;width:26.5mm\">{{f_hal}}</div>\n<div class=\"o r\" style=\"left:160.4mm;top:212.4mm;width:26.5mm\">{{f_vat}}</div>\n<div class=\"o r\" style=\"left:160.4mm;top:218.4mm;width:26.5mm\">{{f_vat_arr}}</div>\n<div class=\"o r\" style=\"left:160.4mm;top:224.4mm;width:26.5mm\">{{f_tax}}</div>\n<div class=\"o r\" style=\"left:160.4mm;top:230.3mm;width:26.5mm\">{{f_tax_arr}}</div>\n<div class=\"o r\" style=\"left:160.4mm;top:236.3mm;width:26.5mm\">{{f_app}}</div>\n<div class=\"o r\" style=\"left:107.4mm;top:245.0mm;width:20.4mm\">{{grand}}</div>\n{{/if}}\n<div class=\"o pbox\" style=\"left:150.2mm;top:33.0mm;width:40.5mm;height:48.7mm\">{{photo}}</div>\n</div></div>"
+  }
+ ]
+}

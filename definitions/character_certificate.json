@@ -1,0 +1,221 @@
+{
+ "title": "চরিত্রগত সার্টিফিকেট (পূর্ণ সার্টিফিকেট, প্লেইন কাগজে)",
+ "title_en": "Character Certificate (full page, plain paper)",
+ "category": "প্রত্যয়ন / Testimonials",
+ "icon": "fa-award",
+ "description": "মেয়র/চেয়ারম্যান/কাউন্সিলরের চরিত্রগত সার্টিফিকেট – সম্পূর্ণ লেআউট প্লেইন A4 কাগজে (সীল/স্বাক্ষর/লোগো ছাপা হয় না)।",
+ "notice": "প্লেইন কাগজে সম্পূর্ণ সার্টিফিকেট ছাপার টেমপ্লেট – পৌরসভা/ইউনিয়ন পরিষদ/ওয়ার্ড কাউন্সিলরের অনুমোদিত কার্যালয়ের জন্য। লোগো, সীল, স্বাক্ষর বা ক্রমিক নম্বর স্বয়ংক্রিয়ভাবে তৈরি হয় না: ক্রমিক নম্বর রেজিস্টার থেকে বসান এবং ছাপার পর দায়িত্বপ্রাপ্ত কর্মকর্তার স্বাক্ষর ও সীল নিন।",
+ "page": {
+  "size": "a4",
+  "marginTop": "0.8in",
+  "margin": "0.5in",
+  "fontSize": 17,
+  "lineHeight": 1.5,
+  "font": "bn"
+ },
+ "digits": "bn",
+ "groups": [
+  {
+   "id": "g_auth",
+   "title": "কার্যালয় ও রং",
+   "icon": "fa-landmark"
+  },
+  {
+   "id": "g_who",
+   "title": "যাঁকে সার্টিফিকেট দেওয়া হচ্ছে",
+   "icon": "fa-user"
+  },
+  {
+   "id": "g_sign",
+   "title": "তারিখ ও স্বাক্ষরকারী (টাইপ করা নাম – স্বাক্ষর হাতে)",
+   "icon": "fa-signature"
+  }
+ ],
+ "fields": [
+  {
+   "name": "auth_name",
+   "label": "কার্যালয়ের নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_auth",
+   "required": true,
+   "sticky": true,
+   "default": "নওগাঁ পৌরসভা"
+  },
+  {
+   "name": "place",
+   "label": "স্থান (নামের নিচের লাইন)",
+   "type": "text",
+   "col": 3,
+   "group": "g_auth",
+   "sticky": true,
+   "default": "নওগাঁ"
+  },
+  {
+   "name": "theme",
+   "label": "রং",
+   "type": "select",
+   "col": 3,
+   "group": "g_auth",
+   "options": [
+    {
+     "value": "brown",
+     "label": "বাদামি"
+    },
+    {
+     "value": "blue",
+     "label": "নীল"
+    },
+    {
+     "value": "green",
+     "label": "সবুজ"
+    },
+    {
+     "value": "pink",
+     "label": "গোলাপি"
+    },
+    {
+     "value": "grey",
+     "label": "ধূসর"
+    }
+   ],
+   "sticky": true,
+   "default": "brown"
+  },
+  {
+   "name": "serial",
+   "label": "ক্রমিক নং",
+   "type": "text",
+   "col": 4,
+   "group": "g_who",
+   "bn": true,
+   "help": "রেজিস্টার থেকে বসান – নিজে তৈরি হয় না"
+  },
+  {
+   "name": "name",
+   "label": "নাম",
+   "type": "text",
+   "col": 8,
+   "group": "g_who",
+   "required": true
+  },
+  {
+   "name": "father",
+   "label": "পিতা/স্বামীর নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_who",
+   "required": true
+  },
+  {
+   "name": "mother",
+   "label": "মাতার নাম",
+   "type": "text",
+   "col": 6,
+   "group": "g_who",
+   "required": true
+  },
+  {
+   "name": "village",
+   "label": "গ্রাম/মহল্লা",
+   "type": "text",
+   "col": 4,
+   "group": "g_who",
+   "required": true
+  },
+  {
+   "name": "ward",
+   "label": "ওয়ার্ড নং",
+   "type": "text",
+   "col": 2,
+   "group": "g_who",
+   "bn": true
+  },
+  {
+   "name": "po",
+   "label": "ডাকঘর",
+   "type": "text",
+   "col": 3,
+   "group": "g_who",
+   "required": true,
+   "default": "নওগাঁ"
+  },
+  {
+   "name": "upz_dist",
+   "label": "উপজেলা + জেলা",
+   "type": "text",
+   "col": 3,
+   "group": "g_who",
+   "required": true,
+   "default": "নওগাঁ"
+  },
+  {
+   "name": "honor",
+   "label": "সম্বোধন",
+   "type": "select",
+   "col": 6,
+   "group": "g_who",
+   "options": [
+    {
+     "value": "se",
+     "label": "সে / তার"
+    },
+    {
+     "value": "tini",
+     "label": "তিনি / তাহার (সম্মানসূচক)"
+    }
+   ],
+   "default": "se"
+  },
+  {
+   "name": "wish",
+   "label": "“সর্বাঙ্গীন মঙ্গল কামনা” লাইন থাকবে",
+   "type": "checkbox",
+   "col": 6,
+   "group": "g_who",
+   "default": true
+  },
+  {
+   "name": "date",
+   "label": "তারিখ",
+   "type": "date",
+   "col": 4,
+   "group": "g_sign",
+   "default": "today"
+  },
+  {
+   "name": "sign_title",
+   "label": "পদবী",
+   "type": "text",
+   "col": 4,
+   "group": "g_sign",
+   "sticky": true,
+   "default": "মেয়র"
+  },
+  {
+   "name": "sign_name",
+   "label": "স্বাক্ষরকারীর নাম (টাইপ করা)",
+   "type": "text",
+   "col": 4,
+   "group": "g_sign",
+   "sticky": true
+  },
+  {
+   "name": "sign_office",
+   "label": "কার্যালয়ের লেখা (পদবীর নিচে)",
+   "type": "text",
+   "col": 12,
+   "group": "g_sign",
+   "sticky": true,
+   "default": "নওগাঁ পৌরসভা, নওগাঁ।"
+  }
+ ],
+ "css": "\n.doc-page .cc{--c:#8a5a2b;--bg:#f3fafc;--ac:#7b1f6e;border:5px double var(--c);background:var(--bg);padding:12mm 13mm 8mm;margin:0 auto;width:170mm;min-height:188mm;position:relative;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:1em;line-height:1.5}\n.doc-page .cc.th-blue{--c:#1f4e8c;--bg:#eef5fd;--ac:#1f4e8c}.doc-page .cc.th-green{--c:#2e7d32;--bg:#eff8ef;--ac:#2e7d32}.doc-page .cc.th-pink{--c:#c2185b;--bg:#fdf0f5;--ac:#c2185b}.doc-page .cc.th-grey{--c:#555;--bg:#f4f4f4;--ac:#333}\n.doc-page .cc-head{text-align:center;line-height:1.15}\n.doc-page .cc-auth{font-size:2.3em;font-weight:700;color:var(--c)}\n.doc-page .cc-place{font-size:1.2em;font-weight:600;color:#2e7d32;margin-top:2px}\n.doc-page .cc-pillwrap{text-align:center;margin:10px 0 2px}\n.doc-page .cc-pill{display:inline-block;background:var(--ac);color:#fff;font-weight:700;font-size:1.3em;padding:3px 26px;border-radius:30px;-webkit-print-color-adjust:exact;print-color-adjust:exact}\n.doc-page .cc-serial{text-align:right;margin:0 4px 4px;color:#2e7d32}\n.doc-page .cc-intro{margin:6px 0 4px;text-indent:2.2em}\n.doc-page .cc-name{display:block;border-bottom:1px dotted #444;font-weight:700;padding:1px 4px;min-height:1.5em;margin-top:2px}\n.doc-page .cc-row{display:flex;gap:6px;align-items:baseline;margin:3px 0}\n.doc-page .cc-row .l{flex:0 0 auto;font-weight:600}\n.doc-page .cc-row .v{flex:1;border-bottom:1px dotted #444;min-height:1.4em;padding:0 4px;font-weight:600}\n.doc-page .cc-two{display:flex;gap:16px}.doc-page .cc-two>div{flex:1}.doc-page .cc-two>div.w{flex:0 0 34%}\n.doc-page .cc-text{margin:8px 0 0;text-align:justify;text-indent:2.2em}\n.doc-page .cc-foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:30px;break-inside:avoid}\n.doc-page .cc-sig{text-align:center;min-width:55mm}\n.doc-page .cc-sigln{border-top:1px solid #222;padding-top:2px;color:var(--ac)}\n.doc-page .cc-note{position:absolute;left:0;right:0;bottom:4px;text-align:center;font-size:.78em;color:#666}\n",
+ "pages": [
+  {
+   "html": "<div class=\"cc th-{{theme}}\">\n<div class=\"cc-head\"><div class=\"cc-auth\">{{auth_name}}</div>{{#if place}}<div class=\"cc-place\">{{place}}।</div>{{/if}}</div>\n<div class=\"cc-pillwrap\"><div class=\"cc-pill\">চরিত্রগত সার্টিফিকেট</div></div>\n<div class=\"cc-serial\">ক্রমিক নং- <strong>{{serial}}</strong></div>\n<p class=\"cc-intro\">এই মর্মে চরিত্রগত সার্টিফিকেট প্রদান করা যাইতেছে যে, <span class=\"cc-name\">{{name}}</span></p>\n<div class=\"cc-row\"><span class=\"l\">পিতা/স্বামীর নামঃ</span><span class=\"v\">{{father}}</span></div>\n<div class=\"cc-row\"><span class=\"l\">মাতার নামঃ</span><span class=\"v\">{{mother}}</span></div>\n<div class=\"cc-two\"><div><div class=\"cc-row\"><span class=\"l\">গ্রাম/মহল্লাঃ</span><span class=\"v\">{{village}}</span></div></div><div class=\"w\"><div class=\"cc-row\"><span class=\"l\">ওয়ার্ড নংঃ</span><span class=\"v\">{{ward}}</span></div></div></div>\n<div class=\"cc-two\"><div><div class=\"cc-row\"><span class=\"l\">ডাকঘরঃ</span><span class=\"v\">{{po}}</span></div></div><div><div class=\"cc-row\"><span class=\"l\">উপজেলা + জেলাঃ</span><span class=\"v\">{{upz_dist}}</span></div></div></div>\n<p class=\"cc-text\">{{#if honor==tini}}তিনি{{else}}সে{{/if}} আমার নিকট ব্যক্তিগতভাবে পরিচিত। আমার জানা মতে {{#if honor==tini}}তিনি{{else}}সে{{/if}} রাষ্ট্র বিরোধী কোন কার্যকলাপে জড়িত {{#if honor==tini}}নহেন{{else}}নয়{{/if}}। {{#if honor==tini}}তাহার{{else}}তার{{/if}} চরিত্র ভাল ও আচরণ সন্তোষজনক।</p>\n{{#if wish}}<p class=\"cc-text\">আমি {{#if honor==tini}}তাহার{{else}}তার{{/if}} সর্বাঙ্গীন মঙ্গল কামনা করি।</p>{{/if}}\n<div class=\"cc-foot\"><div class=\"cc-date\">তারিখঃ <strong>{{date}}</strong></div><div class=\"cc-sig\"><div style=\"height:56px\"></div><div class=\"cc-sigln\"><strong>{{sign_title}}</strong></div>{{#if sign_name}}<div>{{sign_name}}</div>{{/if}}{{#if sign_office}}<div>{{sign_office}}</div>{{/if}}</div></div>\n<div class=\"cc-note\">স্বাক্ষর ও সীলমোহর ছাড়া এই সার্টিফিকেট বৈধ নয়।</div>\n</div>"
+  }
+ ],
+ "id": "character_certificate",
+ "version": 1
+}

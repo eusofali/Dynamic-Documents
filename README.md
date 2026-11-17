@@ -3,11 +3,12 @@
 A dynamic, **Bangla-first document builder** for shared hosting (cPanel, no root needed).
 Pick a document, fill in only the fields it needs, watch the document update **live**, then print or save as PDF.
 
-* **33 ready documents**
+* **35 ready documents**
   * 8 affidavits (marriage, name-correction, name-change, lost-document, date-of-birth, citizenship/residence, parent consent, one-and-the-same-person, plus a free-text general declaration) and vehicle sale
   * contracts: land bainanama, loan (হাওলাত/কর্জ), shop rent – with **multi-person parties** (several sellers / buyers / borrowers / landlords; the wording switches to আমরা/আমাদের and every person gets a signature line)
   * **11 A4 application letters** (no stamp paper): leave (school / office), bank account closing, loan application, trade licence, utility connection, scholarship, complaint, certificate request, resignation, and a general free-text application
   * **প্রত্যয়ন পত্র (testimonials)** for ward councillors / chairmen – resident & character, name variant, new-voter recommendation, student, plus a free-text one – A4 with an adjustable **3 in top margin** (remembered) for pre-printed pads
+  * **চরিত্রগত সার্টিফিকেট (character certificate)** from a mayor / chairman / ward councillor – full plain-A4 version, or values-only printing onto the pre-printed certificate (ক্রমিক নং is typed from your register, never auto-generated)
   * **Full trade licences on plain A4** (Union Parishad and Pourashava): complete layout – header, legal paragraph, all fields, fee tables, validity, signature spaces, 5 colour themes, photo box – no pre-printed paper needed. Text only: **no emblem/logo, seal, signature image, QR code or automatic licence numbering**; every page states "not valid without signature and seal"
   * **Trade-licence printing** onto genuine pre-printed Union Parishad and Pourashava licence paper (two paper types) – prints **values only** at measured positions; no emblem, seal, signature or QR is generated. Per-printer calibration (±mm, remembered) and a *Guide* button that shows a scan of your blank form behind the text on screen (never printed)
   * job application and three CV formats (modern, classic bio-data, and the standard one-page CV with photo upload)
